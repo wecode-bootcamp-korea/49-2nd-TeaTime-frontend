@@ -14,7 +14,6 @@
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
     "sass": "^1.67.0",
-    "styled-components": "^6.0.8",
     "styled-reset": "^4.5.1",
     "stylelint": "^15.10.3",
     "stylelint-config-prettier-scss": "^1.0.0",
