@@ -1,0 +1,30 @@
+.header {
+  height: 55px;
+  text-align: center;
+  border-bottom: 2px solid #f0f0f0;
+  z-index: 10;
+
+  .headerBox {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    line-height: 53px;
+    background-color: #fff;
+
+    margin: 0 auto;
+
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .closeBtn {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      right: 0;
+      top: 15px;
+      opacity: 0.5;
+    }
+  }
+}
