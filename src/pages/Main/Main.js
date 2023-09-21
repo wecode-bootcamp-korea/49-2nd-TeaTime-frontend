@@ -1,10 +1,24 @@
 import React from 'react';
-
+import './Main.scss';
+import BestList from './Components/BestList';
 const Main = () => {
   return (
-    <>
-      <p>메인 페이지 입니다.</p>
-    </>
+    <div className="main">
+      <div className="mainImg">
+        <img alt="이미지" src="/images/main.png" />
+      </div>
+      <div className="contents">
+        <BestList />
+        <div className="trboxImg">
+          <img alt="이미지" src="/images/trbox.png" />
+          <div className="trboxBtnBox">
+            <button className="trBoxMore">
+              <span>바로가기 +</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

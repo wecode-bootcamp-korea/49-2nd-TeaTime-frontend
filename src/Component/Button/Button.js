@@ -12,6 +12,7 @@ const Button = props => {
     style,
     fullWidth = false,
     color,
+    onClick,
     children,
   } = props;
   return (
@@ -25,6 +26,7 @@ const Button = props => {
       style={style}
       fullWidth={fullWidth}
       color={color}
+      onClick={onClick}
     >
       {children}
     </button>
