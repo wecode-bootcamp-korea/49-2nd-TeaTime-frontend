@@ -17,7 +17,10 @@ const BestList = () => {
         <div className="prdListBox">
           <div className="prdInfo">
             <div className="prdThumb">
-              <img src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"></img>
+              <img
+                alt="이미지"
+                src="https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
+              />
               <div className="hoverIcon">
                 <button>장바구니</button>
               </div>
@@ -35,12 +38,15 @@ const BestList = () => {
                   </div>
                 </div>
               </div>
-              <div class="prd_tag"></div>
+              <div class="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
             <div className="prdThumb">
-              <img src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"></img>
+              <img
+                alt="이미지"
+                src="https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
+              />
               <div className="hoverIcon">
                 <button>장바구니</button>
               </div>
@@ -58,12 +64,15 @@ const BestList = () => {
                   </div>
                 </div>
               </div>
-              <div class="prd_tag"></div>
+              <div class="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
             <div className="prdThumb">
-              <img src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"></img>
+              <img
+                alt="이미지"
+                src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
+              />
               <div className="hoverIcon">
                 <button>장바구니</button>
               </div>
@@ -81,12 +90,15 @@ const BestList = () => {
                   </div>
                 </div>
               </div>
-              <div class="prd_tag"></div>
+              <div class="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
             <div className="prdThumb">
-              <img src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"></img>
+              <img
+                alt="이미지"
+                src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
+              />
               <div className="hoverIcon">
                 <button>장바구니</button>
               </div>
@@ -104,12 +116,15 @@ const BestList = () => {
                   </div>
                 </div>
               </div>
-              <div class="prd_tag"></div>
+              <div class="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
             <div className="prdThumb">
-              <img src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"></img>
+              <img
+                alt="이미지"
+                src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
+              />
               <div className="hoverIcon">
                 <button>장바구니</button>
               </div>
@@ -127,7 +142,7 @@ const BestList = () => {
                   </div>
                 </div>
               </div>
-              <div class="prd_tag"></div>
+              <div class="prdTag" />
             </div>
           </div>
         </div>

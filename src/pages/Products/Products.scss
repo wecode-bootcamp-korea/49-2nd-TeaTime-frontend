@@ -1,0 +1,203 @@
+.products {
+  padding-top: 80px;
+  * {
+    box-sizing: border-box;
+  }
+
+  .categoryInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 380px;
+    border-bottom: none;
+    margin: 0;
+    color: white;
+    background: 50% 50% no-repeat;
+
+    .categoryTit {
+      font-size: 48px;
+      font-weight: 500;
+      text-align: center;
+      font-family: 'ad', 'sans-serif' !important;
+    }
+  }
+  .itemList {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+  }
+  .itemWrapper {
+    position: relative;
+    margin: 40px 0 0;
+    padding: 0 0 0 160px;
+  }
+  .subNav {
+    position: absolute;
+    left: 0;
+    top: -10px;
+    padding: 10px 0 0;
+    width: 165px;
+    z-index: 10;
+
+    .title {
+      margin: 0 0 30px;
+      color: #363535;
+      font-size: 18px;
+    }
+
+    .subTitle {
+      position: relative;
+      margin: 0 0 30px 30px !important;
+      a {
+        display: block;
+        position: relative;
+        padding: 0 18px 0 0;
+        color: #363535;
+        font-size: 18px;
+        cursor: pointer;
+
+        &.on {
+          color: green;
+        }
+
+        &:hover {
+          color: green;
+        }
+      }
+    }
+  }
+
+  .pageLocation {
+    position: relative;
+    margin: 0 0 -58px;
+    color: #000000;
+    font-size: 18px;
+    z-index: 2;
+  }
+  .sortBar {
+    overflow: hidden;
+    margin: 20px 0 50px;
+    padding: 0 30px;
+    position: relative;
+    display: block;
+    height: 49px;
+    background: transparent;
+    z-index: 2;
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      content: ' ';
+      background: #ececec;
+    }
+    ul {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border: 0;
+      height: 49px;
+      z-index: 2;
+
+      li a {
+        display: inline-block;
+        position: relative;
+        margin: 0 0 0 42px;
+        padding: 10px 0 0 0;
+        height: 49px;
+        color: #313131;
+        font-size: 18px;
+        cursor: pointer;
+
+        &.on {
+          color: green;
+          border-bottom: 3px green solid;
+        }
+
+        &:hover {
+          color: green;
+        }
+      }
+    }
+  }
+  .total {
+    position: relative;
+    margin: -30px 0 50px;
+    padding: 0 0 0 10px;
+    p {
+      color: #717171;
+      .totalCnt {
+        color: green;
+      }
+    }
+  }
+  .productList {
+    position: relative;
+    padding: 0 0 30px;
+  }
+  .listWrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow: hidden;
+    counter-reset: item-ranking;
+  }
+  .item {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0 22px 70px;
+    width: 25%;
+    border-right: 2px #f6f6f6 solid;
+    .thumb {
+      display: block;
+      position: relative;
+      margin: 0 auto 5px;
+      background: none;
+      overflow: hidden;
+      a {
+        cursor: pointer;
+      }
+      .basket {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+
+    .prdName {
+      margin: 0 0 5px;
+      height: 48px;
+      line-height: 1;
+      a {
+        color: #555555;
+        font-size: 20px;
+        letter-spacing: -0.05em;
+        cursor: pointer;
+      }
+    }
+
+    .prdPrice {
+      margin: 0;
+      height: 50px;
+      color: #555555;
+      font-size: 20px;
+      line-height: 1;
+      del {
+        color: #bcbcbc;
+        font-size: 16px;
+      }
+      em {
+        color: #ff5c5c;
+        font-size: 16px;
+        font-style: normal;
+      }
+    }
+  }
+}
