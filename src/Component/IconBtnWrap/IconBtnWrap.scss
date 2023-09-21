@@ -1,0 +1,15 @@
+.iconBtnWrap {
+  display: flex;
+  flex-direction: column;
+  // width: 120px;
+  font-size: 15px;
+
+  & span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    line-height: 1.23;
+    color: #252525;
+  }
+}
