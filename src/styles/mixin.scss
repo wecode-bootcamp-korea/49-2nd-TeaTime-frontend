@@ -1,0 +1,25 @@
+$colorA: #5c95f0;
+$colorB: #313131;
+$colorC: #ffffff;
+$colorD: #000000;
+$colorE: #6c801a;
+$colorF: #666;
+$colorG: #ddd;
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin primary($bgColor, $color, $borderColor: null) {
+  background-color: $bgColor;
+  color: $color;
+  border: 1px solid $borderColor;
+}
+
+@mixin secondary($bgColor, $color, $borderColor: null) {
+  background-color: $bgColor;
+  color: $color;
+  border: 1px solid $borderColor;
+}
