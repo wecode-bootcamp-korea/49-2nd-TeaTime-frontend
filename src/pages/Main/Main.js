@@ -5,12 +5,12 @@ const Main = () => {
   return (
     <div className="main">
       <div className="mainImg">
-        <img src="/images/main.png"></img>
+        <img alt="이미지" src="/images/main.png" />
       </div>
       <div className="contents">
         <BestList />
         <div className="trboxImg">
-          <img src="/images/trbox.png"></img>
+          <img alt="이미지" src="/images/trbox.png" />
           <div className="trboxBtnBox">
             <button className="trBoxMore">
               <span>바로가기 +</span>

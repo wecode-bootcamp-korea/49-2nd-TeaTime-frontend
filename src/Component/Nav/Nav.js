@@ -1,74 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Nav.scss';
+import {
+  MAIN_MENU,
+  BEST_PRODUCT_MENU,
+  PRODUCT_MENU,
+} from '../../data/ComponentData';
 
 const Nav = () => {
   const [style, setStyle] = useState({ display: 'none' });
   let isLoginStatus = localStorage.getItem('token');
   const nav = useNavigate();
-  const mainMenu = [
-    {
-      text: '제품',
-      url: '/',
-      child: true,
-    },
-    {
-      text: '선물추천',
-      url: '/',
-      child: false,
-    },
-    {
-      text: 'TRBox',
-      url: '/',
-      child: false,
-    },
-  ];
-
-  const bestProductMenu = [
-    {
-      text: '베스트',
-      url: '/',
-    },
-    {
-      text: '위클리 베스트',
-      url: '/',
-    },
-  ];
-
-  const productMenu = [
-    {
-      text: '티세트',
-      url: '/',
-    },
-    {
-      text: '명차',
-      url: '/',
-    },
-    {
-      text: '녹차/말차',
-      url: '/',
-    },
-    {
-      text: '발효차/홍차',
-      url: '/',
-    },
-    {
-      text: '블렌디드티',
-      url: '/',
-    },
-    {
-      text: '허브티',
-      url: '/',
-    },
-    {
-      text: '밀크티/아이스티',
-      url: '/',
-    },
-    {
-      text: '콤부차',
-      url: '/review',
-    },
-  ];
 
   const dimBgAble = (state, key) => {
     if (key === 0) {
@@ -103,7 +45,7 @@ const Nav = () => {
               </h1>
               <nav className="navBox">
                 <ul className="navListDept1">
-                  {mainMenu.map((item, index) => (
+                  {MAIN_MENU.map((item, index) => (
                     <li
                       key={item.text}
                       className="itemDept1"
@@ -119,7 +61,7 @@ const Nav = () => {
                                 <li className="itemDept2">
                                   <Link to="/">베스트</Link>
                                   <ul className="navListDept3">
-                                    {bestProductMenu.map(item => (
+                                    {BEST_PRODUCT_MENU.map(item => (
                                       <li key={item.text} className="itemDept3">
                                         <Link to={item.url}>{item.text}</Link>
                                       </li>
@@ -127,9 +69,9 @@ const Nav = () => {
                                   </ul>
                                 </li>
                                 <li className="itemDept2">
-                                  <Link to="/">티 제품</Link>
+                                  <Link to="/products">티 제품</Link>
                                   <ul className="navListDept3">
-                                    {productMenu.map(item => (
+                                    {PRODUCT_MENU.map(item => (
                                       <li key={item.text} className="itemDept3">
                                         <Link to={item.url}>{item.text}</Link>
                                       </li>
