@@ -13,11 +13,12 @@ const Button = props => {
     fullWidth = false,
     color,
     onClick,
+    text,
     children,
   } = props;
   return (
     <button
-      className={className}
+      className={`btn ${className}`}
       type={type}
       scale={scale}
       shape={shape}
@@ -27,6 +28,7 @@ const Button = props => {
       fullWidth={fullWidth}
       color={color}
       onClick={onClick}
+      text={text}
     >
       {children}
     </button>
