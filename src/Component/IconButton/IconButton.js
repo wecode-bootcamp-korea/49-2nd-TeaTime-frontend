@@ -10,12 +10,7 @@ const IconButton = props => {
     children,
   } = props;
   return (
-    <button
-      className={`iconBtn ${className}`}
-      type={type}
-      scale={scale}
-      img={img}
-    >
+    <button className={className} type={type} scale={scale} img={img}>
       {children}
     </button>
   );
