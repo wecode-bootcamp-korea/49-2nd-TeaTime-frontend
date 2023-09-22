@@ -16,7 +16,7 @@ const Input = props => {
   return (
     <label className="label">
       <input
-        className={`input ${className}`}
+        className={className}
         placeholder={placeholder}
         type={type}
         disabled={disabled}

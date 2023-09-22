@@ -18,7 +18,7 @@ const Button = props => {
   } = props;
   return (
     <button
-      className={`btn ${className}`}
+      className={className}
       type={type}
       scale={scale}
       shape={shape}
