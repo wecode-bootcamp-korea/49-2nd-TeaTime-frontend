@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../Login/Component/Header/Header';
 import Input from '../../Component/Input/Input';
 import './SignUp.scss';
+import Button from '../../Component/Button/Button';
 
 const SignUp = () => {
   const [isScroll, setIsScroll] = useState(false);
@@ -29,7 +30,7 @@ const SignUp = () => {
                 <Input
                   scale="large"
                   fullWidth="true"
-                  placeholder="아이디 입력"
+                  placeholder="아이디 입력 (영문, 숫자 조합)"
                 />
                 <Input
                   scale="large"
@@ -127,7 +128,24 @@ const SignUp = () => {
                 </p>
               </div>
 
-              <Input className="checkbox" type="checkbox" text="아이디 저장" />
+              <Input
+                className="checkbox signUpCheckBox"
+                type="checkbox"
+                text="개인정보 수집 동의"
+                disabled={!isScroll ? true : false}
+              />
+            </div>
+
+            <div className="signUpBtnWrap">
+              <Button
+                className="btn signUpBtn"
+                scale="large"
+                shape="fill"
+                fullWidth="true"
+                color="primary"
+              >
+                회원가입
+              </Button>
             </div>
           </fieldset>
         </form>
