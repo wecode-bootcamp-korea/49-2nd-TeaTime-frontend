@@ -62,6 +62,10 @@
     width: 1px;
     height: 1px;
 
+    &:disabled + span {
+      color: #ccc;
+    }
+
     & + span::before {
       content: '';
       display: inline-block;
