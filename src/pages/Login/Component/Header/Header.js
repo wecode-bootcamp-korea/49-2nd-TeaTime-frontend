@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '../IconButton/IconButton';
+import IconButton from '../../../../Component/IconButton/IconButton';
 import './Header.scss';
 
 const Header = props => {

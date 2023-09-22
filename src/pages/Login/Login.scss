@@ -1,25 +1,7 @@
+.nav + .login {
+  margin-top: 80px;
+}
+
 .login {
   width: 100%;
-
-  .loginContainer {
-    max-width: 520px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 10px 20px 40px;
-
-    .loginSubTitle {
-      font-size: 20px;
-      font-weight: bold;
-      line-height: 1.5;
-      padding: 10px 20p 40px;
-      margin: 20px 0 40px 0;
-    }
-
-    .idSaveCheck {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-  }
 }
