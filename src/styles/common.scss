@@ -51,9 +51,13 @@
 .Cgray88 {
   color: #e0e0e0;
 }
-// .Cgray98 {
-//   color: #fafafa;
-// }
+
+.legend {
+  font-size: 1px;
+  position: absolute;
+  z-index: -1;
+}
+
 @mixin center {
   display: flex;
   justify-content: center;

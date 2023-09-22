@@ -1,0 +1,71 @@
+.loginContainer {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px 20px 40px;
+
+  .loginSubTitle {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 10px 20p 40px;
+    margin: 20px 0 40px 0;
+  }
+
+  .loginBtn {
+    margin-top: 20px;
+  }
+
+  .snsLoginBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .bottomMenu {
+    width: 100%;
+
+    li {
+      display: inline-block;
+      position: relative;
+
+      a {
+        display: block;
+        margin: 20px 9px;
+        font-size: 13px;
+        color: #898989;
+        letter-spacing: -0.65px;
+      }
+
+      &:last-child a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -6px;
+        width: 1px;
+        height: 12px;
+        background-color: #c6c6c6;
+      }
+    }
+  }
+
+  .joinBtn {
+    border-radius: 4px;
+    opacity: 0.5;
+    margin-top: 20px;
+
+    .joinText {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      line-height: 14px;
+      font-weight: 600;
+      padding: 0 20px;
+    }
+  }
+}
