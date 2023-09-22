@@ -75,7 +75,7 @@ const MainForm = props => {
             onChange={onChange}
           />
           <Button
-            className="loginBtn"
+            className="btn loginBtn"
             scale="large"
             shape="fill"
             color="primary"
@@ -122,7 +122,7 @@ const MainForm = props => {
               }}
             >
               <span>아직 회원이 아니세요?</span>
-              <span>회원가입 ></span>
+              <span className="joinSpan">회원가입</span>
             </div>
           </Button>
         </fieldset>
