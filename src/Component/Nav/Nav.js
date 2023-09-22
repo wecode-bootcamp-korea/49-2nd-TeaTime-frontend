@@ -106,7 +106,7 @@ const Nav = () => {
                 )}
                 {!isLoginStatus ? (
                   <li className="item">
-                    <Link to="/">회원가입</Link>
+                    <Link to="/signup">회원가입</Link>
                   </li>
                 ) : (
                   <li className="item">
