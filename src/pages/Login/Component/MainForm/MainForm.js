@@ -80,7 +80,7 @@ const MainForm = props => {
             <span>로그인</span>
           </Button>
 
-          <ul className="snsLoginBtn">
+          {/* <ul className="snsLoginBtn">
             <li>
               <IconButton type="submit" img="kakao">
                 <span>
@@ -89,7 +89,7 @@ const MainForm = props => {
                 </span>
               </IconButton>
             </li>
-          </ul>
+          </ul> */}
           <ul className="bottomMenu">
             <li>
               <Link to="#">아이디 찾기</Link>
