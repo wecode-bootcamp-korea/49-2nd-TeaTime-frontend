@@ -13,6 +13,7 @@ const Input = props => {
     onChange,
     children,
   } = props;
+
   return (
     <label className="label">
       <input
