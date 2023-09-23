@@ -54,20 +54,20 @@ const MainForm = props => {
       <form className="loginForm" onChange={onChangeCheck} onSubmit={onSubmit}>
         <fieldset>
           <legend className="legend">로그인</legend>
-          <InputWrap>
-            <Input
-              placeholder="아이디 입력"
-              type="text"
-              scale="large"
-              name="userId"
-            />
-            <Input
-              placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
-              type="password"
-              scale="large"
-              name="userPw"
-            />
-          </InputWrap>
+
+          <Input
+            placeholder="아이디 입력"
+            type="text"
+            scale="large"
+            name="userId"
+          />
+          <Input
+            placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
+            type="password"
+            scale="large"
+            name="userPw"
+          />
+
           <Input
             className="checkbox"
             type="checkbox"
@@ -109,10 +109,9 @@ const MainForm = props => {
           </ul>
 
           <Button
-            className="joinBtn"
-            scale="large"
-            shape="outLine"
+            className="btn joinBtn"
             fullWidth="true"
+            shape="outLine"
             color="primary"
           >
             <div
