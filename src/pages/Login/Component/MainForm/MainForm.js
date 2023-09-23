@@ -31,12 +31,8 @@ const MainForm = props => {
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 
     if (!idRegExp.test(userId)) {
-      // alert('6글자 이상 소문자와 숫자로 혼합된 아이디를 입력해주세요.');
       return false;
     } else if (!passwordRegEx.test(userPw)) {
-      // alert(
-      //   '비밀번호는 영문, 숫자, 특수기호를 조합하여 8~20글자 이상 입력해주세요.',
-      // );
       return false;
     } else {
       return true;
