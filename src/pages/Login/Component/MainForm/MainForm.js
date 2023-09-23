@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../../../Component/Input/Input';
-import InputWrap from '../../../../Component/InputWrap/InputWrap';
 import Button from '../../../../Component/Button/Button';
 import IconButton from '../../../../Component/IconButton/IconButton';
 import './MainForm.scss';
@@ -71,7 +70,7 @@ const MainForm = props => {
             onChange={onChange}
           />
           <Button
-            className="btn loginBtn"
+            className="loginBtn"
             scale="large"
             shape="fill"
             color="primary"
@@ -101,7 +100,7 @@ const MainForm = props => {
           </ul>
 
           <Button
-            className="btn joinBtn"
+            className="joinBtn"
             fullWidth="true"
             shape="outLine"
             color="primary"

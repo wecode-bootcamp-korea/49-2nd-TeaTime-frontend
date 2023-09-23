@@ -3,7 +3,7 @@ import './Button.scss';
 
 const Button = props => {
   const {
-    className = 'btn',
+    className,
     type = 'button',
     scale,
     shape,
@@ -16,9 +16,10 @@ const Button = props => {
     text,
     children,
   } = props;
+
   return (
     <button
-      className={className}
+      className={className ? `btn ${className}` : 'btn'}
       type={type}
       scale={scale}
       shape={shape}

@@ -2,16 +2,10 @@ import React from 'react';
 import './IconButton.scss';
 
 const IconButton = props => {
-  const {
-    className = 'iconBtn',
-    type = 'button',
-    scale = 'small',
-    img,
-    children,
-  } = props;
+  const { className, type = 'button', scale = 'small', img, children } = props;
   return (
     <button
-      className={`iconBtn ${className}`}
+      className={className ? `iconBtn ${className}` : 'iconBtn'}
       type={type}
       scale={scale}
       img={img}

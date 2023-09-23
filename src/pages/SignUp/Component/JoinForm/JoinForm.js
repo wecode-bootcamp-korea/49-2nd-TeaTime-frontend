@@ -185,7 +185,7 @@ const JoinForm = props => {
 
         <div className="signUpBtnWrap">
           <Button
-            className="btn signUpBtn"
+            className="signUpBtn"
             scale="large"
             shape="fill"
             fullWidth="true"
