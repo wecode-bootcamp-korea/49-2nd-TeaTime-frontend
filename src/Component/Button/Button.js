@@ -25,7 +25,7 @@ const Button = props => {
       item={item}
       disabled={disabled}
       style={style}
-      fullWidth={fullWidth}
+      data-fullWidth={fullWidth}
       color={color}
       onClick={onClick}
       text={text}

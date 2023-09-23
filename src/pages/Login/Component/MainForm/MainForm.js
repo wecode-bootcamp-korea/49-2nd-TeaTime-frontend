@@ -93,14 +93,10 @@ const MainForm = props => {
           </ul>
           <ul className="bottomMenu">
             <li>
-              <Link to="#">
-                <a href="#!">아이디 찾기</a>
-              </Link>
+              <Link to="#">아이디 찾기</Link>
             </li>
             <li>
-              <Link to="#">
-                <a href="#!">비밀번호 찾기</a>
-              </Link>
+              <Link to="#">비밀번호 찾기</Link>
             </li>
           </ul>
 
