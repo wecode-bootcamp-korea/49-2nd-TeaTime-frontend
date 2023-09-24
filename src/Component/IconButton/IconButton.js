@@ -7,6 +7,8 @@ const IconButton = props => {
     type = 'button',
     scale = 'small',
     img,
+    onClick,
+    plusOnClick,
     children,
   } = props;
   return (
@@ -15,6 +17,8 @@ const IconButton = props => {
       type={type}
       scale={scale}
       img={img}
+      onClick={onClick}
+      plusOnClick={plusOnClick}
     >
       {children}
     </button>
