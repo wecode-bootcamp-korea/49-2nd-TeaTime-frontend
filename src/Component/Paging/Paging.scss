@@ -1,0 +1,53 @@
+.paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+  height: 50px;
+
+  .btn {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    text-indent: -10000em;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    min-width: auto;
+    text-align: left;
+    border: 1px #e1e1e1 solid;
+    background: #ffffff;
+    z-index: 1;
+    cursor: pointer;
+  }
+  .disaled {
+    cursor: default;
+  }
+  .prev {
+    margin: 0 24px 0 -1px;
+    background: url('../../../public/images/left.svg') no-repeat 50% / 15px;
+  }
+  .next {
+    margin: 0 -1px 0 24px;
+    background: url('../../../public/images/right.svg') no-repeat 50% / 15px;
+  }
+
+  a {
+    display: block;
+    overflow: hidden;
+    margin: 0 8px;
+    width: 42px;
+    height: 42px;
+    color: #a1a1a1;
+    font-size: 20px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 42px;
+    cursor: pointer;
+
+    &.on {
+      color: #000000;
+      background: #f5f5f5;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Products.scss';
 import { useSearchParams } from 'react-router-dom';
-import { PRODUCT_CATEGORY, PRODUCT_SORT } from '../../data/ComponentData';
+import { PRODUCT_CATEGORY } from '../../data/ComponentData';
 import SubNav from './Components/SubNav';
 import Contents from './Components/Contents';
 
@@ -11,6 +11,7 @@ const Products = () => {
   const [category, setCategory] = useState(0);
   const [sort, setSort] = useState(1);
   const [page, setPage] = useState(1);
+  const [totalCnt, setTotalCnt] = useState(99);
 
   useEffect(() => {
     if (searchParams.get('category'))
@@ -40,6 +41,17 @@ const Products = () => {
     }
   };
 
+  const handlerPage = e => {
+    const ePage = e.target.id;
+    if (!searchParams.get('page')) {
+      searchParams.append('page', ePage);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.set('page', ePage);
+      setSearchParams(searchParams);
+    }
+  };
+
   return (
     <div className="products">
       <div
@@ -58,10 +70,12 @@ const Products = () => {
             />
           </div>
           <Contents
-            productSort={PRODUCT_SORT}
             sort={sort}
             handlerSort={handlerSort}
             titleText={PRODUCT_CATEGORY[category].text}
+            page={page}
+            totalCnt={totalCnt}
+            handlerPage={handlerPage}
           />
         </div>
       </div>

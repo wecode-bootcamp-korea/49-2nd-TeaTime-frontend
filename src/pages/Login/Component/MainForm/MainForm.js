@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../../../Component/Input/Input';
-import InputWrap from '../../../../Component/InputWrap/InputWrap';
 import Button from '../../../../Component/Button/Button';
 import IconButton from '../../../../Component/IconButton/IconButton';
 import './MainForm.scss';
@@ -71,7 +70,7 @@ const MainForm = props => {
             onChange={onChange}
           />
           <Button
-            className="btn loginBtn"
+            className="loginBtn"
             scale="large"
             shape="fill"
             color="primary"
@@ -81,7 +80,7 @@ const MainForm = props => {
             <span>로그인</span>
           </Button>
 
-          <ul className="snsLoginBtn">
+          {/* <ul className="snsLoginBtn">
             <li>
               <IconButton type="submit" img="kakao">
                 <span>
@@ -90,22 +89,18 @@ const MainForm = props => {
                 </span>
               </IconButton>
             </li>
-          </ul>
+          </ul> */}
           <ul className="bottomMenu">
             <li>
-              <Link to="#">
-                <a href="#!">아이디 찾기</a>
-              </Link>
+              <Link to="#">아이디 찾기</Link>
             </li>
             <li>
-              <Link to="#">
-                <a href="#!">비밀번호 찾기</a>
-              </Link>
+              <Link to="#">비밀번호 찾기</Link>
             </li>
           </ul>
 
           <Button
-            className="btn joinBtn"
+            className="joinBtn"
             fullWidth="true"
             shape="outLine"
             color="primary"
