@@ -69,6 +69,7 @@ const Contents = props => {
           page={props.page}
           totalCnt={props.totalCnt}
           handlerPage={props.handlerPage}
+          showPage={8}
         />
       </div>
     </div>

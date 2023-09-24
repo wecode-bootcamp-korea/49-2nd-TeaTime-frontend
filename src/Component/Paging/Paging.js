@@ -10,10 +10,10 @@ const Paging = props => {
   const startPage = (pageGroup - 1) * 5 + 1;
   const endPage = Math.min(startPage + 5 - 1, props.totalCnt);
 
-  if (props.totalCnt % 8 == 0) {
-    maxPage = props.totalCnt / 8;
+  if (props.totalCnt % props.showPage == 0) {
+    maxPage = props.totalCnt / props.showPage;
   } else {
-    maxPage = parseInt(props.totalCnt / 8) + 1;
+    maxPage = parseInt(props.totalCnt / props.showPage) + 1;
   }
 
   const isPrevBtnDisaled = props.page == 1;
