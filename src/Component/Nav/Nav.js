@@ -8,13 +8,13 @@ import {
 } from '../../data/ComponentData';
 
 const Nav = () => {
-  const [style, setStyle] = useState({ display: 'none' });
-  let isLoginStatus = localStorage.getItem('token');
-  const nav = useNavigate();
+  const [style, setStyle] = useState(false);
+  const isLoginStatus = localStorage.getItem('token');
+  const navgiate = useNavigate();
 
-  const dimBgAble = (state, key) => {
-    if (key === 0) {
-      setStyle({ display: state });
+  const dimBgAppear = (state, key) => {
+    if (key) {
+      setStyle(state);
     }
   };
 
@@ -22,7 +22,7 @@ const Nav = () => {
     if (!isLoginStatus) {
       alert('로그인 후 사용가능합니다.');
     } else {
-      nav('/');
+      navgiate('/');
     }
   };
 
@@ -45,12 +45,12 @@ const Nav = () => {
               </h1>
               <nav className="navBox">
                 <ul className="navListDept1">
-                  {MAIN_MENU.map((item, index) => (
+                  {MAIN_MENU.map(item => (
                     <li
                       key={item.text}
                       className="itemDept1"
-                      onMouseOver={() => dimBgAble('block', index)}
-                      onMouseLeave={() => dimBgAble('none', index)}
+                      onMouseOver={() => dimBgAppear(true, item.child)}
+                      onMouseLeave={() => dimBgAppear(false, item.child)}
                     >
                       <Link to={item.url}>{item.text}</Link>
                       {item.child && (
@@ -95,22 +95,22 @@ const Nav = () => {
                     <span className="cartNum">0</span>
                   </button>
                 </li>
-                {!isLoginStatus ? (
-                  <li className="item">
-                    <Link to="/login">로그인</Link>
-                  </li>
-                ) : (
+                {isLoginStatus ? (
                   <li className="item">
                     <Link to="/">마이페이지</Link>
                   </li>
-                )}
-                {!isLoginStatus ? (
+                ) : (
                   <li className="item">
-                    <Link to="/signup">회원가입</Link>
+                    <Link to="/login">로그인</Link>
+                  </li>
+                )}
+                {isLoginStatus ? (
+                  <li className="item">
+                    <Link onClick={logOut}>로그아웃</Link>
                   </li>
                 ) : (
                   <li className="item">
-                    <Link onClick={logOut}>로그아웃</Link>
+                    <Link to="/signup">회원가입</Link>
                   </li>
                 )}
               </ul>
@@ -118,7 +118,10 @@ const Nav = () => {
           </div>
         </div>
       </div>
-      <div className="dimBg" style={style} />
+      <div
+        className="dimBg"
+        style={style ? { display: 'block' } : { display: 'none' }}
+      />
     </div>
   );
 };
