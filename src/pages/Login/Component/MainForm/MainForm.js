@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../../../Component/Input/Input';
-import InputWrap from '../../../../Component/InputWrap/InputWrap';
 import Button from '../../../../Component/Button/Button';
 import IconButton from '../../../../Component/IconButton/IconButton';
 import './MainForm.scss';
@@ -31,12 +30,8 @@ const MainForm = props => {
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 
     if (!idRegExp.test(userId)) {
-      // alert('6글자 이상 소문자와 숫자로 혼합된 아이디를 입력해주세요.');
       return false;
     } else if (!passwordRegEx.test(userPw)) {
-      // alert(
-      //   '비밀번호는 영문, 숫자, 특수기호를 조합하여 8~20글자 이상 입력해주세요.',
-      // );
       return false;
     } else {
       return true;
@@ -54,20 +49,20 @@ const MainForm = props => {
       <form className="loginForm" onChange={onChangeCheck} onSubmit={onSubmit}>
         <fieldset>
           <legend className="legend">로그인</legend>
-          <InputWrap>
-            <Input
-              placeholder="아이디 입력"
-              type="text"
-              scale="large"
-              name="userId"
-            />
-            <Input
-              placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
-              type="password"
-              scale="large"
-              name="userPw"
-            />
-          </InputWrap>
+
+          <Input
+            placeholder="아이디 입력"
+            type="text"
+            scale="large"
+            name="userId"
+          />
+          <Input
+            placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
+            type="password"
+            scale="large"
+            name="userPw"
+          />
+
           <Input
             className="checkbox"
             type="checkbox"
@@ -85,7 +80,7 @@ const MainForm = props => {
             <span>로그인</span>
           </Button>
 
-          <ul className="snsLoginBtn">
+          {/* <ul className="snsLoginBtn">
             <li>
               <IconButton type="submit" img="kakao">
                 <span>
@@ -94,25 +89,20 @@ const MainForm = props => {
                 </span>
               </IconButton>
             </li>
-          </ul>
+          </ul> */}
           <ul className="bottomMenu">
             <li>
-              <Link to="#">
-                <a href="#!">아이디 찾기</a>
-              </Link>
+              <Link to="#">아이디 찾기</Link>
             </li>
             <li>
-              <Link to="#">
-                <a href="#!">비밀번호 찾기</a>
-              </Link>
+              <Link to="#">비밀번호 찾기</Link>
             </li>
           </ul>
 
           <Button
             className="joinBtn"
-            scale="large"
-            shape="outLine"
             fullWidth="true"
+            shape="outLine"
             color="primary"
           >
             <div
@@ -122,7 +112,7 @@ const MainForm = props => {
               }}
             >
               <span>아직 회원이 아니세요?</span>
-              <span>회원가입 ></span>
+              <span className="joinSpan">회원가입</span>
             </div>
           </Button>
         </fieldset>

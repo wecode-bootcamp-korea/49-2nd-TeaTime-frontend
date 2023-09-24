@@ -56,13 +56,9 @@
   font-size: 1px;
   position: absolute;
   z-index: -1;
+  color: transparent;
 }
 
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 a {
   text-decoration-line: none;
 }
