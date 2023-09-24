@@ -81,4 +81,24 @@
     border: 1px solid #ddd;
     opacity: 0.5;
   }
+
+  &[img='heart'] {
+    width: 45px;
+    height: 45px;
+    background: url('../../../public/images/heart.png') no-repeat;
+    background-position: top 0 left 0;
+    background-size: contain;
+    background-color: #c8c4c424;
+    border-radius: 50px;
+
+    &.on {
+      width: 45px;
+      height: 45px;
+      background: url('../../../public/images/heartOn.png') no-repeat;
+      background-position: top 0 left 0;
+      background-size: contain;
+      background-color: #c8c4c424;
+      border-radius: 50px;
+    }
+  }
 }

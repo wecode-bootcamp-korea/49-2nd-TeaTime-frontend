@@ -1,0 +1,173 @@
+.product {
+  padding-top: 80px;
+
+  .prdDetailTop {
+    position: relative;
+    margin: 70px auto 170px;
+    padding: 0 30px;
+    max-width: 1280px;
+
+    .prdInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      padding: 0;
+
+      .prdInfoLeft {
+        position: relative;
+        width: 45.9%;
+
+        .prdWrapper {
+          position: relative;
+          padding: 30px 43px 110px;
+          background: #f8f9fb;
+
+          .thumb {
+            max-width: 480px;
+
+            img {
+              display: block;
+              width: 100%;
+              max-width: 100%;
+              height: auto;
+            }
+          }
+
+          ul {
+            display: block;
+            position: absolute;
+            bottom: 23px;
+            left: 16px;
+            zoom: 1;
+
+            li {
+              display: inline;
+              float: left;
+              position: relative;
+              margin: 22px 0 0;
+              padding: 0 0 0 28px;
+              height: 21px;
+              line-height: 21px;
+              color: #505051;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+
+      .prdInfoRight {
+        position: relative;
+        width: 47.3%;
+
+        .prdLoc {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin: 0 0 10px;
+          color: #9d9d9d;
+          font-size: 16px;
+        }
+
+        .prdName {
+          margin: 0 0 6px;
+          padding: 0;
+          color: #000000;
+          font-size: 36px;
+          line-height: 1.2;
+        }
+
+        .prdOrigin {
+          font-size: 28px;
+          color: #000;
+          margin: 0;
+          margin-bottom: 6px;
+        }
+
+        .prdAmount {
+          margin: 0 0 30px;
+          color: #656565;
+          font-size: 20px;
+        }
+
+        .prdPriceBtn {
+          position: relative;
+          margin: 0 0 14px;
+          padding: 0 0 17px 180px;
+          min-height: 59px;
+          border-bottom: 1px #ececec solid;
+
+          .prdBtn {
+            display: flex;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            bottom: 17px;
+            zoom: 1;
+
+            .prdUrl {
+              display: block;
+              color: #7b7b7ba6;
+              background-color: #c8c4c424;
+              height: 45px;
+              width: 45px;
+              border-radius: 50px;
+              line-height: 49px;
+              text-align: center;
+              cursor: pointer;
+              font-weight: 800;
+              margin-right: 10px;
+
+              &:hover {
+                display: block;
+                color: white;
+                background-color: #40c057;
+                height: 45px;
+                width: 45px;
+                border-radius: 50px;
+                line-height: 49px;
+                text-align: center;
+                cursor: pointer;
+                font-weight: 800;
+              }
+            }
+          }
+
+          .prdPrice {
+            margin: 0 0 0 auto;
+
+            p {
+              margin: 0;
+              padding: 0;
+              text-align: right;
+              line-height: 1;
+            }
+
+            .realPrice {
+              color: #b8b8b8;
+              font-size: 20px;
+              text-decoration: line-through;
+            }
+
+            .price {
+              margin: 7px 0 0;
+              color: #7b7b7b;
+              font-size: 28px;
+
+              strong {
+                color: #000000;
+                font-weight: bold;
+              }
+
+              em {
+                margin: 0 0 0 4px;
+                color: #fd5c5c;
+                font-size: 26px;
+                font-style: normal;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
