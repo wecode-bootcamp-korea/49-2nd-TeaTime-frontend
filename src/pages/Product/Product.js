@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './Product.scss';
 import { useParams, Link } from 'react-router-dom';
 import IconButton from '../../Component/IconButton/IconButton';
+import Button from '../../Component/Button/Button';
 const Product = () => {
   const params = useParams();
   const prductId = params.id;
 
   const [isUserLike, setIsUserLike] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const copyUrl = () => {
     const url = window.document.location.href;
@@ -71,6 +73,80 @@ const Product = () => {
                 <p className="price">
                   <strong>22,400</strong>원<em>20 %</em>
                 </p>
+              </div>
+            </div>
+            <div className="buyPanel">
+              <div className="buyOption">
+                <div className="selectOption">
+                  <div className="setCount">
+                    <p>구매수량</p>
+                    <div className="count">
+                      <a>-</a>
+                      <input type="number"></input>
+                      <a>+</a>
+                    </div>
+                  </div>
+                  <div className="bagOption">
+                    <select id="bag">
+                      <option>쇼핑백 없음</option>
+                      <option>쇼핑백 추가(+100원)</option>
+                    </select>
+                  </div>
+                  <div className="bagOption">
+                    <select id="wrap">
+                      <option>포장안함</option>
+                      <option>포장함(+2000원)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="freeLabel">
+              <span
+                style={
+                  totalPrice > 50000
+                    ? { display: 'block' }
+                    : { display: 'none' }
+                }
+              >
+                무료배송
+              </span>
+            </div>
+            <div className="valueAmount">
+              <p className="totalValue">상품금액 합계</p>
+              <p className="totalAmount">
+                <strong>22,500</strong>원
+              </p>
+            </div>
+            <div className="btnWapper">
+              <div className="payWarpper">
+                <Button
+                  className="presentBtn"
+                  scale="small"
+                  shape="fill"
+                  fullWidth="true"
+                  color="bording"
+                >
+                  선물하기
+                </Button>
+                <Button
+                  className="cartBtn"
+                  scale="small"
+                  shape="fill"
+                  fullWidth="true"
+                  color="secondary"
+                >
+                  장바구니
+                </Button>
+                <Button
+                  className="payBtn"
+                  scale="large"
+                  shape="fill"
+                  fullWidth="true"
+                  color="green"
+                >
+                  바로구매
+                </Button>
               </div>
             </div>
           </div>
