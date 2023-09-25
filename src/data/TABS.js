@@ -4,7 +4,7 @@ export const TABS = [
   { id: 'delivery', url: '/mypage/delivery', title: '배송지 정보' },
 ];
 
-export const DILIVERYDATA = [
+export const DILIVERY_DATA = [
   {
     id: '1',
     name: '집',
