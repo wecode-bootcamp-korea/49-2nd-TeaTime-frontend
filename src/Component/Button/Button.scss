@@ -25,6 +25,11 @@
     font-size: 15px;
   }
 
+  &[scale='xSmall'] {
+    min-width: 100px;
+    font-size: 14px;
+  }
+
   &[data-fullWidth='true'] {
     width: 100%;
   }
@@ -37,12 +42,16 @@
     border: none;
 
     &[color='primary'] {
-      @include primary($colorA, $colorC, $colorA);
+      @include primary($skyblue, $white, $skyblue);
       border-radius: 4px;
     }
 
     &[color='secondary'] {
-      @include secondary($colorB, $colorC, $colorB);
+      @include secondary($black, $white, $black);
+    }
+
+    &[color='tertiary'] {
+      @include tertiary($lightGray, $gray, $darkWhite);
     }
 
     &:disabled {
@@ -60,11 +69,11 @@
     text-align: center;
 
     &[color='primary'] {
-      @include primary($colorC, $colorB, $colorB);
+      @include primary($white, $black, $black);
     }
 
     &[color='secondary'] {
-      @include secondary($colorC, $colorF, $colorG);
+      @include secondary($white, $gray, $darkWhite);
     }
   }
 }
