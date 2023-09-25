@@ -54,6 +54,14 @@
       @include tertiary($lightGray, $gray, $darkWhite);
     }
 
+    &[color='bording'] {
+      @include bording($colorC, $colorE, $colorB);
+    }
+
+    &[color='green'] {
+      @include primary($colorE, $colorC, $colorE);
+    }
+
     &:disabled {
       cursor: not-allowed;
       background-color: #f0f0f0;

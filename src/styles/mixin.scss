@@ -24,6 +24,13 @@ $lightGray: #e6e6e6;
   border: 1px solid $borderColor;
 }
 
+
+@mixin bording($bgColor, $color, $borderColor: null) {
+  background-color: $bgColor;
+  color: $color;
+  border: 1px solid $borderColor;
+}
+
 @mixin tertiary($bgColor, $color, $borderColor: null) {
   background-color: $bgColor;
   color: $color;

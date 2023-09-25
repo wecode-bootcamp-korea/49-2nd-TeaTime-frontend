@@ -2,8 +2,14 @@ import React from 'react';
 import '../Products.scss';
 import Paging from '../../../Component/Paging/Paging';
 import { PRODUCT_SORT } from '../../../data/ComponentData';
+import { useNavigate } from 'react-router-dom';
 
 const Contents = props => {
+  const navigate = useNavigate();
+  const goDetail = key => {
+    navigate(`/product/${key}`);
+  };
+
   return (
     <div>
       <p className="pageLocation">{props.titleText}</p>
@@ -35,13 +41,16 @@ const Contents = props => {
           <div className="item">
             <div className="thumb">
               <a>
-                <img src="https://image.osulloc.com/upload/kr/ko/adminImage/JY/QU/304_20210825170710069ZN.png"></img>
+                <img
+                  onClick={() => goDetail(1)}
+                  src="https://image.osulloc.com/upload/kr/ko/adminImage/JY/QU/304_20210825170710069ZN.png"
+                ></img>
               </a>
               <a className="basket">
                 <button>장바구니</button>
               </a>
             </div>
-            <p className="prdName">
+            <p className="prdName" onClick={() => goDetail(1)}>
               <a>러블리 티 박스</a>
             </p>
             <span className="prdPrice">

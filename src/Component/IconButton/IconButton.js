@@ -3,13 +3,14 @@ import './IconButton.scss';
 
 const IconButton = props => {
   const {
-    className = 'iconBtn',
+
+    className,
     type = 'button',
     scale = 'small',
     img,
+    children,
     onClick,
     plusOnClick,
-    children,
   } = props;
 
   return (
