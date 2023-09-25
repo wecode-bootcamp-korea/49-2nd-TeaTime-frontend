@@ -1,0 +1,26 @@
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .plusBtn {
+    flex: 0 0 50px;
+    position: relative;
+  }
+
+  & .label {
+    padding: 0;
+
+    .countInput {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      border-color: #ddd;
+    }
+  }
+
+  .minusBtn {
+    position: relative;
+    flex: 0 0 50px;
+  }
+}

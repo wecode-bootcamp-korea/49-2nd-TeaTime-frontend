@@ -1,0 +1,32 @@
+.myPageNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 1240px;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0 30px;
+
+  & .selected {
+    border-bottom: 1px solid #0a40d5;
+    color: #0a40d5;
+  }
+
+  & .myPageNavList {
+    display: flex;
+    padding: 0 20px;
+
+    & .myPageNavListItem {
+      display: block;
+      padding: 14px 40px 14px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      color: #333;
+
+      a {
+        color: #333;
+      }
+    }
+  }
+}

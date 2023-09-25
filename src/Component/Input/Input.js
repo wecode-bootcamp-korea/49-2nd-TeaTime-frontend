@@ -11,19 +11,21 @@ const Input = props => {
     scale,
     text,
     onChange,
+    value,
     children,
   } = props;
 
   return (
     <label className="label">
       <input
-        className={className}
+        className={className ? `input ${className}` : 'input'}
         placeholder={placeholder}
         type={type}
         disabled={disabled}
         name={name}
         scale={scale}
         text={text}
+        value={value}
         onChange={onChange}
       >
         {children}

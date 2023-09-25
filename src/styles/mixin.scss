@@ -1,10 +1,10 @@
-$colorA: #5c95f0;
-$colorB: #313131;
-$colorC: #ffffff;
-$colorD: #000000;
-$colorE: #6c801a;
-$colorF: #666;
-$colorG: #ddd;
+$skyblue: #5c95f0;
+$black: #313131;
+$white: #ffffff;
+$darkGreen: #6c801a;
+$gray: #666;
+$darkWhite: #ddd;
+$lightGray: #e6e6e6;
 
 @mixin center {
   display: flex;
@@ -19,6 +19,19 @@ $colorG: #ddd;
 }
 
 @mixin secondary($bgColor, $color, $borderColor: null) {
+  background-color: $bgColor;
+  color: $color;
+  border: 1px solid $borderColor;
+}
+
+
+@mixin bording($bgColor, $color, $borderColor: null) {
+  background-color: $bgColor;
+  color: $color;
+  border: 1px solid $borderColor;
+}
+
+@mixin tertiary($bgColor, $color, $borderColor: null) {
   background-color: $bgColor;
   color: $color;
   border: 1px solid $borderColor;

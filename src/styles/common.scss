@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 }
+html,
+.menuBox {
+  min-width: 1200px;
+}
 .Bblack {
   background-color: #000000;
 }
@@ -61,4 +65,8 @@
 
 a {
   text-decoration-line: none;
+}
+
+img {
+  width: 100%;
 }
