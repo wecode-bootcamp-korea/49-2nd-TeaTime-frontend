@@ -55,11 +55,11 @@
     }
 
     &[color='bording'] {
-      @include bording($colorC, $colorE, $colorB);
+      @include bording($white, $darkGreen, $black);
     }
 
     &[color='green'] {
-      @include primary($colorE, $colorC, $colorE);
+      @include primary($darkGreen, $white, $darkGreen);
     }
 
     &:disabled {
