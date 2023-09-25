@@ -82,6 +82,7 @@
     opacity: 0.5;
   }
 
+
   &[img='heart'] {
     width: 45px;
     height: 45px;
@@ -100,5 +101,25 @@
       background-color: #c8c4c424;
       border-radius: 50px;
     }
+
+  &[img='plus'] {
+    width: 50px;
+    height: 50px;
+    background: url('../../../public/images/plus.png') no-repeat 50% / 20px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0 6px 6px 0; // 왼쪽 위 오른쪽 위 오른쪽 아래 왼쪽 아래
+    opacity: 0.8;
+  }
+
+  &[img='minus'] {
+    width: 50px;
+    height: 50px;
+    background: url('../../../public/images/minus.png') no-repeat 50% / 20px;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    opacity: 0.8;
+
   }
 }
