@@ -1,0 +1,101 @@
+.deliveryLocation {
+  & .deliveryInfo {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding: 30px 0 0 20px;
+  }
+
+  .deliveryLength {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 0px;
+
+    & span {
+      font-size: 20px;
+      color: #6c801a;
+    }
+  }
+
+  & .deliveryRegister {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 0px;
+  }
+
+  & .deliveryLocationList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 30px 24px 30px 24px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+
+    .deliveryItem {
+      .deliveryListTitle {
+        display: flex;
+        padding: 20px 0;
+
+        .listName {
+          font-size: 20px;
+          font-weight: 600;
+          margin-right: 10px;
+        }
+
+        .customerName {
+          font-size: 16px;
+          font-weight: 500;
+          text-align: center;
+        }
+      }
+
+      .deliveryUserAddress {
+        margin-top: 10px;
+
+        .address {
+          font-size: 16px;
+          color: #666;
+          margin-top: 10px;
+        }
+
+        .phoneNumber {
+          font-size: 14px;
+          color: #666;
+          margin-top: 10px;
+        }
+      }
+
+      .delEdtWrap {
+        font-size: 13px;
+        margin-top: 30px;
+        color: #666;
+
+        .delBtn {
+          margin-right: 12px;
+          padding-right: 12px;
+          color: #666;
+          border-right: 1px solid #e6e6e6;
+        }
+
+        .edtBtn {
+          color: #666;
+        }
+      }
+    }
+  }
+
+  .deliveryAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 30px 24px 30px 24px;
+
+    & .btn span::before {
+      content: '+ ';
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}

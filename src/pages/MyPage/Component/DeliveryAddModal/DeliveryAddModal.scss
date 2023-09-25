@@ -1,0 +1,125 @@
+.deliveryAddModal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+
+  .deliveryAddModalContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 480px;
+    max-width: 480px;
+    height: 700px;
+    padding: 30px 30px 40px 30px;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid #555;
+    border-radius: 12px;
+
+    .deliveryAddModalHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #555;
+
+      & h3 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      & button {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .deliveryAddModalForm {
+      width: 100%;
+
+      & .deliveryAddModalFormContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 20px 0;
+
+        & .addModalTitle {
+          font-size: 16px;
+          font-weight: 500;
+          color: #333333;
+          margin-bottom: 12px;
+        }
+        & .addModalPhone {
+          display: flex;
+          justify-content: flex-start;
+          gap: 8px;
+
+          & .addModalSelect {
+            display: flex;
+            width: 136px;
+            max-width: 136px;
+            height: 40px;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            padding: 5px 14px 5px 10px;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #999;
+          }
+
+          label {
+            flex: 1;
+          }
+        }
+
+        .addModalAddress {
+          display: flex;
+          width: 100%;
+
+          label {
+            flex: 1;
+
+            & .addressInput {
+              display: flex;
+              margin-right: 8px;
+            }
+          }
+
+          & .addressSearch {
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4px;
+          }
+        }
+        .deliveryAddModalCheckBox {
+          display: flex;
+          align-items: center;
+
+          & .checkBox {
+            margin: 0;
+          }
+
+          p {
+            font-size: 14px;
+            padding-left: 5px;
+          }
+        }
+
+        .deliveryAddModalButton {
+          position: fixed;
+          width: 100%;
+          left: 110px;
+          bottom: 30px;
+        }
+      }
+    }
+  }
+}
