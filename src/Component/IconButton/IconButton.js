@@ -3,7 +3,6 @@ import './IconButton.scss';
 
 const IconButton = props => {
   const {
-
     className,
     type = 'button',
     scale = 'small',
