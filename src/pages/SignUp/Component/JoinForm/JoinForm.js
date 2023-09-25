@@ -106,14 +106,23 @@ const JoinForm = props => {
             <span>필수 사항</span>
           </div>
           <div className="signUpInput">
-            <InputWrap
-              className={`input ${isIdValidation && 'error'}`}
-              scale="large"
-              fullWidth="true"
-              placeholder="아이디 입력 (영문, 숫자 조합)"
-              name="userId"
-              type="text"
-            />
+            <div className="signUpIdCheck">
+              <InputWrap
+                className={`input ${isIdValidation && 'error'}`}
+                scale="large"
+                placeholder="아이디 입력 (영문, 숫자 조합)"
+                name="userId"
+                type="text"
+              />
+              <Button
+                className="signUpIdCheckBtn"
+                scale="xSmall"
+                shape="fill"
+                color="tertiary"
+              >
+                중복확인
+              </Button>
+            </div>
             <InputWrap
               className={`input ${isPasswordValidation && 'error'}`}
               scale="large"
