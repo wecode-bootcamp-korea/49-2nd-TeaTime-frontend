@@ -27,6 +27,29 @@
         color: #ff3636;
       }
     }
+
+    .signUpIdCheck {
+      display: flex;
+      .inputWrap {
+        flex: 1;
+      }
+
+      & input {
+        display: flex;
+        flex: 1;
+        width: 100%;
+      }
+
+      & .signUpIdCheckBtn {
+        width: 100px;
+        height: 56px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22px;
+        margin-left: 8px;
+      }
+    }
     .signUpOption {
       display: flex;
       justify-content: space-between;
