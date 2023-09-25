@@ -10,22 +10,12 @@ import './MyPage.scss';
 const MyPage = () => {
   const { tabId } = useParams();
 
-  const isOn = tabId => {
-    if (tabId === 'userinfo') {
-      return 'userinfoSelected';
-    } else if (tabId === 'recentorder') {
-      return 'recentorderSelected';
-    } else if (tabId === 'delivery') {
-      return 'deliverySelected';
-    }
-  };
-
   return (
     <div className="myPage">
       <div className="myPageHeader">
         <h2>마이페이지</h2>
       </div>
-      <Tab TABS={TABS} className={isOn(tabId)} />
+      <Tab TABS={TABS} />
       {tabId === 'userinfo' && <UserInfo />}
       {tabId === 'recentorder' && <RecentOrderDetails />}
       {tabId === 'delivery' && <Delivery DILIVERY_DATA={DILIVERY_DATA} />}

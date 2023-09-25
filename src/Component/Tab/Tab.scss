@@ -7,6 +7,11 @@
   border-bottom: 1px solid #e6e6e6;
   padding: 0 30px;
 
+  & .selected {
+    border-bottom: 1px solid #0a40d5;
+    color: #0a40d5;
+  }
+
   & .myPageNavList {
     display: flex;
     padding: 0 20px;
