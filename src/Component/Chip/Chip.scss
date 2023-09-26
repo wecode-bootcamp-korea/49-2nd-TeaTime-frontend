@@ -18,6 +18,14 @@
     font-weight: 600;
   }
 
+  &[data-scale='large'] {
+    height: 40px;
+    line-height: 20px;
+    padding: 10px 24px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
   &[data-checked='true'] {
     color: #fff;
     background-color: #a1af1b;
