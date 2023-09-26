@@ -59,7 +59,7 @@ const Nav = () => {
                             <div className="flexBox">
                               <ul className="navListDept2">
                                 <li className="itemDept2">
-                                  <Link to="/">베스트</Link>
+                                  <Link to="/best">베스트</Link>
                                   <ul className="navListDept3">
                                     {BEST_PRODUCT_MENU.map(item => (
                                       <li key={item.text} className="itemDept3">

@@ -8,6 +8,7 @@ import Product from './pages/Product/Product';
 import SignUp from './pages/SignUp/SignUp';
 import Payment from './pages/Payment/Payment';
 import MyPage from './pages/MyPage/MyPage';
+import Best from './pages/Best/Best';
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/best" element={<Best />} />
         <Route path="/mypage/:tabId" element={<MyPage />} />
         <Route path="/mypage" element={<Navigate to="/mypage/userinfo" />} />
       </Routes>
