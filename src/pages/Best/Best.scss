@@ -1,0 +1,39 @@
+.nav + .best {
+  margin-top: 80px;
+}
+
+.best {
+  width: 100%;
+  min-width: 1240px;
+
+  .bestContainer {
+    width: 100%;
+    min-width: 1240px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+
+    .bestChipBtnWrap {
+      max-width: 1240px;
+      margin: 0 auto;
+
+      .chip {
+        margin-left: 10px;
+      }
+
+      .ChipBtn {
+        display: flex;
+      }
+    }
+
+    .bestListTitle {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 1240px;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 40px auto;
+      padding-left: 15px;
+    }
+  }
+}
