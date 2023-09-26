@@ -1,0 +1,105 @@
+.bestList {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+
+  .bestListWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 23%;
+    margin: 0 auto;
+
+    .bestItem {
+      position: relative;
+
+      & > .bestItemImg {
+        height: 300px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      &:hover {
+        .bestItemImg {
+          opacity: 0.7;
+        }
+        .bestItemImgBtn {
+          display: block;
+        }
+      }
+
+      .bestItemText {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        background-color: #666666;
+        color: #fff;
+        text-align: center;
+      }
+
+      .bestItemImgBtn {
+        display: none;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+
+        &:hover {
+          display: block;
+        }
+
+        &:hover + .bestItemImg {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .bestItemNameInfo {
+      height: 115px;
+      margin-top: 15px;
+
+      .bestItemName {
+        font-size: 16px;
+        font-weight: 600;
+        max-height: 35px;
+        color: #555;
+      }
+
+      .bestItemPriceBox {
+        margin-top: 5px;
+
+        .bestItemSalesPrice {
+          font-size: 14px;
+          color: #999999;
+        }
+
+        .bestItemListPrice {
+          display: flex;
+
+          .bestItemPrice {
+            font-size: 18px;
+            line-height: 1;
+            font-weight: 600;
+            color: #333;
+          }
+
+          .bestItemDiscount {
+            font-size: 14px;
+            color: red;
+            margin-left: 5px;
+          }
+        }
+      }
+      .bestItemPrice {
+        font-size: 18px;
+        line-height: 1;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+  }
+}
