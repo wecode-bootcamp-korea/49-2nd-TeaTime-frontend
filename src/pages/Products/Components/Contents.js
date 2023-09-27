@@ -19,7 +19,7 @@ const Contents = props => {
           {PRODUCT_SORT.map(item => (
             <li key={item.text}>
               <a
-                className={props.sort === item.value && 'on'}
+                className={props.sort === item.value ? 'on' : null}
                 id={item.value}
                 onClick={e => {
                   props.handlerSort(e);
