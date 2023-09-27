@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Payment from './pages/Payment/Payment';
 import MyPage from './pages/MyPage/MyPage';
 import Best from './pages/Best/Best';
+import Cart from './pages/Cart/Cart';
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/best" element={<Best />} />
         <Route path="/mypage/:tabId" element={<MyPage />} />
         <Route path="/mypage" element={<Navigate to="/mypage/userinfo" />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
