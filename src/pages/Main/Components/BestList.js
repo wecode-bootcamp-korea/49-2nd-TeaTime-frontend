@@ -25,20 +25,20 @@ const BestList = () => {
               />
               <IconButton className="cartBtn" img="cart" onClick={() => {}} />
             </div>
-            <div class="prdDesc">
-              <div class="prdInfo">
-                <p class="prdName">
+            <div className="prdDesc">
+              <div className="prdInfo">
+                <p className="prdName">
                   <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
                 </p>
-                <div class="prdPrice">
-                  <p class="priceOrigin">39,000원</p>
-                  <div class="flexBox">
-                    <p class="priceResult">13,000원</p>
-                    <p class="salePercent">25%</p>
+                <div className="prdPrice">
+                  <p className="priceOrigin">39,000원</p>
+                  <div className="flexBox">
+                    <p className="priceResult">13,000원</p>
+                    <p className="salePercent">25%</p>
                   </div>
                 </div>
               </div>
-              <div class="prdTag" />
+              <div className="prdTag" />
             </div>
           </div>
           {/* 여기까지 */}
@@ -52,20 +52,20 @@ const BestList = () => {
                 <button>장바구니</button>
               </div>
             </div>
-            <div class="prdDesc">
-              <div class="prdInfo">
-                <p class="prdName">
+            <div className="prdDesc">
+              <div className="prdInfo">
+                <p className="prdName">
                   <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
                 </p>
-                <div class="prdPrice">
-                  <p class="priceOrigin">39,000원</p>
-                  <div class="flexBox">
-                    <p class="priceResult">13,000원</p>
-                    <p class="salePercent">25%</p>
+                <div className="prdPrice">
+                  <p className="priceOrigin">39,000원</p>
+                  <div className="flexBox">
+                    <p className="priceResult">13,000원</p>
+                    <p className="salePercent">25%</p>
                   </div>
                 </div>
               </div>
-              <div class="prdTag" />
+              <div className="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
@@ -78,20 +78,20 @@ const BestList = () => {
                 <button>장바구니</button>
               </div>
             </div>
-            <div class="prdDesc">
-              <div class="prdInfo">
-                <p class="prdName">
+            <div className="prdDesc">
+              <div className="prdInfo">
+                <p className="prdName">
                   <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
                 </p>
-                <div class="prdPrice">
-                  <p class="priceOrigin">39,000원</p>
-                  <div class="flexBox">
-                    <p class="priceResult">13,000원</p>
-                    <p class="salePercent">25%</p>
+                <div className="prdPrice">
+                  <p className="priceOrigin">39,000원</p>
+                  <div className="flexBox">
+                    <p className="priceResult">13,000원</p>
+                    <p className="salePercent">25%</p>
                   </div>
                 </div>
               </div>
-              <div class="prdTag" />
+              <div className="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
@@ -104,20 +104,20 @@ const BestList = () => {
                 <button>장바구니</button>
               </div>
             </div>
-            <div class="prdDesc">
-              <div class="prdInfo">
-                <p class="prdName">
+            <div className="prdDesc">
+              <div className="prdInfo">
+                <p className="prdName">
                   <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
                 </p>
-                <div class="prdPrice">
-                  <p class="priceOrigin">39,000원</p>
-                  <div class="flexBox">
-                    <p class="priceResult">13,000원</p>
-                    <p class="salePercent">25%</p>
+                <div className="prdPrice">
+                  <p className="priceOrigin">39,000원</p>
+                  <div className="flexBox">
+                    <p className="priceResult">13,000원</p>
+                    <p className="salePercent">25%</p>
                   </div>
                 </div>
               </div>
-              <div class="prdTag" />
+              <div className="prdTag" />
             </div>
           </div>
           <div className="prdInfo">
@@ -130,20 +130,20 @@ const BestList = () => {
                 <button>장바구니</button>
               </div>
             </div>
-            <div class="prdDesc">
-              <div class="prdInfo">
-                <p class="prdName">
+            <div className="prdDesc">
+              <div className="prdInfo">
+                <p className="prdName">
                   <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
                 </p>
-                <div class="prdPrice">
-                  <p class="priceOrigin">39,000원</p>
-                  <div class="flexBox">
-                    <p class="priceResult">13,000원</p>
-                    <p class="salePercent">25%</p>
+                <div className="prdPrice">
+                  <p className="priceOrigin">39,000원</p>
+                  <div className="flexBox">
+                    <p className="priceResult">13,000원</p>
+                    <p className="salePercent">25%</p>
                   </div>
                 </div>
               </div>
-              <div class="prdTag" />
+              <div className="prdTag" />
             </div>
           </div>
         </div>
