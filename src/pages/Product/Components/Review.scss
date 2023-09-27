@@ -1,0 +1,189 @@
+.review {
+  padding: 90px 0 0;
+
+  .title {
+    font-weight: 500;
+    margin: 0;
+    color: #000000;
+    font-size: 40px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .subTitle {
+    margin: 20px 0 80px;
+    color: #9e9e9e;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .average {
+    margin: 0 0 45px;
+    padding: 0 0 24px;
+    border-bottom: 1px #ececec solid;
+
+    .averageInner {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 66px;
+      max-width: 1280px;
+      width: 100%;
+      overflow: hidden;
+      margin: 0 auto;
+
+      .innerLeft {
+        width: 50%;
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+        .leftTit {
+          margin-top: 1px;
+          color: #000000;
+          font-size: 32px;
+          line-height: 1;
+        }
+
+        .leftSubTit {
+          margin-top: 13px;
+          color: #9e9e9e;
+          font-size: 22px;
+
+          span {
+            color: #fd5c5c;
+          }
+        }
+      }
+
+      .innerRight {
+        display: block;
+        width: 50%;
+
+        p {
+          margin: -2px 0 0;
+          padding: 5px 0 5px;
+          text-align: right;
+          color: #313131;
+          font-size: 20px;
+          line-height: 1;
+        }
+
+        div {
+          position: relative;
+          margin: 0 0 0 auto;
+          padding: 0 85px 0 0;
+          height: 58px;
+          width: 270px;
+
+          span {
+            position: absolute;
+            bottom: 3px;
+            right: 0;
+            color: #6c801a;
+            font-size: 50px;
+            font-weight: bold;
+            line-height: 1;
+          }
+        }
+      }
+    }
+  }
+  .reviewList {
+    padding: 18px 0 0;
+    margin: 0 auto;
+    max-width: 1148px;
+    border-bottom: 0;
+
+    .reviewBox {
+      display: table;
+      margin: 0;
+      padding: 30px 0 20px;
+      width: 100%;
+      border-bottom: 1px #eaeaea solid;
+
+      .reviewPoint {
+        padding: 0 0 0 20px;
+        width: 152px;
+        text-align: left;
+        display: table-cell;
+
+        .reviewDate {
+          color: #b0b0b0;
+          font-size: 16px;
+        }
+
+        .starPoint {
+          margin: 15px 0 0;
+          padding: 0;
+          width: auto;
+          height: auto;
+
+          .star {
+            position: relative;
+            overflow: hidden;
+            bottom: 0;
+            width: 107px;
+            height: 19px;
+            background: url('../../../../public/images/starsBlack.png') 0 0
+              no-repeat;
+
+            .bar {
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 19px;
+              background: url('../../../../public/images/starsBlack.png') 0 -20px
+                no-repeat;
+            }
+          }
+
+          .p0 .bar {
+            width: 0;
+          }
+          .p1 .bar {
+            width: 20px;
+          }
+          .p2 .bar {
+            width: 42px;
+          }
+          .p3 .bar {
+            width: 64px;
+          }
+          .p4 .bar {
+            width: 86px;
+          }
+          .p5 .bar {
+            width: 108px;
+          }
+        }
+      }
+    }
+  }
+  .reviewContent {
+    padding: 0 70px 0 20px;
+    text-align: left;
+    display: table-cell;
+
+    .reviewWriter {
+      color: #8b8b8b;
+      font-size: 17px;
+
+      em {
+        color: #6c801a;
+        font-style: normal;
+      }
+    }
+
+    a {
+      display: block;
+      margin: 10px 0 0;
+      padding: 0;
+      color: #7e7e7e;
+      font-size: 17px;
+      line-height: 1.8;
+      word-break: break-all;
+    }
+  }
+}
