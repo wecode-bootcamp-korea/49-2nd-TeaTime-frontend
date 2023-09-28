@@ -83,7 +83,7 @@ const Delivery = props => {
         >
           <span>배송지 추가</span>
         </Button>
-        {isModalOpen && <DeliveryAddModal onClick={closeModal} />}
+        <DeliveryAddModal open={isModalOpen} onClick={closeModal} />
       </div>
     </div>
   );
