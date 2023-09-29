@@ -19,23 +19,26 @@ const Product = () => {
   const [productData, setProductData] = useState({});
 
   useEffect(() => {
-    const Data = {
-      price: 22400,
-      discount: 20,
-      realPrice: 28000,
-      src: 'https://image.osulloc.com/upload/kr/ko/adminImage/NP/YV/20200513135231693GB.png',
-      category: 1,
-      categoryName: '티 제품',
-      name: '상품 명',
-      origin: '원산지',
-      amount: '상품 설명을 길게 더 길게 또 길게 표현D',
-      reviewCnt: 112,
-      reviewPoint: 5,
-    };
-    setProductData(Data);
-    setTotalAmount(pre => {
-      return { ...pre, totalPrice: Data.price };
-    });
+    fetch(`http://51.20.57.76:8000/products/${productId}`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result.message === 'READ_DETAIL_SUCCESS') {
+          setProductData(result.data);
+          setTotalAmount(pre => {
+            return { ...pre, totalPrice: result.data.discountPrice };
+          });
+          setIsUserLike(result.data.isLiked === 1 ? true : false);
+        } else {
+          alert('에러입니다. 관리자에게 문의하세요.');
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -99,7 +102,6 @@ const Product = () => {
       }
     }
   };
-
   return (
     <div className="product">
       <div className="prdDetailTop">
@@ -107,7 +109,7 @@ const Product = () => {
           <div className="prdInfoLeft">
             <div className="prdWrapper">
               <div className="thumb">
-                <img src={productData.src} alt={productData.name} />
+                <img src={productData.mainImageUrl} alt={productData.name} />
               </div>
               <ul>
                 <li>o 포인트 10% 적립</li>
@@ -128,7 +130,7 @@ const Product = () => {
               </Link>
             </div>
             <p className="prdName">{productData.name}</p>
-            <p className="prdOrigin">{productData.origin}</p>
+            <p className="prdOrigin">{'(' + productData.region + ')'}</p>
             <p className="prdAmount">{productData.amount}</p>
             <div className="prdPriceBtn">
               <div className="prdBtn">
@@ -145,15 +147,14 @@ const Product = () => {
               </div>
               <div className="prdPrice">
                 <p className="realPrice">
-                  {productData.realPrice &&
-                    productData.realPrice.toLocaleString()}
-                  원
+                  {productData.price && productData.price.toLocaleString()}원
                 </p>
                 <p className="price">
                   <strong>
-                    {productData.price && productData.price.toLocaleString()}
+                    {productData.discountPrice &&
+                      productData.discountPrice.toLocaleString()}
                   </strong>
-                  원<em>{productData.discount} %</em>
+                  원<em>{productData.discountRate} %</em>
                 </p>
               </div>
             </div>
@@ -200,7 +201,8 @@ const Product = () => {
                 <strong>
                   {totalAmount.totalPrice
                     ? totalAmount.totalPrice.toLocaleString()
-                    : productData.price && productData.price.toLocaleString()}
+                    : productData.discountPrice &&
+                      productData.discountPrice.toLocaleString()}
                 </strong>
                 원
               </p>
@@ -242,17 +244,17 @@ const Product = () => {
           <div className="reviewPoint">
             <p>리뷰 평점</p>
             <div className="pointStar">
-              <span className="pointNum">{productData.reviewPoint}</span>
+              <span className="pointNum">{productData.reviewGradeAvg}</span>
               <span
                 className="starPoint"
-                style={{ width: productData.reviewPoint * 12.75 + `%` }}
+                style={{ width: productData.reviewGradeAvg * 12.75 + `%` }}
               >
                 ★★★★★
               </span>
             </div>
           </div>
           <span className="reviewCnt">
-            REVIEW <strong>{productData.reviewCnt}</strong>
+            REVIEW <strong>{productData.reviewCount}</strong>
           </span>
         </div>
       </div>
@@ -269,14 +271,19 @@ const Product = () => {
             있습니다.
           </small>
         </div>
-        <img src={productData.src} />
+        {productData.contentImageUrls &&
+          productData.contentImageUrls.map((item, index) => (
+            <div key={productData.contentImageUrls[item]}>
+              <img src={productData.contentImageUrls[index]} />
+            </div>
+          ))}
       </div>
       <div className="hr"></div>
       <Review
         productId={productId}
-        reviewCnt={productData.reviewCnt}
+        reviewCnt={productData.reviewCount}
         productName={productData.name}
-        reviewPoint={productData.reviewPoint}
+        reviewPoint={productData.reviewGradeAvg}
       />
     </div>
   );

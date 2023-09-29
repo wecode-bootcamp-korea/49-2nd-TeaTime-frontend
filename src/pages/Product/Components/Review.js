@@ -6,10 +6,31 @@ import './Review.scss';
 const Review = props => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     if (searchParams.get('page')) setPage(parseInt(searchParams.get('page')));
   }, [searchParams]);
+
+  useEffect(() => {
+    fetch(
+      `http://51.20.57.76:8000/products/${props.productId}/reviews?page=${page}`,
+      {
+        method: 'Get',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result.message === 'READ_REVIEW_SUCCESS') {
+          setData(result.data.reviews);
+        }
+      });
+  }, [page]);
 
   const handlerPage = e => {
     const ePage = e.target.id;
@@ -21,7 +42,7 @@ const Review = props => {
       setSearchParams(searchParams);
     }
   };
-
+  console.log(data);
   return (
     <div className="review">
       <p className="title">고객 리뷰</p>
@@ -46,25 +67,26 @@ const Review = props => {
       </div>
       <div className="reviewContents">
         <div className="reviewList">
-          {/* 반복 */}
-          <div className="reviewBox">
-            <div className="reviewPoint">
-              <div className="reviewDate">2023.04.23</div>
-              <div className="starPoint">
-                <div className={`star p${props.reviewPoint}`}>
-                  <div className="bar"></div>
+          {data &&
+            data.map(item => (
+              <div className="reviewBox">
+                <div className="reviewPoint">
+                  <div className="reviewDate">{item.createdAt}</div>
+                  <div className="starPoint">
+                    <div className={`star p${item.grade}`}>
+                      <div className="bar"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="reviewContent">
+                  <div className="reviewWriter">
+                    <em>구매자</em>
+                    <span>{item.loginId}</span>
+                  </div>
+                  <a>{item.content}</a>
                 </div>
               </div>
-            </div>
-            <div className="reviewContent">
-              <div className="reviewWriter">
-                <em>구매자</em>
-                <span>누구누구</span>
-              </div>
-              <a>여러가지 맛을 볼수 있어서 참 좋네요</a>
-            </div>
-          </div>
-          {/* 여기까지 */}
+            ))}
         </div>
       </div>
       <Paging

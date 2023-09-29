@@ -35,7 +35,6 @@ const Contents = props => {
         }
       });
   }, [props.category, props.page, props.sort]);
-  console.log(totalCnt);
   return (
     <div>
       <p className="pageLocation">{props.titleText}</p>
