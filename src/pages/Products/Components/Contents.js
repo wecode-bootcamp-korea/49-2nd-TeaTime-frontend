@@ -85,11 +85,16 @@ const Contents = props => {
                 <p className="">
                   <strong>{item.price && item.price.toLocaleString()}원</strong>
                   <br />
-                  <del>
-                    {item.discountPrice && item.discountPrice.toLocaleString()}
-                    원
-                  </del>
-                  <em>({item.discountRate}%)</em>
+                  {item.discountPrice && (
+                    <>
+                      <del>
+                        {item.discountPrice &&
+                          item.discountPrice.toLocaleString()}
+                        원
+                      </del>
+                      <em>({item.discountRate}%)</em>
+                    </>
+                  )}
                 </p>
               </span>
               <div className="etc">

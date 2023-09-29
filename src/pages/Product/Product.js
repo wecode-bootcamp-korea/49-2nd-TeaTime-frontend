@@ -30,6 +30,7 @@ const Product = () => {
       })
       .then(result => {
         if (result.message === 'READ_DETAIL_SUCCESS') {
+          console.log(result);
           setProductData(result.data);
           setTotalAmount(pre => {
             return { ...pre, totalPrice: result.data.discountPrice };
