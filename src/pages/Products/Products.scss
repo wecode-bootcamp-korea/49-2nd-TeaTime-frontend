@@ -148,6 +148,7 @@
     overflow: hidden;
     counter-reset: item-ranking;
   }
+
   .item {
     display: block;
     position: relative;
@@ -155,6 +156,7 @@
     padding: 0 22px 70px;
     width: 25%;
     border-right: 2px #f6f6f6 solid;
+
     .thumb {
       display: block;
       position: relative;
@@ -164,10 +166,17 @@
       a {
         cursor: pointer;
       }
-      .basket {
+
+      .cartBtn {
+        display: none;
         position: absolute;
-        right: 10px;
         bottom: 10px;
+        right: 10px;
+      }
+      &:hover {
+        .cartBtn {
+          display: block;
+        }
       }
     }
 
@@ -228,6 +237,21 @@
           width: 23px;
           height: 21px;
           cursor: pointer;
+        }
+
+        .heartBtn {
+          position: absolute;
+          top: -6px;
+          left: 0;
+          width: 23px;
+          cursor: pointer;
+        }
+
+        .commentBtn {
+          position: absolute;
+          top: -6px;
+          left: 0;
+          width: 23px;
         }
       }
     }

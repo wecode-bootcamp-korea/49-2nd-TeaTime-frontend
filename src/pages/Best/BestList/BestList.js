@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import IconButton from '../../../../Component/IconButton/IconButton';
+import IconButton from '../../../Component/IconButton/IconButton';
 import './BestList.scss';
 
 const BestList = props => {

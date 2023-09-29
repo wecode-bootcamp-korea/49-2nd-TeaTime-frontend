@@ -1,6 +1,7 @@
 .chip {
   text-align: center;
   border-radius: 150px;
+  user-select: none;
 
   &[data-scale='small'] {
     width: 70px;

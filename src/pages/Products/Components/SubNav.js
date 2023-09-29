@@ -8,7 +8,7 @@ const BestList = props => {
       {props.productCategory.map(item => (
         <li className="subTitle" key={item.text}>
           <a
-            className={props.category === item.value && 'on'}
+            className={props.category === item.value ? 'on' : null}
             id={item.value}
             onClick={e => {
               props.handlerSubNav(e);
