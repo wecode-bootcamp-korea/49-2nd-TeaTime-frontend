@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Products.scss';
+import IconButton from '../../../Component/IconButton/IconButton';
 import Paging from '../../../Component/Paging/Paging';
 import { PRODUCT_SORT } from '../../../data/ComponentData';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +19,7 @@ const Contents = props => {
           {PRODUCT_SORT.map(item => (
             <li key={item.text}>
               <a
-                className={props.sort === item.value && 'on'}
+                className={props.sort === item.value ? 'on' : null}
                 id={item.value}
                 onClick={e => {
                   props.handlerSort(e);
@@ -44,11 +45,9 @@ const Contents = props => {
                 <img
                   onClick={() => goDetail(1)}
                   src="https://image.osulloc.com/upload/kr/ko/adminImage/JY/QU/304_20210825170710069ZN.png"
-                ></img>
+                />
               </a>
-              <a className="basket">
-                <button>장바구니</button>
-              </a>
+              <IconButton className="cartBtn" img="cart" onClick={() => {}} />
             </div>
             <p className="prdName" onClick={() => goDetail(1)}>
               <a>러블리 티 박스</a>
@@ -63,11 +62,11 @@ const Contents = props => {
             </span>
             <div className="etc">
               <span className="e1">
-                <a></a>
+                <img className="heartBtn" src="/images/heart.png" />
                 34
               </span>
               <span className="e2">
-                <a></a>
+                <img className="commentBtn" src="/images/comment.png" />
                 123
               </span>
             </div>

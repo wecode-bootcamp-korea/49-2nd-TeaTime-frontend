@@ -3,9 +3,10 @@ import './Product.scss';
 import { useParams, Link } from 'react-router-dom';
 import IconButton from '../../Component/IconButton/IconButton';
 import Button from '../../Component/Button/Button';
+import Review from './Components/Review';
 const Product = () => {
   const params = useParams();
-  const prductId = params.id;
+  const productId = params.id;
 
   const [isUserLike, setIsUserLike] = useState(true);
   const [totalAmount, setTotalAmount] = useState({
@@ -271,7 +272,12 @@ const Product = () => {
         <img src={productData.src} />
       </div>
       <div className="hr"></div>
-      {/* <Review /> */}
+      <Review
+        productId={productId}
+        reviewCnt={productData.reviewCnt}
+        productName={productData.name}
+        reviewPoint={productData.reviewPoint}
+      />
     </div>
   );
 };

@@ -19,11 +19,11 @@ const Nav = () => {
   };
 
   const goCart = () => {
-    if (!isLoginStatus) {
-      alert('로그인 후 사용가능합니다.');
-    } else {
-      navgiate('/');
-    }
+    // if (!isLoginStatus) {
+    //   alert('로그인 후 사용가능합니다.');
+    // } else {
+    navgiate('/cart');
+    //}
   };
 
   const logOut = () => {
