@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Main.scss';
+import Button from '../../../Component/Button/Button';
 
 const BestList = () => {
   return (
@@ -147,9 +148,14 @@ const BestList = () => {
           </div>
         </div>
         <div className="prdBtnBox">
-          <button className="bestPrdMore">
-            <span>더보기 +</span>
-          </button>
+          <Button
+            className="prdBtn"
+            scale="middle"
+            shape="fill"
+            color="tertiary"
+          >
+            <span>더보기</span>
+          </Button>
         </div>
       </div>
     </div>
