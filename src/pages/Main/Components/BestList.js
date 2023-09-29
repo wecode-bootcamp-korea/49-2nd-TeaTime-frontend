@@ -1,4 +1,5 @@
 import React from 'react';
+import IconButton from '../../../Component/IconButton/IconButton';
 import '../Main.scss';
 
 const BestList = () => {
@@ -15,15 +16,14 @@ const BestList = () => {
       </div>
       <div className="itemList">
         <div className="prdListBox">
+          {/* 여기서부터 */}
           <div className="prdInfo">
             <div className="prdThumb">
               <img
                 alt="이미지"
                 src="https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
               />
-              <div className="hoverIcon">
-                <button>장바구니</button>
-              </div>
+              <IconButton className="cartBtn" img="cart" onClick={() => {}} />
             </div>
             <div class="prdDesc">
               <div class="prdInfo">
@@ -41,6 +41,7 @@ const BestList = () => {
               <div class="prdTag" />
             </div>
           </div>
+          {/* 여기까지 */}
           <div className="prdInfo">
             <div className="prdThumb">
               <img
