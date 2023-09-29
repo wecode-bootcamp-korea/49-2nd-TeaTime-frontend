@@ -45,7 +45,7 @@ const Paging = props => {
           <a
             key={page}
             id={page}
-            className={page === props.page && 'on'}
+            className={page === props.page ? 'on' : null}
             onClick={e => {
               props.handlerPage(e);
             }}
