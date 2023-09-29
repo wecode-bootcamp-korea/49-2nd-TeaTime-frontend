@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import IconButton from '../../../Component/IconButton/IconButton';
 import '../Main.scss';
 
 const BestList = () => {
+  const [sortOn, setSortOn] = useState(true);
+  const handleSort = () => {
+    setSortOn(!sortOn);
+  };
+
+  // useEffect(() => {
+  //   fech문 사용 , sortOn true면 이번주, false면 베스트 5개 제품 가져오기
+  // },[sortOn]);
+
   return (
     <div className="bestList">
       <div className="titBox">
@@ -10,8 +19,18 @@ const BestList = () => {
           <span className="bestTit">오늘은 어떤 차를 마셔볼까요</span>
         </div>
         <ul className="bestTab">
-          <li className="tabItem">베스트</li>
-          <li className="tabItem on">이번 주 인기 제품</li>
+          <li
+            className={`tabItem ${sortOn ? null : 'on'}`}
+            onClick={handleSort}
+          >
+            베스트
+          </li>
+          <li
+            className={`tabItem ${sortOn ? 'on' : null}`}
+            onClick={handleSort}
+          >
+            이번 주 인기 제품
+          </li>
         </ul>
       </div>
       <div className="itemList">
