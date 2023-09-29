@@ -11,7 +11,6 @@ const Products = () => {
   const [category, setCategory] = useState(0);
   const [sort, setSort] = useState(1);
   const [page, setPage] = useState(1);
-  const [totalCnt, setTotalCnt] = useState(99);
 
   useEffect(() => {
     if (searchParams.get('category'))
@@ -73,8 +72,8 @@ const Products = () => {
             sort={sort}
             handlerSort={handlerSort}
             titleText={PRODUCT_CATEGORY[category].text}
+            category={category}
             page={page}
-            totalCnt={totalCnt}
             handlerPage={handlerPage}
           />
         </div>
