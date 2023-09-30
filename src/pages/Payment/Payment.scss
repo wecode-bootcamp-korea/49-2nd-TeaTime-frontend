@@ -6,39 +6,192 @@
   width: 100%;
   min-width: 1240px;
   margin: 0 auto;
-  padding: 0 20px;
 
-  .paymentHeader {
+  .paymentInnerWrap {
     width: 100%;
-    padding: 30px 0 30px 10px;
-    font-size: 28px;
-    font-weight: 600;
-    border-bottom: 2px solid #555;
+    max-width: 1240px;
+    margin: 0 auto;
+
+    .paymentUserInfoTable {
+      width: 100%;
+
+      caption {
+        visibility: hidden;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+      }
+    }
   }
 
-  .paymentContainer {
-    display: flex;
+  .paymentTitle {
+    display: inline-block;
     width: 100%;
-    padding: 20px 20px;
-    font-size: 20px;
-    font-weight: 600;
+    max-width: 1240px;
 
-    & .paymentUserInfoTitle {
+    .paymentHeader {
+      padding: 0 60px;
+
+      .title {
+        line-height: initial;
+        font-size: 30px;
+        font-weight: 600;
+        padding: 48px 0 30px;
+        color: #333;
+      }
+    }
+  }
+
+  .paymentFormOrder {
+    display: block;
+    width: 100%;
+    max-width: 1240px;
+    height: 2000px;
+    padding: 0 60px;
+    margin: 0 auto;
+
+    .paymentInfo {
+      display: inline-block;
+      width: 70%;
+      height: 60px;
+      line-height: 60px;
+      border-top: 2px solid #333;
+      user-select: none;
+
+      & .paymentUserInfoTitle {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        & .paymentUserInfo {
+          display: flex;
+          font-size: 20px;
+          font-weight: 600;
+          user-select: none;
+        }
+
+        & .paymentUserName {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          font-size: 16px;
+          font-weight: 400;
+          color: #6c801a;
+          user-select: none;
+
+          & span::after {
+            content: url('../../../public/images/down-arrow.png');
+            margin-left: 10px;
+            margin-top: 5px;
+          }
+
+          &.modalOn span::after {
+            content: url('../../../public/images/up-arrow.png');
+          }
+        }
+      }
+
+      .userName {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .paymentUserInfoDelivery {
+    padding: 0 20px 60px;
+    border-top: 1px solid #e6e6e6;
+
+    .paymentDeliveryInfo {
+      display: flex;
+      font-size: 20px;
+      font-weight: 600;
+      user-select: none;
+    }
+  }
+
+  .paymentUserInfoItem {
+    padding: 0 20px 60px;
+    border-top: 1px solid #e6e6e6;
+
+    .itemInfoText {
       display: flex;
       justify-content: space-between;
-      width: 100%;
-      padding: 20px 20px;
 
-      & .paymentUserInfo {
+      .paymentItemInfo {
         display: flex;
         font-size: 20px;
         font-weight: 600;
+        user-select: none;
       }
 
-      & .paymentUserName {
-        font-size: 16px;
-        font-weight: 400;
-        color: #6c801a;
+      & span::after {
+        content: url('../../../public/images/down-arrow.png');
+      }
+
+      &.modalOn span::after {
+        content: url('../../../public/images/up-arrow.png');
+      }
+    }
+    .paymentItemInfoBox {
+      width: 100%;
+      border-bottom: 1px solid #e6e6e6;
+
+      .paymentItemInfoBoxWrap {
+        display: flex;
+        align-items: center;
+
+        .paymentItemInfoBoxWrapInnerImg {
+          width: 100px;
+          height: 100px;
+          margin-right: 20px;
+          padding: 10px;
+          object-fit: cover;
+
+          & img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+          }
+        }
+
+        .paymentItemInfoBoxWrapInnerInfo {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+
+          .paymentItemInfoBoxWrapInnerInfoName {
+            display: flex;
+            flex-direction: column;
+            line-height: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.05em;
+
+            .packaging {
+              font-size: 14px;
+              font-weight: 400;
+              color: #666666;
+            }
+          }
+
+          .paymentItemInfoBoxWrapInnerInfoPrice {
+            display: flex;
+            align-items: center;
+
+            & p {
+              font-size: 16px;
+              font-weight: 600;
+              letter-spacing: -0.05em;
+            }
+
+            & span {
+              font-size: 15px;
+            }
+          }
+        }
       }
     }
   }
