@@ -1,0 +1,82 @@
+.deliveryInfoBox {
+  width: 100%;
+  line-height: 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+
+  .NameBoxWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0 20px;
+
+    .NameBox {
+      display: flex;
+      align-items: center;
+
+      .deliveryName {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .deliverySubName {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.deliveryAddress {
+  font-size: 14px;
+  color: #666;
+  word-break: keep-all;
+  padding: 20px 20px 0 20px;
+}
+
+.deliveryPhone {
+  font-size: 13px;
+  color: #666;
+  padding: 20px 20px 20px 20px;
+}
+
+.deliveryBtn {
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #ddd;
+  border-radius: 0px 0px 8px 8px;
+
+  &::after {
+    content: ' >';
+  }
+}
+
+.requestedTerm {
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  background-color: #f6f6f6;
+  padding: 24px;
+  margin: 20px 0;
+
+  .requestedTermTitle {
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .deliverySelect {
+    width: 100%;
+    height: 40px;
+    padding: 0 24px 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
