@@ -1,7 +1,7 @@
 import React from 'react';
-import './DeliveryInfo.scss';
 import Chip from '../../../../Component/Chip/Chip';
 import Button from '../../../../Component/Button/Button';
+import './DeliveryInfo.scss';
 
 const DeliveryInfo = () => {
   return (
