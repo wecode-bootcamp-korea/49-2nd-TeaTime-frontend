@@ -5,6 +5,7 @@ $darkGreen: #6c801a;
 $gray: #666;
 $darkWhite: #ddd;
 $lightGray: #e6e6e6;
+$darkGray: #f6f6f6;
 
 @mixin center {
   display: flex;
@@ -23,7 +24,6 @@ $lightGray: #e6e6e6;
   color: $color;
   border: 1px solid $borderColor;
 }
-
 
 @mixin bording($bgColor, $color, $borderColor: null) {
   background-color: $bgColor;
