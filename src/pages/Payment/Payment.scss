@@ -48,7 +48,7 @@
     display: block;
     width: 100%;
     max-width: 1240px;
-    height: 2000px;
+    height: auto;
     padding: 0 60px;
     margin: 0 auto;
 
@@ -85,10 +85,12 @@
             content: url('../../../public/images/down-arrow.png');
             margin-left: 10px;
             margin-top: 5px;
+            padding-left: 10px;
           }
 
           &.modalOn span::after {
             content: url('../../../public/images/up-arrow.png');
+            padding-left: 10px;
           }
         }
       }
@@ -114,11 +116,15 @@
 
   .paymentUserInfoItem {
     padding: 0 20px 60px;
-    border-top: 1px solid #e6e6e6;
 
     .itemInfoText {
       display: flex;
       justify-content: space-between;
+      border-top: 1px solid #e6e6e6;
+
+      &.modalOn {
+        border-top: 1px solid #333;
+      }
 
       .paymentItemInfo {
         display: flex;
@@ -129,69 +135,85 @@
 
       & span::after {
         content: url('../../../public/images/down-arrow.png');
+        padding-left: 10px;
       }
 
       &.modalOn span::after {
         content: url('../../../public/images/up-arrow.png');
+        padding-left: 10px;
       }
     }
-    .paymentItemInfoBox {
+  }
+
+  .paymentDisCount {
+    width: 100%;
+
+    & .modalOn {
+      border-top: 1px solid #333;
+    }
+
+    .paymentDisCountWrapTitle {
+      display: flex;
+      justify-content: space-between;
+
+      & span {
+        font-size: 14px;
+        color: #6c801a;
+      }
+
+      .disCountTitle {
+        display: flex;
+        font-size: 20px;
+        font-weight: 600;
+        user-select: none;
+      }
+
+      & span::after {
+        content: url('../../../public/images/down-arrow.png');
+        padding-left: 10px;
+      }
+
+      &.modalOn span::after {
+        content: url('../../../public/images/up-arrow.png');
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .paymentSelect {
+    width: 100%;
+
+    .paymentSelectWrapTitle {
+      display: flex;
+      justify-content: space-between;
       width: 100%;
+      border-top: 1px solid #e6e6e6;
       border-bottom: 1px solid #e6e6e6;
 
-      .paymentItemInfoBoxWrap {
+      .selectTitle {
         display: flex;
-        align-items: center;
+        font-size: 20px;
+        font-weight: 600;
+        user-select: none;
 
-        .paymentItemInfoBoxWrapInnerImg {
-          width: 100px;
-          height: 100px;
-          margin-right: 20px;
-          padding: 10px;
-          object-fit: cover;
-
-          & img {
-            max-width: 100%;
-            height: auto;
-            vertical-align: middle;
-          }
+        & ~ span {
+          font-size: 14px;
+          color: #6c801a;
         }
 
-        .paymentItemInfoBoxWrapInnerInfo {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-
-          .paymentItemInfoBoxWrapInnerInfoName {
-            display: flex;
-            flex-direction: column;
-            line-height: 25px;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: -0.05em;
-
-            .packaging {
-              font-size: 14px;
-              font-weight: 400;
-              color: #666666;
-            }
-          }
-
-          .paymentItemInfoBoxWrapInnerInfoPrice {
-            display: flex;
-            align-items: center;
-
-            & p {
-              font-size: 16px;
-              font-weight: 600;
-              letter-spacing: -0.05em;
-            }
-
-            & span {
-              font-size: 15px;
-            }
-          }
+        & ~ span::after {
+          content: url('../../../public/images/down-arrow.png');
+          padding-left: 10px;
         }
+      }
+
+      &.modalOn span::after {
+        content: url('../../../public/images/up-arrow.png');
+        padding-left: 10px;
+      }
+
+      &.modalOn {
+        border-top: 1px solid #333;
       }
     }
   }

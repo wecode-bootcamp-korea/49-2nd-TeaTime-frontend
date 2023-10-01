@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import UserInfoModal from './Component/UserInfoModal/UserInfoModal';
 import Receipt from './Component/Receipt/Receipt';
 import DeliveryInfo from './Component/DeliveryInfo/DeliveryInfo';
-import './Payment.scss';
 import ItemList from './Component/ItemList/ItemList';
+import DisCountModal from './Component/DisCountModal/DisCountModal';
+import PaymentModal from './Component/PaymentModal/PaymentModal';
+import Agree from './Component/Agree/Agree';
+import './Payment.scss';
 
 const Payment = () => {
   // useState
   const [isUserInfoModal, setIsUserInfoModal] = useState(false);
   const [isItemListModal, setIsItemListModal] = useState(false);
+  const [isDisCountModal, setIsDisCountModal] = useState(false);
+  const [isPaymentModal, setIsPaymentModal] = useState(false);
+  const [paymentSelect, setPaymentSelect] = useState([]);
+
   const [userInfo, setUserInfo] = useState([
     {
       name: '',
@@ -45,6 +52,28 @@ const Payment = () => {
       return setIsItemListModal(false);
     }
     return setIsItemListModal(true);
+  };
+
+  const openDisCountModal = () => {
+    if (isDisCountModal) {
+      return setIsDisCountModal(false);
+    }
+    return setIsDisCountModal(true);
+  };
+
+  const openPaymentModal = () => {
+    if (isPaymentModal) {
+      return setIsPaymentModal(false);
+    }
+    return setIsPaymentModal(true);
+  };
+
+  const handleOnClick = e => {
+    if (e.target.name === 'payment') {
+      setPaymentSelect({ ...paymentSelect, payment: 'on', account: '' });
+    } else {
+      setPaymentSelect({ ...paymentSelect, payment: '', account: 'on' });
+    }
   };
 
   return (
@@ -115,6 +144,46 @@ const Payment = () => {
                   </div>
                 </div>
               )}
+
+              <div className="paymentDisCount">
+                <div
+                  className={`paymentDisCountWrapTitle ${
+                    isDisCountModal ? 'modalOn' : ''
+                  }`}
+                  onClick={() => {
+                    openDisCountModal();
+                  }}
+                >
+                  <h2 className="disCountTitle">할인/포인트</h2>
+                  <span>-9,750원</span>
+                </div>
+                {isDisCountModal && <DisCountModal />}
+              </div>
+
+              <div className="paymentSelect">
+                <div
+                  className={`paymentSelectWrapTitle ${
+                    isPaymentModal ? 'modalOn' : ''
+                  }`}
+                  onClick={() => {
+                    openPaymentModal();
+                  }}
+                >
+                  <h2 className="selectTitle">결제수단</h2>
+                  <span>
+                    {paymentSelect.payment === 'on' ? '신용카드' : '계좌이체'}
+                  </span>
+                </div>
+
+                {isPaymentModal && (
+                  <PaymentModal
+                    onClick={handleOnClick}
+                    paymentSelect={paymentSelect}
+                  />
+                )}
+              </div>
+
+              <Agree />
             </div>
           </section>
 
