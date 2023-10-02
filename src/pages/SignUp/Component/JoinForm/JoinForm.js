@@ -36,7 +36,7 @@ const JoinForm = props => {
   const isIdValidation = !idRegExp.test(userId);
   const isPasswordValidation = !passwordRegEx.test(userPw);
   const isPhoneValidation = `${userPhonePrefix}-${userPhone}`.length === 13;
-  // const isEmailValidation = !emailRegExp.test(userEmail);
+  const isEmailValidation = !emailRegExp.test(userEmail);
 
   const handleUserPhone = e => {
     e.target.value = e.target.value
@@ -58,46 +58,64 @@ const JoinForm = props => {
     setJoinInfo({ ...joinInfo, [name]: value });
   };
 
-  // const handlerJoinBtn = e => {
-  //   e.preventDefault();
+  const handlerJoinBtn = e => {
+    e.preventDefault();
 
-  //   fetch('http://', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //     body: JSON.stringify({
-  //       userId: userId,
-  //       userPw: userPw,
-  //       userName: userName,
-  //       userEmail: userEmail,
-  //       userPhone: `${userPhonePrefix}-${userPhone}`,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       if (res.message === 'SUCCESS') {
-  //         alert('회원가입이 완료되었습니다.');
-  //         window.location.replace('/login');
-  //       } else {
-  //         alert('회원가입에 실패하였습니다.');
-  //       }
-  //     });
-  // };
+    fetch('http://10.58.52.115:8000/user/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        name: userName,
+        login_id: userId,
+        password: userPw,
+        email: userEmail,
+        phoneNumber: `${userPhonePrefix}-${userPhone}`,
+        is_agree: isChecked,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          alert('회원가입이 완료되었습니다.');
+          window.location.replace('/login');
+        } else if (res.code === 'ALREADYLOGIN_ID') {
+          alert('중복된 아이디입니다.');
+        }
+      });
+  };
+
+  const handleIdCheck = () => {
+    fetch('http://10.58.52.115:8000/user/check-duplicate-userid', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        login_id: userId,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          alert('사용 가능한 아이디입니다.');
+        } else {
+          alert('사용 불가능한 아이디입니다.');
+        }
+      });
+  };
 
   const isSignUpValidation =
     !isIdValidation &&
     !isPasswordValidation &&
     userName.length >= 1 &&
     isPhoneValidation &&
+    !isEmailValidation &&
     isChecked;
 
   return (
-    <form
-      className="signUpForm"
-      onChange={onChangeHandler}
-      // onClick={handlerJoinBtn}
-    >
+    <form className="signUpForm" onChange={onChangeHandler}>
       <fieldset>
         <legend className="legend">회원가입</legend>
         <div className="signUpInputWrap">
@@ -119,6 +137,7 @@ const JoinForm = props => {
                 scale="xSmall"
                 shape="fill"
                 color="tertiary"
+                onClick={handleIdCheck}
               >
                 중복확인
               </Button>
@@ -153,9 +172,9 @@ const JoinForm = props => {
             />
           </div>
 
-          <div className="signUpOption">
+          <div className="signUpNcsry">
             <p>이메일</p>
-            <span>선택 사항</span>
+            <span>필수 사항</span>
           </div>
           <div>
             <Input
@@ -200,6 +219,7 @@ const JoinForm = props => {
             fullWidth="true"
             color="primary"
             disabled={!isSignUpValidation ? true : false}
+            onClick={handlerJoinBtn}
           >
             회원가입
           </Button>

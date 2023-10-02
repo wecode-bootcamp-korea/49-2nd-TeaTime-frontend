@@ -89,7 +89,7 @@
       vertical-align: middle;
     }
 
-    &:checked + span::after {
+    &.checked + span::after {
       content: '';
       position: absolute;
       top: 0px;
