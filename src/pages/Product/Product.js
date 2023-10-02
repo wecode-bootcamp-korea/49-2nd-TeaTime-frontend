@@ -30,7 +30,6 @@ const Product = () => {
       })
       .then(result => {
         if (result.message === 'READ_DETAIL_SUCCESS') {
-          console.log(result);
           setProductData(result.data);
           setTotalAmount(pre => {
             return { ...pre, totalPrice: result.data.discountPrice };
@@ -51,7 +50,9 @@ const Product = () => {
       return {
         ...pre,
         totalPrice:
-          (productData.price + bagPrice + wrapPrice) * totalAmount.cnt,
+          (productData.discountPrice
+            ? productData.discountPrice + bagPrice + wrapPrice
+            : productData.price + bagPrice + wrapPrice) * totalAmount.cnt,
       };
     });
   }, [totalAmount.isBagCheck, totalAmount.isWrapCheck, totalAmount.cnt]);
@@ -103,6 +104,7 @@ const Product = () => {
       }
     }
   };
+  console.log(productData);
   return (
     <div className="product">
       <div className="prdDetailTop">
@@ -132,7 +134,7 @@ const Product = () => {
             <div className="prdLoc">
               <Link to="/products?category=0"> 티 제품</Link>
               <span> {'>'} </span>
-              <Link to={`/products?category=${productData.category}`}>
+              <Link to={`/products?category=${productData.categoryId}`}>
                 {' '}
                 {productData.categoryName}
               </Link>
@@ -221,8 +223,10 @@ const Product = () => {
                 <strong>
                   {totalAmount.totalPrice
                     ? totalAmount.totalPrice.toLocaleString()
-                    : productData.discountPrice &&
-                      productData.discountPrice.toLocaleString()}
+                    : productData.discountPrice
+                    ? productData.discountPrice &&
+                      productData.discountPrice.toLocaleString()
+                    : productData.price && productData.price.toLocaleString()}
                 </strong>
                 원
               </p>
