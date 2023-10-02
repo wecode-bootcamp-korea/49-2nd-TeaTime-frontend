@@ -2,17 +2,40 @@ import React, { useEffect, useState } from 'react';
 import IconButton from '../../../Component/IconButton/IconButton';
 import '../Main.scss';
 import Button from '../../../Component/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const BestList = () => {
-  const [sortOn, setSortOn] = useState(true);
+  const [sortOn, setSortOn] = useState(false);
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
   const handleSort = () => {
     setSortOn(!sortOn);
   };
 
-  // useEffect(() => {
-  //   fech문 사용 , sortOn true면 이번주, false면 베스트 5개 제품 가져오기
-  // },[sortOn]);
-
+  useEffect(() => {
+    //fech문 사용 , sortOn true면 이번주, false면 베스트 5개 제품 가져오기
+    let sort = 0;
+    sortOn ? (sort = 1) : (sort = 3);
+    fetch(`http://51.20.57.76:8000/products/best?sort=${sort}`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result.message === 'READ_SUCCESS') {
+          setData(result.data.slice(0, 5));
+        } else {
+          alert('오류입니다. 관리자에게 문의하세요.');
+        }
+      });
+  }, [sortOn]);
+  const goDetail = key => {
+    navigate(`/product/${key}`);
+  };
   return (
     <div className="bestList">
       <div className="titBox">
@@ -36,136 +59,53 @@ const BestList = () => {
       </div>
       <div className="itemList">
         <div className="prdListBox">
-          {/* 여기서부터 */}
-          <div className="prdInfo">
-            <div className="prdThumb">
-              <img
-                alt="이미지"
-                src="https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
-              />
-              <IconButton className="cartBtn" img="cart" onClick={() => {}} />
-            </div>
-            <div className="prdDesc">
-              <div className="prdInfo">
-                <p className="prdName">
-                  <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
-                </p>
-                <div className="prdPrice">
-                  <p className="priceOrigin">39,000원</p>
-                  <div className="flexBox">
-                    <p className="priceResult">13,000원</p>
-                    <p className="salePercent">25%</p>
-                  </div>
+          {data.map(item => (
+            <div className="prdInfo" key={item.id}>
+              <div className="prdThumb">
+                <img
+                  alt="이미지"
+                  onClick={() => goDetail(item.id)}
+                  src={
+                    item.mainImageUrl
+                      ? item.mainImageUrl
+                      : '/images/no-image.jpg'
+                  }
+                />
+                <IconButton className="cartBtn" img="cart" onClick={() => {}} />
+              </div>
+              <div className="prdDesc">
+                <div className="prdInfo">
+                  <p className="prdName">
+                    <span onClick={() => goDetail(item.id)}>{item.name}</span>
+                  </p>
+                  {item.discountRate ? (
+                    <div className="prdPrice">
+                      <p className="priceOrigin">
+                        {item.price && item.price.toLocaleString()}원
+                      </p>
+                      <div className="flexBox">
+                        <p className="priceResult">
+                          {item.discountPrice &&
+                            item.discountPrice.toLocaleString()}
+                          원
+                        </p>
+                        <p className="salePercent">{item.discountRate}%</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="prdPrice">
+                      <div className="flexBox">
+                        <p className="priceResult">
+                          {item.price && item.price.toLocaleString()}원
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div className="prdTag" />
-            </div>
-          </div>
-          {/* 여기까지 */}
-          <div className="prdInfo">
-            <div className="prdThumb">
-              <img
-                alt="이미지"
-                src="https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
-              />
-              <div className="hoverIcon">
-                <button>장바구니</button>
+                <div className="prdTag" />
               </div>
             </div>
-            <div className="prdDesc">
-              <div className="prdInfo">
-                <p className="prdName">
-                  <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
-                </p>
-                <div className="prdPrice">
-                  <p className="priceOrigin">39,000원</p>
-                  <div className="flexBox">
-                    <p className="priceResult">13,000원</p>
-                    <p className="salePercent">25%</p>
-                  </div>
-                </div>
-              </div>
-              <div className="prdTag" />
-            </div>
-          </div>
-          <div className="prdInfo">
-            <div className="prdThumb">
-              <img
-                alt="이미지"
-                src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
-              />
-              <div className="hoverIcon">
-                <button>장바구니</button>
-              </div>
-            </div>
-            <div className="prdDesc">
-              <div className="prdInfo">
-                <p className="prdName">
-                  <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
-                </p>
-                <div className="prdPrice">
-                  <p className="priceOrigin">39,000원</p>
-                  <div className="flexBox">
-                    <p className="priceResult">13,000원</p>
-                    <p className="salePercent">25%</p>
-                  </div>
-                </div>
-              </div>
-              <div className="prdTag" />
-            </div>
-          </div>
-          <div className="prdInfo">
-            <div className="prdThumb">
-              <img
-                alt="이미지"
-                src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
-              />
-              <div className="hoverIcon">
-                <button>장바구니</button>
-              </div>
-            </div>
-            <div className="prdDesc">
-              <div className="prdInfo">
-                <p className="prdName">
-                  <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
-                </p>
-                <div className="prdPrice">
-                  <p className="priceOrigin">39,000원</p>
-                  <div className="flexBox">
-                    <p className="priceResult">13,000원</p>
-                    <p className="salePercent">25%</p>
-                  </div>
-                </div>
-              </div>
-              <div className="prdTag" />
-            </div>
-          </div>
-          <div className="prdInfo">
-            <div className="prdThumb">
-              <img
-                alt="이미지"
-                src="	https://image.osulloc.com/upload/kr/ko/adminImage/YZ/EK/304_20221202173016036XG.png"
-              />
-              <div className="hoverIcon">
-                <button>장바구니</button>
-              </div>
-            </div>
-            <div className="prdDesc">
-              <div className="prdInfo">
-                <p className="prdName">
-                  <a href="/kr/ko/shop/item/bakery/14943">그린티 랑드샤</a>
-                </p>
-                <div className="prdPrice">
-                  <p className="priceOrigin">39,000원</p>
-                  <div className="flexBox">
-                    <p className="priceResult">13,000원</p>
-                    <p className="salePercent">25%</p>
-                  </div>
-                </div>
-              </div>
-              <div className="prdTag" />
-            </div>
-          </div>
+          ))}
         </div>
         <div className="prdBtnBox">
           <Button
