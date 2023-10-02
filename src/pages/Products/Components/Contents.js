@@ -13,13 +13,14 @@ const Contents = props => {
     navigate(`/product/${key}`);
   };
 
-  useEffect(() => {
+  const handleFetch = () => {
     fetch(
       `http://51.20.57.76:8000/products?sort=${props.sort}&category=${props.category}&page=${props.page}`,
       {
         method: 'Get',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('accessToken'),
         },
       },
     )
@@ -34,7 +35,35 @@ const Contents = props => {
           alert('오류입니다. 관리자에게 문의하세요.');
         }
       });
+  };
+
+  useEffect(() => {
+    handleFetch();
   }, [props.category, props.page, props.sort]);
+
+  const clickLike = key => {
+    fetch('http://51.20.57.76:8000/likes', {
+      method: 'Post',
+      body: JSON.stringify({
+        productId: key,
+      }),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result.message === 'LIKE_PUSHED') {
+          handleFetch();
+        } else {
+          alert('오류입니다. 관리자에게 문의하세요.');
+        }
+      });
+  };
+  console.log(data);
   return (
     <div>
       <p className="pageLocation">{props.titleText}</p>
@@ -100,9 +129,17 @@ const Contents = props => {
               <div className="etc">
                 <span className="e1">
                   {item.isLiked === 0 ? (
-                    <img className="heartBtn" src="/images/heart.png" />
+                    <img
+                      className="heartBtn"
+                      src="/images/heart.png"
+                      onClick={() => clickLike(item.id)}
+                    />
                   ) : (
-                    <img className="heartBtn" src="/images/heartOn.png" />
+                    <img
+                      className="heartBtn"
+                      src="/images/heartOn.png"
+                      onClick={() => clickLike(item.id)}
+                    />
                   )}
 
                   {item.likeCount}

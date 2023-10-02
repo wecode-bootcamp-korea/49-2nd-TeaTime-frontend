@@ -23,6 +23,7 @@ const Product = () => {
       method: 'Get',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(res => {
@@ -65,11 +66,30 @@ const Product = () => {
   };
 
   const likeOnOff = () => {
-    if (isUserLike) {
-      setIsUserLike(false);
-    } else {
-      setIsUserLike(true);
-    }
+    fetch('http://51.20.57.76:8000/likes', {
+      method: 'Post',
+      body: JSON.stringify({
+        productId: productId,
+      }),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result.message === 'LIKE_PUSHED') {
+          if (isUserLike) {
+            setIsUserLike(false);
+          } else {
+            setIsUserLike(true);
+          }
+        } else {
+          alert('오류입니다. 관리자에게 문의하세요.');
+        }
+      });
   };
 
   const handleOption = e => {
