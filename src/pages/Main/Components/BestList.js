@@ -53,7 +53,7 @@ const BestList = () => {
             className={`tabItem ${sortOn ? 'on' : null}`}
             onClick={handleSort}
           >
-            이번 주 인기 제품
+            선물하기 베스트
           </li>
         </ul>
       </div>
