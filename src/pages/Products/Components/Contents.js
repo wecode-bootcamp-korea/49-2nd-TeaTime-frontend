@@ -72,7 +72,7 @@ const Contents = props => {
                     src={
                       item.mainImageUrl
                         ? item.mainImageUrl
-                        : 'https://image.osulloc.com/upload/kr/ko/adminImage/JY/QU/304_20210825170710069ZN.png'
+                        : '/images/no-image.jpg'
                     }
                   />
                 </a>
