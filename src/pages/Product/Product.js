@@ -110,7 +110,14 @@ const Product = () => {
           <div className="prdInfoLeft">
             <div className="prdWrapper">
               <div className="thumb">
-                <img src={productData.mainImageUrl} alt={productData.name} />
+                <img
+                  src={
+                    productData.mainImageUrl
+                      ? productData.mainImageUrl
+                      : '/images/no-image.jpg'
+                  }
+                  alt={productData.name}
+                />
               </div>
               <ul>
                 <li>o 포인트 10% 적립</li>
@@ -146,18 +153,30 @@ const Product = () => {
                   onClick={likeOnOff}
                 />
               </div>
-              <div className="prdPrice">
-                <p className="realPrice">
-                  {productData.price && productData.price.toLocaleString()}원
-                </p>
-                <p className="price">
-                  <strong>
-                    {productData.discountPrice &&
-                      productData.discountPrice.toLocaleString()}
-                  </strong>
-                  원<em>{productData.discountRate} %</em>
-                </p>
-              </div>
+              {productData.discountRate ? (
+                <div className="prdPrice">
+                  <p className="realPrice">
+                    {productData.price && productData.price.toLocaleString()}원
+                  </p>
+                  <p className="price">
+                    <strong>
+                      {productData.discountPrice &&
+                        productData.discountPrice.toLocaleString()}
+                    </strong>
+                    원<em>{productData.discountRate} %</em>
+                  </p>
+                </div>
+              ) : (
+                <div className="prdPrice">
+                  <p className="realPrice"></p>
+                  <p className="price">
+                    <strong>
+                      {productData.price && productData.price.toLocaleString()}
+                    </strong>
+                    원
+                  </p>
+                </div>
+              )}
             </div>
             <div className="buyPanel">
               <div className="buyOption">
