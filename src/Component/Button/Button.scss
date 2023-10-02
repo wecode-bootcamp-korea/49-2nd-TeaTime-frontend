@@ -62,6 +62,10 @@
       @include primary($darkGreen, $white, $darkGreen);
     }
 
+    &[color='darkGray'] {
+      @include primary($lightGray, $gray, $darkGray);
+    }
+
     &:disabled {
       cursor: not-allowed;
       background-color: #f0f0f0;

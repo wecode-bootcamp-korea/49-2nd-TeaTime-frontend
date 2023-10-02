@@ -1,0 +1,94 @@
+.paymentUserInfoInputWrap {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+  border-bottom: 2px solid #e6e6e6;
+  user-select: none;
+
+  .paymentUserInfoTable {
+    width: 100%;
+    vertical-align: top;
+    padding: 0 20px;
+
+    .infoText {
+      font-size: 14px;
+      color: #333;
+      font-weight: 400;
+      padding: 0 20px;
+      text-shadow: 1px 1px 1px #666666;
+    }
+
+    .userEmail {
+      display: flex;
+      align-items: center;
+    }
+
+    .userEmailWrap {
+      display: flex;
+      width: 100%;
+
+      .paymentUserInfoEmailInput {
+        width: 100%;
+      }
+
+      & .text {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 5px;
+      }
+
+      .emailSelect {
+        flex: 1;
+        height: 40px;
+        padding: 0 24px 0 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+      }
+    }
+  }
+
+  .userPhone {
+    display: flex;
+    align-items: center;
+  }
+
+  .userPhoneWrap {
+    display: flex;
+    width: 100%;
+
+    .phoneSelect {
+      width: 30%;
+      height: 40px;
+      padding: 0 24px 0 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .text {
+      height: 40px;
+      line-height: 40px;
+      padding: 0 5px;
+    }
+
+    .label {
+      display: flex;
+      flex: 1;
+    }
+  }
+
+  .senderName {
+    display: flex;
+    align-items: center;
+
+    .paymentUserInfoInput {
+      display: flex;
+      flex: 1 0;
+    }
+  }
+}
