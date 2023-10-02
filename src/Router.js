@@ -8,6 +8,8 @@ import Product from './pages/Product/Product';
 import SignUp from './pages/SignUp/SignUp';
 import Payment from './pages/Payment/Payment';
 import MyPage from './pages/MyPage/MyPage';
+import Best from './pages/Best/Best';
+import Cart from './pages/Cart/Cart';
 
 const Router = () => {
   return (
@@ -20,8 +22,11 @@ const Router = () => {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/best/:bestType" element={<Best />} />
+        <Route path="/best" element={<Navigate to="/best/best" />} />
         <Route path="/mypage/:tabId" element={<MyPage />} />
         <Route path="/mypage" element={<Navigate to="/mypage/userinfo" />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );

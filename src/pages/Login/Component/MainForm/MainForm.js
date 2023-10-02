@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../../../Component/Input/Input';
 import Button from '../../../../Component/Button/Button';
-import IconButton from '../../../../Component/IconButton/IconButton';
 import './MainForm.scss';
 
 const MainForm = props => {
-  const { onChange } = props;
-  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     userId: '',
     userPw: '',
   });
-
+  const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false); // 체크박스 체크 여부 [true, false]
   const { userId, userPw } = userInfo;
+
+  useEffect(() => {
+    if (localStorage.getItem('isChecked') === 'true') {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, []);
+
+  const checkItemHandler = e => {
+    if (e.target.checked) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  };
+
   const onChangeCheck = e => {
     const { name, value } = e.target;
 
@@ -22,6 +37,38 @@ const MainForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
+
+    fetch('http://10.58.52.115:8000/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        login_id: userId,
+        password: userPw,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          alert('로그인이 완료되었습니다.');
+          if (!isChecked) {
+            localStorage.setItem('accessToken', res.accessToken);
+            localStorage.setItem('isChecked', false);
+            localStorage.removeItem('userId');
+            navigate('/');
+          } else {
+            localStorage.setItem('accessToken', res.accessToken);
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('isChecked', true);
+            navigate('/');
+          }
+        } else if (res.code === 'ERRORLOGIN_ID') {
+          alert('아이디가 일치하지 않습니다.');
+        } else if (res.code === 'PASSWORDERROR') {
+          alert('비밀번호가 일치하지 않습니다.');
+        }
+      });
   };
 
   const loginValidation = e => {
@@ -55,6 +102,7 @@ const MainForm = props => {
             type="text"
             scale="large"
             name="userId"
+            value={isChecked ? localStorage.getItem('userId') : null}
           />
           <Input
             placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
@@ -64,17 +112,19 @@ const MainForm = props => {
           />
 
           <Input
-            className="checkbox"
+            className={`checkbox ${isChecked ? 'checked' : ''}`}
             type="checkbox"
             text="아이디 저장"
-            onChange={onChange}
+            onChange={checkItemHandler}
           />
+
           <Button
             className="loginBtn"
             scale="large"
             shape="fill"
             color="primary"
             fullWidth="true"
+            onClick={onSubmit}
             disabled={!loginValidation() ? true : false}
           >
             <span>로그인</span>
@@ -104,13 +154,9 @@ const MainForm = props => {
             fullWidth="true"
             shape="outLine"
             color="primary"
+            onClick={() => navigate('/signup')}
           >
-            <div
-              className="joinText"
-              onClick={() => {
-                navigate('/');
-              }}
-            >
+            <div className="joinText" type="button">
               <span>아직 회원이 아니세요?</span>
               <span className="joinSpan">회원가입</span>
             </div>

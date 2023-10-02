@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Input from '../../../../Component/Input/Input';
 import Button from '../../../../Component/Button/Button';
 import IconButton from '../../../../Component/IconButton/IconButton';
+import { Postcode } from './Component/DaumPostCode';
 import './DeliveryAddModal.scss';
 
 const DeliveryAddModal = props => {
-  const { onClick } = props;
+  const { open, onClick } = props;
+
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = open ? 'hidden' : 'auto';
+  }, [open]);
+
+  if (!open) return null;
 
   return (
     <div className="deliveryAddModal">
@@ -38,14 +46,7 @@ const DeliveryAddModal = props => {
               <p className="addModalTitle">주소</p>
               <div className="addModalAddress">
                 <Input className="addressInput" scale="middle" />
-                <Button
-                  className="addressSearch"
-                  scale="xSmall"
-                  shape="fill"
-                  color="tertiary"
-                >
-                  우편번호 찾기
-                </Button>
+                <Postcode />
               </div>
               <Input scale="middle" />
               <Input scale="middle" />

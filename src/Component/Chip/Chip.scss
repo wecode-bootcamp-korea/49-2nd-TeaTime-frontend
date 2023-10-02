@@ -1,6 +1,7 @@
 .chip {
   text-align: center;
   border-radius: 150px;
+  user-select: none;
 
   &[data-scale='small'] {
     width: 70px;
@@ -15,6 +16,14 @@
     height: 25px;
     line-height: 25px;
     font-size: 12px;
+    font-weight: 600;
+  }
+
+  &[data-scale='large'] {
+    height: 40px;
+    line-height: 20px;
+    padding: 10px 24px;
+    font-size: 18px;
     font-weight: 600;
   }
 
