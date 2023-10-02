@@ -18,7 +18,7 @@ const BestList = props => {
               <div className="bestItem">
                 <img
                   className="bestItemImg"
-                  src={mainImageUrl}
+                  src={mainImageUrl ? mainImageUrl : '/images/no-image.jpg'}
                   alt="best 상품"
                   onClick={() => {
                     navigate('/');
