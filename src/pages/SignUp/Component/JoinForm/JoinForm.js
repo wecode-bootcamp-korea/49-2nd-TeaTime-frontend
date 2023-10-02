@@ -61,7 +61,7 @@ const JoinForm = props => {
   const handlerJoinBtn = e => {
     e.preventDefault();
 
-    fetch('http://10.58.52.115:8000/user/signup', {
+    fetch('http://51.20.57.76:8000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -113,6 +113,8 @@ const JoinForm = props => {
     isPhoneValidation &&
     !isEmailValidation &&
     isChecked;
+
+  console.log(isChecked);
 
   return (
     <form className="signUpForm" onChange={onChangeHandler}>
@@ -205,6 +207,7 @@ const JoinForm = props => {
             />
           </div>
           <JoinCheckBox
+            className={`checkbox ${isChecked ? 'checked' : ''}`}
             onChange={isCheckItemHandler}
             onScroll={onScroll}
             isScroll={isScroll}

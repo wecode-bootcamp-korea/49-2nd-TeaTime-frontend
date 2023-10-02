@@ -38,7 +38,7 @@ const MainForm = props => {
   const onSubmit = e => {
     e.preventDefault();
 
-    fetch('http://10.58.52.115:8000/user/login', {
+    fetch('http://51.20.57.76:8000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

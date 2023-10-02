@@ -41,7 +41,9 @@ const Nav = () => {
           <div className="innerBox">
             <div className="leftBox">
               <h1 className="logo">
-                <Link to="/">TTIME</Link>
+                <Link to="/">
+                  <img src="/images/logo_transparent.png" alt="logo" />
+                </Link>
               </h1>
               <nav className="navBox">
                 <ul className="navListDept1">
