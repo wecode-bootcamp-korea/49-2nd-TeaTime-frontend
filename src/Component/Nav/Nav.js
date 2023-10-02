@@ -9,7 +9,7 @@ import {
 
 const Nav = () => {
   const [style, setStyle] = useState(false);
-  const isLoginStatus = localStorage.getItem('token');
+  const isLoginStatus = localStorage.getItem('accessToken');
   const navgiate = useNavigate();
 
   const dimBgAppear = (state, key) => {
@@ -19,16 +19,16 @@ const Nav = () => {
   };
 
   const goCart = () => {
-    // if (!isLoginStatus) {
-    //   alert('로그인 후 사용가능합니다.');
-    // } else {
-    navgiate('/cart');
-    //}
+    if (!isLoginStatus) {
+      alert('로그인 후 사용가능합니다.');
+    } else {
+      navgiate('/cart');
+    }
   };
 
   const logOut = () => {
     if (window.confirm('로그아웃 하시겠습니까 ?')) {
-      localStorage.removeItem('token');
+      localStorage.clear().removeItem('accessToken');
       window.location.reload();
     }
   };
@@ -41,7 +41,9 @@ const Nav = () => {
           <div className="innerBox">
             <div className="leftBox">
               <h1 className="logo">
-                <Link to="/">TTIME</Link>
+                <Link to="/">
+                  <img src="/images/logo_transparent.png" alt="logo" />
+                </Link>
               </h1>
               <nav className="navBox">
                 <ul className="navListDept1">

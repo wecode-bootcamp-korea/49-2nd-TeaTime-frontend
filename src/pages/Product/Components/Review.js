@@ -18,7 +18,7 @@ const Review = props => {
       {
         method: 'Get',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json;charset=utf-8',
         },
       },
     )
@@ -26,7 +26,8 @@ const Review = props => {
         return res.json();
       })
       .then(result => {
-        if (result.message === 'READ_REVIEW_SUCCESS') {
+        console.log(result);
+        if (result.message === 'READ_SUCCESS') {
           setData(result.data.reviews);
         }
       });
@@ -60,7 +61,7 @@ const Review = props => {
           <div className="innerRight">
             <p>리뷰 평점</p>
             <div>
-              <span>{props.reviewPoint}</span>
+              <span>{props.reviewPoint ? props.reviewPoint + '.0' : 0}점</span>
             </div>
           </div>
         </div>

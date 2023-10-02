@@ -19,11 +19,11 @@ export const MAIN_MENU = [
 export const BEST_PRODUCT_MENU = [
   {
     text: '베스트',
-    url: '/',
+    url: '/best/best',
   },
   {
-    text: '위클리 베스트',
-    url: '/',
+    text: '선물하기 베스트',
+    url: '/best/giftBest',
   },
 ];
 
