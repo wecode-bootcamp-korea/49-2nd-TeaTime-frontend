@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import IconButton from '../../../Component/IconButton/IconButton';
 import '../Main.scss';
 import Button from '../../../Component/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const BestList = () => {
   const [sortOn, setSortOn] = useState(false);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   const handleSort = () => {
     setSortOn(!sortOn);
   };
@@ -24,7 +26,6 @@ const BestList = () => {
         return res.json();
       })
       .then(result => {
-        console.log(result);
         if (result.message === 'READ_SUCCESS') {
           setData(result.data.slice(0, 5));
         } else {
@@ -32,7 +33,9 @@ const BestList = () => {
         }
       });
   }, [sortOn]);
-  console.log(data);
+  const goDetail = key => {
+    navigate(`/product/${key}`);
+  };
   return (
     <div className="bestList">
       <div className="titBox">
@@ -57,10 +60,11 @@ const BestList = () => {
       <div className="itemList">
         <div className="prdListBox">
           {data.map(item => (
-            <div className="prdInfo">
+            <div className="prdInfo" key={item.id}>
               <div className="prdThumb">
                 <img
                   alt="이미지"
+                  onClick={() => goDetail(item.id)}
                   src={
                     item.mainImageUrl
                       ? item.mainImageUrl
@@ -72,7 +76,7 @@ const BestList = () => {
               <div className="prdDesc">
                 <div className="prdInfo">
                   <p className="prdName">
-                    <a href="/kr/ko/shop/item/bakery/14943">{item.name}</a>
+                    <span onClick={() => goDetail(item.id)}>{item.name}</span>
                   </p>
                   {item.discountRate ? (
                     <div className="prdPrice">
