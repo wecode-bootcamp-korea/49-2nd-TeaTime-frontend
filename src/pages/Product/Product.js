@@ -295,7 +295,11 @@ const Product = () => {
               >
                 <div className="bar"></div>
               </div>
-              <span className="pointNum">{productData.reviewGradeAvg}</span>
+              <span className="pointNum">
+                {productData.reviewGradeAvg
+                  ? productData.reviewGradeAvg + '.0'
+                  : 0}
+              </span>
             </div>
           </div>
           <span className="reviewCnt">

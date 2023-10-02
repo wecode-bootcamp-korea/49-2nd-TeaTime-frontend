@@ -61,7 +61,7 @@ const Review = props => {
           <div className="innerRight">
             <p>리뷰 평점</p>
             <div>
-              <span>{props.reviewPoint}</span>
+              <span>{props.reviewPoint ? props.reviewPoint + '.0' : 0}점</span>
             </div>
           </div>
         </div>
