@@ -288,7 +288,11 @@ const Product = () => {
           <div className="reviewPoint">
             <p>리뷰 평점</p>
             <div className="starPoint">
-              <div className={`star p${productData.reviewGradeAvg}`}>
+              <div
+                className={`star p${
+                  productData.reviewGradeAvg ? productData.reviewGradeAvg : 0
+                }`}
+              >
                 <div className="bar"></div>
               </div>
               <span className="pointNum">{productData.reviewGradeAvg}</span>
