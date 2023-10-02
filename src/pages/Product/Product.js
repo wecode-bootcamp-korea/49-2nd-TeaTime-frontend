@@ -287,14 +287,11 @@ const Product = () => {
         <div className="reviewTotal">
           <div className="reviewPoint">
             <p>리뷰 평점</p>
-            <div className="pointStar">
+            <div className="starPoint">
+              <div className={`star p${productData.reviewGradeAvg}`}>
+                <div className="bar"></div>
+              </div>
               <span className="pointNum">{productData.reviewGradeAvg}</span>
-              <span
-                className="starPoint"
-                style={{ width: productData.reviewGradeAvg * 12.75 + `%` }}
-              >
-                ★★★★★
-              </span>
             </div>
           </div>
           <span className="reviewCnt">
