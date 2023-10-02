@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import Chip from '../../Component/Chip/Chip';
 import ImgBanner from '../../Component/ImgBanner/ImgBanner';
 import BestList from './BestList/BestList';
@@ -8,6 +13,7 @@ import './Best.scss';
 const Best = () => {
   // state
   const [bestData, setBestData] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // hooks
   const params = useParams();
@@ -15,27 +21,28 @@ const Best = () => {
 
   // var
   const currentChip = params.bestType || 'best';
+  const sort = searchParams.get('sort');
 
   // useEffects
   useEffect(() => {
-    if (params.bestType !== 'best' && params.bestType !== 'giftBest') {
+    if (
+      params.bestType !== 'best' &&
+      params.bestType !== 'giftBest' &&
+      params.bestType !== 'weeklyBest'
+    ) {
       navigate('/best/best', { replace: true });
     }
 
-    const url =
-      currentChip === 'best'
-        ? '/data/BestComponentData.json'
-        : '/data/GiftBestData.json';
-
-    fetch(url)
+    fetch(`http://51.20.57.76:8000/products/best?sort=${sort}`)
       .then(res => res.json())
-      .then(data => setBestData(data));
-  }, [params.bestType, navigate, currentChip]);
+      .then(result => setBestData(result.data));
+  }, [params.bestType, navigate, currentChip, sort]);
 
   // handlers
-
-  const onClickChip = bestType => {
-    navigate(`/best/${bestType}`);
+  const onClickChip = (bestType, index) => {
+    searchParams.set('sort', index);
+    setSearchParams(searchParams);
+    navigate(`/best/${bestType}?sort=${index}`);
   };
 
   return (
@@ -45,6 +52,14 @@ const Best = () => {
           src="../../../images/tea-banner.jpg"
           alt="best 상품 배너"
           text="베스트"
+        />
+      )}
+
+      {currentChip === 'weeklyBest' && (
+        <ImgBanner
+          src="../../../images/tea-banner (3).jpg"
+          alt="weeklyBest 상품 배너"
+          text="주간 베스트"
         />
       )}
 
@@ -64,7 +79,19 @@ const Best = () => {
                 scale="large"
                 checked={currentChip === 'best'}
                 text="베스트 상품"
-                onClick={() => onClickChip('best')}
+                onClick={() => {
+                  onClickChip('best', 1);
+                }}
+              />
+            </li>
+            <li>
+              <Chip
+                scale="large"
+                checked={currentChip === 'weeklyBest'}
+                text="위클리 베스트"
+                onClick={() => {
+                  onClickChip('weeklyBest', 2);
+                }}
               />
             </li>
             <li>
@@ -72,7 +99,9 @@ const Best = () => {
                 scale="large"
                 checked={currentChip === 'giftBest'}
                 text="선물하기 베스트"
-                onClick={() => onClickChip('giftBest')}
+                onClick={() => {
+                  onClickChip('giftBest', 3);
+                }}
               />
             </li>
           </ul>
