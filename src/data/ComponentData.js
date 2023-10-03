@@ -11,7 +11,7 @@ export const MAIN_MENU = [
   },
   {
     text: 'TRBox',
-    url: '/',
+    url: '/trbox',
     child: false,
   },
 ];
