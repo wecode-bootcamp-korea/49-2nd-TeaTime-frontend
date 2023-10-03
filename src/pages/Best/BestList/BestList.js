@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import IconButton from '../../../Component/IconButton/IconButton';
 import './BestList.scss';
 
 const BestList = props => {
   const { bestData, navigate } = props;
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <div className="bestList">
       {bestData.length > 0 &&
         bestData.map((item, index) => {
-          const { id, mainImageUrl, name, price, discountRate, discountPrice } =
-            item;
+          const {
+            id,
+            mainImageUrl,
+            subImageUrl,
+            name,
+            price,
+            discountRate,
+            discountPrice,
+          } = item;
+
+          const handelMouseOver = () => {
+            if (id === index + 1) {
+              setIsHovering(true);
+            }
+          };
+
+          const handelMouseOut = () => {
+            setIsHovering(false);
+          };
 
           return (
             <section className="bestListWrap" key={id}>
@@ -19,7 +37,12 @@ const BestList = props => {
                 <img
                   className="bestItemImg"
                   src={mainImageUrl ? mainImageUrl : '/images/no-image.jpg'}
+                  {...(isHovering && {
+                    src: subImageUrl ? subImageUrl : '/images/no-image.jpg',
+                  })}
                   alt="best 상품"
+                  onMouseOver={handelMouseOver}
+                  onMouseOut={handelMouseOut}
                   onClick={() => {
                     navigate('/');
                   }}
