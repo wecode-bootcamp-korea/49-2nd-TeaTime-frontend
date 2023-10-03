@@ -1,6 +1,7 @@
 import React from 'react';
-import './Main.scss';
 import BestList from './Components/BestList';
+import EventSwiper from './Components/EventSwiper/EventSwiper';
+import './Main.scss';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button/Button';
 const Main = () => {
@@ -10,9 +11,7 @@ const Main = () => {
   };
   return (
     <div className="main">
-      <div className="mainImg">
-        <img alt="이미지" src="/images/main.png" />
-      </div>
+      <EventSwiper />
       <div className="contents">
         <BestList />
         <div className="trboxImg">
