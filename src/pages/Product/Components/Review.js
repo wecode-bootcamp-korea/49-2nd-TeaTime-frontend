@@ -8,7 +8,6 @@ const Review = props => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
 
-
   useEffect(() => {
     if (searchParams.get('page')) setPage(parseInt(searchParams.get('page')));
   }, [searchParams]);
@@ -33,7 +32,6 @@ const Review = props => {
         }
       });
   }, [page]);
-
 
   const handlerPage = e => {
     const ePage = e.target.id;

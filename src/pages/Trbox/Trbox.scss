@@ -1,0 +1,170 @@
+.trbox {
+  position: relative;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .trboxImg {
+    width: 100%;
+
+    img {
+      height: 700px;
+    }
+  }
+
+  .trboxInfo,
+  .trboxNotice {
+    padding: 60px 0;
+    margin: 0 auto;
+    background-color: white;
+    max-width: 1240px;
+    display: grid;
+
+    h1 {
+      padding-bottom: 36px;
+      font-family: 'Gowun Dodum';
+      font-size: 32px;
+      color: #333;
+      text-align: center;
+      letter-spacing: -0.05em;
+    }
+
+    .infoGrid {
+      display: block;
+
+      table {
+        border-bottom: 1px solid #ddd;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        empty-cells: show;
+
+        thead tr th {
+          height: 60px;
+          border-top: 1px solid #707070;
+          border-left: 1px solid #ddd;
+          background: #f6f8f6;
+          color: #5a7e62;
+        }
+
+        th {
+          border: solid #ddd;
+          font-size: 22px;
+          font-weight: 500;
+          padding: 14px 0;
+          text-align: center;
+          line-height: 1.5;
+        }
+
+        td {
+          border: solid #ddd;
+          border-width: 1px;
+          font-weight: 400;
+          font-size: 18px;
+          color: #999;
+          padding: 14px 0;
+          text-align: center;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  .trboxNotice {
+    h1 {
+      padding-bottom: 36px;
+      font-size: 32px;
+      color: #333;
+      text-align: center;
+      letter-spacing: -0.05em;
+    }
+
+    .noticeContent {
+      padding: 90px 142px;
+      background: #fbfbfb;
+
+      ul {
+        padding-left: 11px;
+
+        li {
+          margin-bottom: 60px;
+          list-style: none;
+
+          .listTitle {
+            position: relative;
+            padding: 3px 0;
+            font-weight: 500;
+            font-size: 22px;
+            color: #333;
+            line-height: 1;
+          }
+
+          .desc {
+            font-weight: 400;
+            font-size: 20px;
+            color: #999;
+          }
+        }
+      }
+    }
+  }
+  .trboxContent {
+    padding-top: 60px;
+
+    h1 {
+      font-weight: 500;
+      color: #333333;
+      letter-spacing: -0.04em;
+      line-height: 30px;
+      font-size: 30px;
+      padding-bottom: 60px;
+    }
+
+    .trboxBtn {
+      display: flex;
+    }
+
+    .payBtn {
+      padding: 25px 40px 28px;
+      display: inline-block;
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: 400;
+      width: 100%;
+      text-align: left;
+      border-width: 0.3px;
+
+      &.on {
+        background-color: #f6f8f1;
+        border: 3px solid #b2ca8b;
+      }
+
+      h2,
+      p {
+        font-weight: 500;
+        font-size: 20px;
+      }
+
+      p {
+        margin-top: 9px;
+
+        .monthPrice {
+          color: #5a7e62;
+          font-weight: 600;
+          font-size: 26px;
+          margin-left: 5px;
+        }
+
+        .totalPrice {
+          color: #999999;
+          font-weight: 400;
+        }
+      }
+    }
+    .subscribeBtn {
+      text-align: center;
+      padding-top: 60px;
+    }
+  }
+}
