@@ -122,7 +122,7 @@ const BestList = () => {
             className="prdBtn"
             scale="middle"
             shape="fill"
-            color="tertiary"
+            color="bording"
           >
             <span>더보기</span>
           </Button>
