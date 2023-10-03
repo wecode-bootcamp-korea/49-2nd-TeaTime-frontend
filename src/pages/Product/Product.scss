@@ -348,32 +348,60 @@
           font-size: 30px;
         }
 
-        .pointStar {
+        .starPoint {
           position: relative;
+          margin: 0 0 0 auto;
+          padding: 0 85px 0 0;
           height: 58px;
           width: 270px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
 
           .pointNum {
             position: absolute;
-            bottom: -5px;
+            bottom: -4px;
+            right: 0;
             color: #6c801a;
+            font-size: 50px;
             font-weight: bold;
+            line-height: 1;
             left: 0;
             right: auto;
             font-size: 40px;
           }
 
-          .starPoint {
+          .star {
             position: absolute;
-            bottom: -5px;
-            font-size: 40px;
-            color: #6c801a;
-            overflow: hidden;
-            pointer-events: none;
-            right: 0;
+            bottom: 5px;
+            width: 176px;
+            height: 32px;
+            background: url('../../../public/images/starsGreen.png') 0 0
+              no-repeat;
+            right: 25px;
+
+            .bar {
+              display: block;
+              overflow: hidden;
+              height: 32px;
+              background: url('../../../public/images/starsGreen.png') 0 -40px no-repeat;
+            }
+          }
+
+          .p0 .bar {
+            width: 0;
+          }
+          .p1 .bar {
+            width: 34px;
+          }
+          .p2 .bar {
+            width: 70px;
+          }
+          .p3 .bar {
+            width: 106px;
+          }
+          .p4 .bar {
+            width: 142px;
+          }
+          .p5 .bar {
+            width: 176px;
           }
         }
       }

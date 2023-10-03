@@ -1,10 +1,9 @@
 import React from 'react';
 import Input from '../../../../Component/Input/Input';
-import InputWrap from '../../../../Component/InputWrap/InputWrap';
 import Privacy from '../Privacy/Privacy';
 
 const JoinCheckBox = props => {
-  const { isScroll, onScroll, onChange } = props;
+  const { className, isScroll, onScroll, onChange } = props;
 
   return (
     <>
@@ -13,7 +12,7 @@ const JoinCheckBox = props => {
       </div>
 
       <Input
-        className="checkbox signUpCheckBox"
+        className={className ? `checkbox ${className}` : 'checkbox'}
         type="checkbox"
         text="개인정보 수집 동의"
         disabled={!isScroll ? true : false}
