@@ -99,7 +99,7 @@ const Nav = () => {
                 </li>
                 {isLoginStatus ? (
                   <li className="item">
-                    <Link to="/">마이페이지</Link>
+                    <Link to="/mypage">마이페이지</Link>
                   </li>
                 ) : (
                   <li className="item">

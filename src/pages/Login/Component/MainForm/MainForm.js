@@ -16,8 +16,10 @@ const MainForm = props => {
   useEffect(() => {
     if (localStorage.getItem('isChecked') === 'true') {
       setIsChecked(true);
+      setUserInfo({ ...userInfo, userId: localStorage.getItem('userId') });
     } else {
       setIsChecked(false);
+      setUserInfo({ ...userInfo, userId: '' });
     }
   }, []);
 
@@ -51,7 +53,6 @@ const MainForm = props => {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SUCCESS') {
-          alert('로그인이 완료되었습니다.');
           if (!isChecked) {
             localStorage.setItem('accessToken', res.accessToken);
             localStorage.setItem('isChecked', false);
