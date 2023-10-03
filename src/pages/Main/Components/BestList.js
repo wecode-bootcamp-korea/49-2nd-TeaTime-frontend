@@ -102,7 +102,7 @@ const BestList = () => {
                     </div>
                   )}
                 </div>
-                <div className="prdTag" />
+              <div className="prdTag" />
               </div>
             </div>
           ))}

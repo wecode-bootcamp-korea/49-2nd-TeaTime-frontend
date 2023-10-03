@@ -8,6 +8,7 @@ const Review = props => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
 
+
   useEffect(() => {
     if (searchParams.get('page')) setPage(parseInt(searchParams.get('page')));
   }, [searchParams]);
@@ -33,6 +34,7 @@ const Review = props => {
       });
   }, [page]);
 
+
   const handlerPage = e => {
     const ePage = e.target.id;
     if (!searchParams.get('page')) {
@@ -43,7 +45,6 @@ const Review = props => {
       setSearchParams(searchParams);
     }
   };
-  console.log(data);
   return (
     <div className="review">
       <p className="title">고객 리뷰</p>
