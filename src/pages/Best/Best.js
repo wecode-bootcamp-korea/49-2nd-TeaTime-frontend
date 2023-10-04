@@ -46,7 +46,7 @@ const Best = () => {
   };
 
   return (
-    <div className="best">
+    <main className="best">
       {currentChip === 'best' && (
         <ImgBanner
           src="../../../images/tea-banner.jpg"
@@ -113,7 +113,7 @@ const Best = () => {
 
         <BestList bestData={bestData} navigate={navigate} />
       </div>
-    </div>
+    </main>
   );
 };
 
