@@ -43,7 +43,6 @@ const Review = props => {
       setSearchParams(searchParams);
     }
   };
-  console.log(data);
   return (
     <div className="review">
       <p className="title">고객 리뷰</p>

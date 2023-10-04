@@ -1,18 +1,56 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Postcode } from './Component/DaumPostCode';
 import Input from '../../../../Component/Input/Input';
 import Button from '../../../../Component/Button/Button';
 import IconButton from '../../../../Component/IconButton/IconButton';
-import { Postcode } from './Component/DaumPostCode';
 import './DeliveryAddModal.scss';
 
 const DeliveryAddModal = props => {
+  // props
   const { open, onClick } = props;
 
+  // useState
+  const [onAddressSelect, setOnAddressSelect] = useState('');
+  const [isChecked, setIsChecked] = useState(false); // [TODO] 기본 배송지로 설정 체크박스
+  const [deliveryAddUserInfo, setDeliveryAddUserInfo] = useState({
+    deliveryName: '',
+    deliveryRecipient: '',
+    deliveryPrefix: '010',
+    deliveryPhone: '',
+    deliveryZipCode: '',
+    deliveryAddress: '',
+    deliveryAddressDetail: '',
+  });
+
+  // useEffect
   useEffect(() => {
     const body = document.querySelector('body');
     body.style.overflow = open ? 'hidden' : 'auto';
   }, [open]);
 
+  // handlers
+  const handlerChange = e => {
+    const { name, value } = e.target;
+    setDeliveryAddUserInfo({
+      ...deliveryAddUserInfo,
+      [name]: value,
+    });
+  };
+
+  const handleAddressSelect = address => {
+    setOnAddressSelect(address);
+    setDeliveryAddUserInfo({
+      ...deliveryAddUserInfo,
+      deliveryZipCode: address.zonecode,
+      deliveryAddress: address.address,
+    });
+  };
+
+  const handleCheckBox = () => {
+    setIsChecked(!isChecked);
+  };
+
+  console.log(isChecked);
   if (!open) return null;
 
   return (
@@ -28,12 +66,24 @@ const DeliveryAddModal = props => {
             <legend className="legend">배송지 추가</legend>
             <div className="deliveryAddModalFormContainer">
               <p className="addModalTitle">배송지명</p>
-              <Input scale="middle" />
+              <Input
+                scale="middle"
+                name="deliveryName"
+                onChange={handlerChange}
+              />
               <p className="addModalTitle">받는 분</p>
-              <Input scale="middle" />
+              <Input
+                scale="middle"
+                name="deliveryRecipient"
+                onChange={handlerChange}
+              />
               <p className="addModalTitle">휴대폰 번호</p>
               <div className="addModalPhone">
-                <select className="addModalSelect">
+                <select
+                  className="addModalSelect"
+                  name="deliveryPrefix"
+                  onChange={handlerChange}
+                >
                   <option>010</option>
                   <option>011</option>
                   <option>016</option>
@@ -41,18 +91,37 @@ const DeliveryAddModal = props => {
                   <option>018</option>
                   <option>019</option>
                 </select>
-                <Input scale="middle" placeholder={`'-'없이 휴대폰번호 입력`} />
+                <Input
+                  scale="middle"
+                  name="deliveryPhone"
+                  onChange={handlerChange}
+                  placeholder={`'-'없이 휴대폰번호 입력`}
+                />
               </div>
               <p className="addModalTitle">주소</p>
               <div className="addModalAddress">
-                <Input className="addressInput" scale="middle" />
-                <Postcode />
+                <Input
+                  className="addressInput"
+                  onChange={handlerChange}
+                  scale="middle"
+                  name="deliveryZipCode"
+                  value={onAddressSelect.zonecode}
+                />
+                <Postcode onAddressSelect={handleAddressSelect} />
               </div>
-              <Input scale="middle" />
-              <Input scale="middle" />
+              <Input scale="middle" value={onAddressSelect.address} />
+              <Input
+                scale="middle"
+                name="deliveryAddressDetail"
+                onChange={handlerChange}
+              />
               <div className="deliveryAddModalCheckBox">
-                <Input className="checkBox" type="checkbox" />
-                <p>기본 배송지로 설정</p>
+                <Input
+                  className="checkBox"
+                  type="checkbox"
+                  text="기본 배송지로 설정"
+                  onChange={handleCheckBox}
+                />
               </div>
               <div className="deliveryAddModalButton">
                 <Button scale="middle" shape="fill" color="tertiary">

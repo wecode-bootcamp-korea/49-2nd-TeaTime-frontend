@@ -36,6 +36,11 @@ const BestList = () => {
   const goDetail = key => {
     navigate(`/product/${key}`);
   };
+
+  const imageHover = (e, img) => {
+    e.target.src = img;
+  };
+
   return (
     <div className="bestList">
       <div className="titBox">
@@ -62,15 +67,20 @@ const BestList = () => {
           {data.map(item => (
             <div className="prdInfo" key={item.id}>
               <div className="prdThumb">
-                <img
-                  alt="이미지"
-                  onClick={() => goDetail(item.id)}
-                  src={
-                    item.mainImageUrl
-                      ? item.mainImageUrl
-                      : '/images/no-image.jpg'
-                  }
-                />
+                {item.mainImageUrl ? (
+                  <img
+                    onClick={() => goDetail(item.id)}
+                    src={item.mainImageUrl}
+                    onMouseOver={e => imageHover(e, item.subImageUrl)}
+                    onMouseOut={e => imageHover(e, item.mainImageUrl)}
+                  />
+                ) : (
+                  <img
+                    onClick={() => goDetail(item.id)}
+                    src="/images/no-image.jpg"
+                  />
+                )}
+
                 <IconButton className="cartBtn" img="cart" onClick={() => {}} />
               </div>
               <div className="prdDesc">
@@ -112,7 +122,7 @@ const BestList = () => {
             className="prdBtn"
             scale="middle"
             shape="fill"
-            color="tertiary"
+            color="bording"
           >
             <span>더보기</span>
           </Button>
