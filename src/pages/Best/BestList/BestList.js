@@ -22,7 +22,7 @@ const BestList = props => {
           } = item;
 
           const handelMouseOver = () => {
-            if (id === index + 1) {
+            if (id === index) {
               setIsHovering(true);
             }
           };
@@ -44,7 +44,7 @@ const BestList = props => {
                   onMouseOver={handelMouseOver}
                   onMouseOut={handelMouseOut}
                   onClick={() => {
-                    navigate('/');
+                    navigate(`/product/${id}`);
                   }}
                 />
                 <div className="bestItemText">{index + 1}</div>
@@ -52,12 +52,12 @@ const BestList = props => {
                   className="bestItemImgBtn"
                   img="cart"
                   onClick={() => {
-                    navigate('/');
+                    navigate('/cart');
                   }}
                 />
               </div>
               <div className="bestItemNameInfo">
-                <Link className="bestItemName" to="/">
+                <Link className="bestItemName" to={`/product/${id}`}>
                   {name}
                 </Link>
                 <div className="bestItemPriceBox">

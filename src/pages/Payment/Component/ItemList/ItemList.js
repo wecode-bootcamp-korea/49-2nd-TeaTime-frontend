@@ -17,7 +17,10 @@ const ItemList = props => {
               <span className="packaging">{item.packaging}</span>
             </div>
             <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-              <p>{`${item.price}원`}</p>/<span>{`${item.quantity}개`}</span>
+              <p>{`${item.price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
+              /<span>{`${item.quantity}개`}</span>
             </p>
           </div>
         </div>

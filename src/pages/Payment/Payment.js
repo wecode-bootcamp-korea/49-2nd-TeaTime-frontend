@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import UserInfoModal from './Component/UserInfoModal/UserInfoModal';
 import Receipt from './Component/Receipt/Receipt';
 import DeliveryInfo from './Component/DeliveryInfo/DeliveryInfo';
@@ -15,6 +16,8 @@ const Payment = () => {
   const [isDisCountModal, setIsDisCountModal] = useState(false);
   const [isPaymentModal, setIsPaymentModal] = useState(false);
   const [paymentSelect, setPaymentSelect] = useState([]);
+  const location = useLocation();
+  // const [seachParams, setSeachParams] = useSearchParams();
 
   const [userInfo, setUserInfo] = useState([
     {
@@ -25,13 +28,27 @@ const Payment = () => {
     },
   ]);
   const [itemList, setItemList] = useState([]);
+  const productData = location.state;
 
-  // useEffect
   useEffect(() => {
     fetch('../data/ItemListData.json')
       .then(res => res.json())
       .then(data => setItemList(data));
   }, []);
+
+  console.log(itemList);
+
+  // useEffect(() => {
+  //   fetch(`http://51.20.57.76:8000/orders`, {
+  //     method: 'Get',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       Authorization: localStorage.getItem('accessToken'),
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => setItemList(data));
+  // }, []);
 
   // event
   const handleUserInfo = e => {
@@ -118,32 +135,74 @@ const Payment = () => {
                 }}
               >
                 <h2 className="paymentItemInfo">주문상품</h2>
-                <span>총 {itemList.length}건</span>
+                <span>총 {!productData ? itemList.length : '1'}건</span>
               </div>
 
-              {isItemListModal ? (
-                <ItemList itemList={itemList} />
-              ) : (
+              {productData !== null && (
                 <div className="paymentItemInfoBox">
                   <div className="paymentItemInfoBoxWrap">
                     <div className="paymentItemInfoBoxWrapInnerImg">
-                      <img src={itemList[0]?.image} alt="상품 이미지" />
+                      <img
+                        src={
+                          productData.img !== null
+                            ? productData.img
+                            : '../images/no-image.jpg'
+                        }
+                        alt="상품 이미지"
+                      />
                     </div>
                     <div className="paymentItemInfoBoxWrapInnerInfo">
                       <div className="paymentItemInfoBoxWrapInnerInfoName">
-                        <span>{itemList[0]?.name}</span>
-                        <span className="packaging">
-                          {itemList[0]?.packaging}
-                        </span>
+                        <span>{productData.name}</span>
+                        <div>
+                          <span className="packaging">
+                            {productData.isBagCheck ? '포장' : '비포장'}
+                          </span>
+                          <span className="packaging"> / </span>
+                          <span className="packaging">
+                            {productData.isWrapCheck
+                              ? '쇼핑백 사용'
+                              : '쇼핑백 미사용'}
+                          </span>
+                        </div>
                       </div>
                       <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                        <p>{`${itemList[0]?.price}원`}</p>/
-                        <span>{`${itemList[0]?.quantity}개`}</span>
+                        <p>{`${productData.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
+                        /<span>{`${productData.cnt}개`}</span>
                       </p>
                     </div>
                   </div>
                 </div>
               )}
+
+              {productData === null &&
+                (isItemListModal ? (
+                  <ItemList itemList={itemList} />
+                ) : (
+                  <div className="paymentItemInfoBox">
+                    <div className="paymentItemInfoBoxWrap">
+                      <div className="paymentItemInfoBoxWrapInnerImg">
+                        <img src={itemList[0]?.image} alt="상품 이미지" />
+                      </div>
+                      <div className="paymentItemInfoBoxWrapInnerInfo">
+                        <div className="paymentItemInfoBoxWrapInnerInfoName">
+                          <span>{itemList[0]?.name}</span>
+                          <span className="packaging">
+                            {itemList[0]?.packaging}
+                          </span>
+                        </div>
+                        <p className="paymentItemInfoBoxWrapInnerInfoPrice">
+                          <p>{`${itemList[0]?.price
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
+                          /<span>{`${itemList[0]?.quantity}개`}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
 
               <div className="paymentDisCount">
                 <div
@@ -155,9 +214,14 @@ const Payment = () => {
                   }}
                 >
                   <h2 className="disCountTitle">할인/포인트</h2>
-                  <span>-9,750원</span>
+                  <span>
+                    {productData !== null &&
+                      `${productData.discountPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
+                  </span>
                 </div>
-                {isDisCountModal && <DisCountModal />}
+                {isDisCountModal && <DisCountModal productData={productData} />}
               </div>
 
               <div className="paymentSelect">
@@ -187,7 +251,7 @@ const Payment = () => {
             </div>
           </section>
 
-          <Receipt />
+          <Receipt productData={productData} />
         </form>
       </div>
     </div>

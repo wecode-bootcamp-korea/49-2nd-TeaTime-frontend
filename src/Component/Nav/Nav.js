@@ -10,7 +10,7 @@ import {
 const Nav = () => {
   const [style, setStyle] = useState(false);
   const isLoginStatus = localStorage.getItem('accessToken');
-  const navgiate = useNavigate();
+  const navigate = useNavigate();
 
   const dimBgAppear = (state, key) => {
     if (key) {
@@ -22,7 +22,7 @@ const Nav = () => {
     if (!isLoginStatus) {
       alert('로그인 후 사용가능합니다.');
     } else {
-      navgiate('/cart');
+      navigate('/cart');
     }
   };
 
@@ -41,9 +41,13 @@ const Nav = () => {
           <div className="innerBox">
             <div className="leftBox">
               <h1 className="logo">
-                <Link to="/">
-                  <img src="/images/logo_transparent.png" alt="logo" />
-                </Link>
+                <img
+                  src="/images/logo_transparent.png"
+                  alt="logo"
+                  onClick={() => {
+                    navigate('/');
+                  }}
+                />
               </h1>
               <nav className="navBox">
                 <ul className="navListDept1">

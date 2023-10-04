@@ -2,23 +2,38 @@ import React from 'react';
 import Button from '../../../../Component/Button/Button';
 import './Receipt.scss';
 
-const Receipt = () => {
+const Receipt = props => {
+  const { productData } = props;
+
+  console.log(productData);
   return (
     <section className="paymentReceipt">
       <div className="paymentReceiptContainer">
         <ul className="paymentReceiptList">
           <li className="paymentReceiptTotalPrice">
             <h2>총 상품금액</h2>
-            <span>39,000원</span>
+            <span>{`${productData.price
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</span>
           </li>
           <li className="paymentReceiptDisCountWrap">
             <div className="disCountWrap">
               <h2>총 할인 혜택</h2>
-              <span className="disCount">-9,750원</span>
+              <span className="disCount">
+                {productData !== null &&
+                  `-${productData.discountPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
+              </span>
             </div>
             <div className="disCountPrice">
               <h3>└ 상품할인</h3>
-              <span>-9,750원</span>
+              <span>
+                {productData !== null &&
+                  `-${productData.discountPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
+              </span>
             </div>
           </li>
           <li className="paymentReceiptPoint">
@@ -27,11 +42,18 @@ const Receipt = () => {
           </li>
           <li className="paymentReceiptDelivery">
             <h2>배송비</h2>
-            <span>0원</span>
+            <span>
+              {`${productData.delivery
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              원`}
+            </span>
           </li>
           <li className="paymentReceiptTotal">
             <h2>총 결제금액</h2>
-            <span className="totalPrice">29,250원</span>
+            <span className="totalPrice">{`${productData.totalPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</span>
           </li>
         </ul>
         <Button
@@ -40,7 +62,9 @@ const Receipt = () => {
           fullWidth="true"
           shape="fill"
         >
-          29,250원 주문하기
+          {`${productData.totalPrice
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 주문하기`}
         </Button>
       </div>
     </section>

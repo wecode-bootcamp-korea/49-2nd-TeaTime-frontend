@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './Product.scss';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import IconButton from '../../Component/IconButton/IconButton';
 import Button from '../../Component/Button/Button';
 import Review from './Components/Review';
+import './Product.scss';
+
 const Product = () => {
   const params = useParams();
   const productId = params.id;
+  const navigate = useNavigate();
 
   const [isUserLike, setIsUserLike] = useState(true);
   const [totalAmount, setTotalAmount] = useState({
@@ -47,6 +49,7 @@ const Product = () => {
     let wrapPrice = 0;
     if (totalAmount.isBagCheck === true) bagPrice = 100;
     if (totalAmount.isWrapCheck === true) wrapPrice = 2000;
+
     setTotalAmount(pre => {
       return {
         ...pre,
@@ -56,7 +59,12 @@ const Product = () => {
             : productData.price + bagPrice + wrapPrice) * totalAmount.cnt,
       };
     });
-  }, [totalAmount.isBagCheck, totalAmount.isWrapCheck, totalAmount.cnt]);
+  }, [
+    productData,
+    totalAmount.isBagCheck,
+    totalAmount.isWrapCheck,
+    totalAmount.cnt,
+  ]);
 
   const copyUrl = () => {
     const url = window.document.location.href;
@@ -124,7 +132,33 @@ const Product = () => {
       }
     }
   };
-  console.log(productData);
+
+  // useLocation 으로 받아온 데이터 모음 state를 이용해 데이터를 넘겨줌
+  const datas = {
+    id: productData.id,
+    name: productData.name,
+    img: productData.mainImageUrl,
+    cnt: totalAmount.cnt,
+    price: productData.price * totalAmount.cnt,
+    discountPrice:
+      (productData.price / 100) *
+      (productData.discountRate || 0) *
+      totalAmount.cnt,
+
+    // 할인된 금액이 있을 경우에는 할인된 금액으로 갯수 곱해서 계산
+    // 할인된 금액이 없을 경우에는 전체 금액
+    totalPrice: productData.discountPrice
+      ? productData.discountPrice * totalAmount.cnt +
+        (totalAmount.totalPrice > 50000 ? 0 : 2500)
+      : totalAmount.totalPrice + (totalAmount.totalPrice > 50000 ? 0 : 2500),
+    isBagCheck: totalAmount.isBagCheck,
+    isWrapCheck: totalAmount.isWrapCheck,
+    delivery: totalAmount.totalPrice > 50000 ? 0 : 2500,
+  };
+  const handelInfoMove = () => {
+    navigate('/payment', { state: datas });
+  };
+
   return (
     <div className="product">
       <div className="prdDetailTop">
@@ -164,7 +198,7 @@ const Product = () => {
             <p className="prdAmount">{productData.amount}</p>
             <div className="prdPriceBtn">
               <div className="prdBtn">
-                <input type="hidden" id="shareUrl"></input>
+                <input type="hidden" id="shareUrl" />
                 <span className="prdUrl" onClick={copyUrl}>
                   URL
                 </span>
@@ -190,7 +224,7 @@ const Product = () => {
                 </div>
               ) : (
                 <div className="prdPrice">
-                  <p className="realPrice"></p>
+                  <p className="realPrice" />
                   <p className="price">
                     <strong>
                       {productData.price && productData.price.toLocaleString()}
@@ -207,7 +241,7 @@ const Product = () => {
                     <p>구매수량</p>
                     <div className="count">
                       <a onClick={() => handleCnt('-')}>-</a>
-                      <input type="number" value={totalAmount.cnt}></input>
+                      <input type="number" value={totalAmount.cnt} />
                       <a onClick={() => handleCnt('+')}>+</a>
                     </div>
                   </div>
@@ -277,6 +311,7 @@ const Product = () => {
                   shape="fill"
                   fullWidth="true"
                   color="green"
+                  onClick={handelInfoMove}
                 >
                   바로구매
                 </Button>
@@ -293,7 +328,7 @@ const Product = () => {
                   productData.reviewGradeAvg ? productData.reviewGradeAvg : 0
                 }`}
               >
-                <div className="bar"></div>
+                <div className="bar" />
               </div>
               <span className="pointNum">
                 {productData.reviewGradeAvg
@@ -327,7 +362,7 @@ const Product = () => {
             </div>
           ))}
       </div>
-      <div className="hr"></div>
+      <div className="hr" />
       <Review
         productId={productId}
         reviewCnt={productData.reviewCount}

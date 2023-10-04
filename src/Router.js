@@ -11,11 +11,14 @@ import Payment from './pages/Payment/Payment';
 import MyPage from './pages/MyPage/MyPage';
 import Best from './pages/Best/Best';
 import Cart from './pages/Cart/Cart';
+import InitializeScroll from './Component/initializeScroll/initializeScroll';
 import Trbox from './pages/Trbox/Trbox';
+
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <InitializeScroll />
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
