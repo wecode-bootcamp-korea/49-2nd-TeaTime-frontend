@@ -63,7 +63,10 @@ const Contents = props => {
         }
       });
   };
-  console.log(data);
+  const imageHover = (e, img) => {
+    e.target.src = img;
+  };
+
   return (
     <div>
       <p className="pageLocation">{props.titleText}</p>
@@ -95,16 +98,24 @@ const Contents = props => {
           {data.map(item => (
             <div className="item" key={item.id}>
               <div className="thumb">
-                <a>
-                  <img
-                    onClick={() => goDetail(item.id)}
-                    src={
-                      item.mainImageUrl
-                        ? item.mainImageUrl
-                        : '/images/no-image.jpg'
-                    }
-                  />
-                </a>
+                {item.mainImageUrl ? (
+                  <a>
+                    <img
+                      onClick={() => goDetail(item.id)}
+                      src={item.mainImageUrl}
+                      onMouseOver={e => imageHover(e, item.subImageUrl)}
+                      onMouseOut={e => imageHover(e, item.mainImageUrl)}
+                    />
+                  </a>
+                ) : (
+                  <a>
+                    <img
+                      onClick={() => goDetail(item.id)}
+                      src="/images/no-image.jpg"
+                    />
+                  </a>
+                )}
+
                 <IconButton className="cartBtn" img="cart" onClick={() => {}} />
               </div>
               <p className="prdName" onClick={() => goDetail(item.id)}>
