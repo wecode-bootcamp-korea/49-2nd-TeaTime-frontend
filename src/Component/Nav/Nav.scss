@@ -31,7 +31,7 @@
 
   .wrapper {
     padding: 0 10px;
-    max-width: 1540px;
+    max-width: 1240px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -51,6 +51,7 @@
   .logo {
     width: 110px;
     padding: 10px 20px;
+    cursor: pointer;
   }
 
   .navBox {
@@ -84,7 +85,7 @@
       border-top: 1px solid #e6e6e6;
 
       .wrapper {
-        padding-left: 170px;
+        padding-left: 120px;
         padding-right: 170px;
       }
     }
