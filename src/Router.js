@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Nav from './Component/Nav/Nav';
+import Footer from './Component/Footer/Footer';
 import Main from './pages/Main/Main';
 import Login from './pages/Login/Login';
 import Products from './pages/Products/Products';
@@ -30,6 +31,7 @@ const Router = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/trbox" element={<Trbox />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
