@@ -50,7 +50,6 @@ const DeliveryAddModal = props => {
     setIsChecked(!isChecked);
   };
 
-  console.log(isChecked);
   if (!open) return null;
 
   return (
