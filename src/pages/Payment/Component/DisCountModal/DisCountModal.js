@@ -4,15 +4,27 @@ import Button from '../../../../Component/Button/Button';
 import './DisCountModal.scss';
 
 const DisCountModal = props => {
+  const { productData } = props;
+
   return (
     <section>
       <div className="paymentDisCountWrap">
         <div className="itemDisCountWrap">
           <p className="itemDisCountTitle">상품 할인</p>
           <div className="titleWrap">
-            <Input className="disCountInput" scale="medium" />
+            <Input
+              className="disCountInput"
+              scale="medium"
+              disabled="true"
+              value={
+                productData !== null &&
+                `${productData.discountPrice
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`
+              }
+            />
             <Button scale="xSmall" shape="fill" color="darkGray">
-              할인 적용
+              적용 취소
             </Button>
           </div>
         </div>
@@ -21,7 +33,7 @@ const DisCountModal = props => {
           <div className="couponWrap">
             <p className="itemDisCountTitle">쿠폰</p>
             <span>
-              보유쿠폰 <strong>2장</strong>
+              보유쿠폰 <strong>0장</strong>
             </span>
           </div>
           <div className="titleWrap">
