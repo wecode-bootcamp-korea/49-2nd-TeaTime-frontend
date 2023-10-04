@@ -11,7 +11,7 @@ const MyPage = () => {
   const { tabId } = useParams();
 
   return (
-    <div className="myPage">
+    <main className="myPage">
       <div className="myPageHeader">
         <h2>마이페이지</h2>
       </div>
@@ -19,7 +19,7 @@ const MyPage = () => {
       {tabId === 'userinfo' && <UserInfo />}
       {tabId === 'recentorder' && <RecentOrderDetails />}
       {tabId === 'delivery' && <Delivery DILIVERY_DATA={DILIVERY_DATA} />}
-    </div>
+    </main>
   );
 };
 
