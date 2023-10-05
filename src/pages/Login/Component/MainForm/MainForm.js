@@ -46,7 +46,7 @@ const MainForm = props => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        login_id: userId,
+        loginId: userId,
         password: userPw,
       }),
     })

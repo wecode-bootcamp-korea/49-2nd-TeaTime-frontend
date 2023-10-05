@@ -68,11 +68,11 @@ const JoinForm = props => {
       },
       body: JSON.stringify({
         name: userName,
-        login_id: userId,
+        loginId: userId,
         password: userPw,
         email: userEmail,
         phoneNumber: `${userPhonePrefix}-${userPhone}`,
-        is_agree: isChecked,
+        isAgree: isChecked,
       }),
     })
       .then(res => res.json())
