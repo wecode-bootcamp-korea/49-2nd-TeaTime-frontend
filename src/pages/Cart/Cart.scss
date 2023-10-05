@@ -220,36 +220,39 @@
             display: flex;
             align-items: center;
 
-            .cntBox {
-              width: 128px;
-              border-radius: 4px;
-              border: 1px solid #ddd;
-
-              .counter {
-                display: flex;
-
-                a {
-                  flex: 0 0 40px;
-                  width: 40px;
-                  position: relative;
-                  background-color: #f2f2f2;
-                  pointer-events: none;
-                  text-align: center;
-                  font-size: 22px;
-                }
-                input {
-                  flex: 1 1 auto;
-                  width: 1%;
-                  text-align: center;
-                  border: none;
-                  font-size: 14px;
-                  font-weight: 500;
-                  letter-spacing: 0;
-                  vertical-align: middle;
-                  outline: 0;
-                }
-              }
+            .count {
+              align-items: flex-start;
             }
+            // .cntBox {
+            //   width: 128px;
+            //   border-radius: 4px;
+            //   border: 1px solid #ddd;
+
+            //   .counter {
+            //     display: flex;
+
+            //     a {
+            //       flex: 0 0 40px;
+            //       width: 40px;
+            //       position: relative;
+            //       background-color: #f2f2f2;
+            //       pointer-events: none;
+            //       text-align: center;
+            //       font-size: 22px;
+            //     }
+            //     input {
+            //       flex: 1 1 auto;
+            //       width: 1%;
+            //       text-align: center;
+            //       border: none;
+            //       font-size: 14px;
+            //       font-weight: 500;
+            //       letter-spacing: 0;
+            //       vertical-align: middle;
+            //       outline: 0;
+            //     }
+            //   }
+            // }
 
             .priceBox {
               display: block;

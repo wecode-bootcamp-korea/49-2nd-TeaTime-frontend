@@ -41,6 +41,30 @@ const BestList = () => {
     e.target.src = img;
   };
 
+  const putCart = key => {
+    fetch('http://51.20.57.76:8000/cart/add', {
+      method: 'Post',
+      body: JSON.stringify({
+        productId: key,
+        count: 1,
+        isBag: 0,
+        isPackage: 0,
+      }),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        result.message === 'add'
+          ? window.location.reload()
+          : alert('에러입니다. 관리자에게 문의하세요.');
+      });
+  };
+
   return (
     <div className="bestList">
       <div className="titBox">
@@ -68,12 +92,19 @@ const BestList = () => {
             <div className="prdInfo" key={item.id}>
               <div className="prdThumb">
                 {item.mainImageUrl ? (
-                  <img
-                    onClick={() => goDetail(item.id)}
-                    src={item.mainImageUrl}
-                    onMouseOver={e => imageHover(e, item.subImageUrl)}
-                    onMouseOut={e => imageHover(e, item.mainImageUrl)}
-                  />
+                  item.subImageUrl ? (
+                    <img
+                      onClick={() => goDetail(item.id)}
+                      src={item.mainImageUrl}
+                      onMouseOver={e => imageHover(e, item.subImageUrl)}
+                      onMouseOut={e => imageHover(e, item.mainImageUrl)}
+                    />
+                  ) : (
+                    <img
+                      onClick={() => goDetail(item.id)}
+                      src={item.mainImageUrl}
+                    />
+                  )
                 ) : (
                   <img
                     onClick={() => goDetail(item.id)}
@@ -81,7 +112,13 @@ const BestList = () => {
                   />
                 )}
 
-                <IconButton className="cartBtn" img="cart" onClick={() => {}} />
+                <IconButton
+                  className="cartBtn"
+                  img="cart"
+                  onClick={() => {
+                    putCart(item.id);
+                  }}
+                />
               </div>
               <div className="prdDesc">
                 <div className="prdInfo">

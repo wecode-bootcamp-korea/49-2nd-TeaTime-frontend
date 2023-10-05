@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../../Component/Button/Button';
 import './Cart.scss';
+import Count from '../../Component/Count/Count';
 const Cart = () => {
   const [checkItems, setCheckItems] = useState([]);
-  const [data, setData] = useState([{ id: 1 }, { id: 2 }]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://51.20.57.76:8000/cart/show`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        setData(result.data);
+      });
+  }, []);
 
   const handleAllCheck = checked => {
     if (checked) {
       const idArray = [];
-      data.forEach(el => idArray.push(el.id));
+      data.forEach(el => idArray.push(el.cart_id));
       setCheckItems(idArray);
     } else {
       setCheckItems([]);
@@ -23,7 +40,16 @@ const Cart = () => {
     }
   };
 
+  const onClickPlus = (e, key) => {
+    e.target.previousSibling.children[0].value = parseInt(key) + 1;
+  };
+
+  const onClickMinus = (e, key) => {
+    if (key != 1) e.target.nextSibling.children[0].value = parseInt(key) - 1;
+  };
+
   console.log(checkItems);
+
   return (
     <div className="cart">
       <div className="cartTit">
@@ -56,88 +82,50 @@ const Cart = () => {
                 </div>
               </div>
               <ul className="cartList">
-                {/* 여기서부터 */}
-                <li className="listItem">
-                  <div className="chkBox">
-                    <div className="inputChk">
-                      <input
-                        type="checkbox"
-                        id="prdId1"
-                        name={`select-${1}`}
-                        onChange={e => handleSingleCheck(e.target.checked, 1)}
-                        checked={checkItems.includes(1) ? true : false}
-                      />
-                      <label htmlFor="prdId1"></label>
-                    </div>
-                  </div>
-                  <div className="prdInfo">
-                    <div className="imgBox">
-                      <img
-                        src="https://image.osulloc.com/upload/kr/ko/adminImage/DG/EQ/304_20230727092009887WH.png"
-                        alt=""
-                        class="thumb"
-                      />
-                    </div>
-                    <div className="textBox">
-                      <p className="prdName">상품명</p>
-                      <p className="packingState">포장가능/쇼핑백가능</p>
-                      <p className="presentable">선물 가능한 상품입니다.</p>
-                    </div>
-                  </div>
-                  <div className="cntPrd">
-                    <div className="cntBox">
-                      <div className="counter">
-                        <a>-</a>
-                        <input type="number"></input>
-                        <a>+</a>
+                {data.map(item => (
+                  <li className="listItem">
+                    <div className="chkBox">
+                      <div className="inputChk">
+                        <input
+                          type="checkbox"
+                          id="prdId1"
+                          name={`select-${item.cart_id}`}
+                          onChange={e =>
+                            handleSingleCheck(e.target.checked, item.cart_id)
+                          }
+                          checked={
+                            checkItems.includes(item.cart_id) ? true : false
+                          }
+                        />
+                        <label htmlFor="prdId1"></label>
                       </div>
                     </div>
-                    <div className="priceBox">
-                      <p>38,000원</p>
-                    </div>
-                  </div>
-                </li>
-                {/* 여기까지 */}
-                <li className="listItem">
-                  <div className="chkBox">
-                    <div className="inputChk">
-                      <input
-                        type="checkbox"
-                        id="prdId2"
-                        name={`select-${2}`}
-                        onChange={e => handleSingleCheck(e.target.checked, 2)}
-                        checked={checkItems.includes(2) ? true : false}
-                      />
-                      <label htmlFor="prdId2"></label>
-                    </div>
-                  </div>
-                  <div className="prdInfo">
-                    <div className="imgBox">
-                      <img
-                        src="https://image.osulloc.com/upload/kr/ko/adminImage/DG/EQ/304_20230727092009887WH.png"
-                        alt=""
-                        class="thumb"
-                      />
-                    </div>
-                    <div className="textBox">
-                      <p className="prdName">상품명</p>
-                      <p className="packingState">포장가능/쇼핑백가능</p>
-                      <p className="presentable">선물 가능한 상품입니다.</p>
-                    </div>
-                  </div>
-                  <div className="cntPrd">
-                    <div className="cntBox">
-                      <div className="counter">
-                        <a>-</a>
-                        <input type="number"></input>
-                        <a>+</a>
+                    <div className="prdInfo">
+                      <div className="imgBox">
+                        <img
+                          src="https://image.osulloc.com/upload/kr/ko/adminImage/DG/EQ/304_20230727092009887WH.png"
+                          alt=""
+                          class="thumb"
+                        />
+                      </div>
+                      <div className="textBox">
+                        <p className="prdName">{item.name}</p>
+                        <p className="packingState">포장가능/쇼핑백가능</p>
+                        <p className="presentable">선물 가능한 상품입니다.</p>
                       </div>
                     </div>
-                    <div className="priceBox">
-                      <p>38,000원</p>
+                    <div className="cntPrd">
+                      <Count
+                        onClickPlus={e => onClickPlus(e, `${item.count}`)}
+                        onClickMinus={e => onClickMinus(e, `${item.count}`)}
+                        value={1}
+                      />
+                      <div className="priceBox">
+                        <p>{item.price && item.price.toLocaleString()}원</p>
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </div>
 

@@ -63,6 +63,31 @@ const Contents = props => {
         }
       });
   };
+
+  const putCart = key => {
+    fetch('http://51.20.57.76:8000/cart/add', {
+      method: 'Post',
+      body: JSON.stringify({
+        productId: key,
+        count: 1,
+        isBag: 0,
+        isPackage: 0,
+      }),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        result.message === 'add'
+          ? window.location.reload()
+          : alert('에러입니다. 관리자에게 문의하세요.');
+      });
+  };
+
   const imageHover = (e, img) => {
     e.target.src = img;
   };
@@ -99,14 +124,23 @@ const Contents = props => {
             <div className="item" key={item.id}>
               <div className="thumb">
                 {item.mainImageUrl ? (
-                  <a>
-                    <img
-                      onClick={() => goDetail(item.id)}
-                      src={item.mainImageUrl}
-                      onMouseOver={e => imageHover(e, item.subImageUrl)}
-                      onMouseOut={e => imageHover(e, item.mainImageUrl)}
-                    />
-                  </a>
+                  item.subImageUrl ? (
+                    <a>
+                      <img
+                        onClick={() => goDetail(item.id)}
+                        src={item.mainImageUrl}
+                        onMouseOver={e => imageHover(e, item.subImageUrl)}
+                        onMouseOut={e => imageHover(e, item.mainImageUrl)}
+                      />
+                    </a>
+                  ) : (
+                    <a>
+                      <img
+                        onClick={() => goDetail(item.id)}
+                        src={item.mainImageUrl}
+                      />
+                    </a>
+                  )
                 ) : (
                   <a>
                     <img
@@ -116,7 +150,13 @@ const Contents = props => {
                   </a>
                 )}
 
-                <IconButton className="cartBtn" img="cart" onClick={() => {}} />
+                <IconButton
+                  className="cartBtn"
+                  img="cart"
+                  onClick={() => {
+                    putCart(item.id);
+                  }}
+                />
               </div>
               <p className="prdName" onClick={() => goDetail(item.id)}>
                 <a>{item.name}</a>
