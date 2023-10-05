@@ -14,7 +14,7 @@ const EventSwiper = () => {
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{
-          delay: 3500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         loop={true}
