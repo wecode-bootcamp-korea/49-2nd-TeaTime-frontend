@@ -5,11 +5,6 @@ export const MAIN_MENU = [
     child: true,
   },
   {
-    text: '선물추천',
-    url: '/',
-    child: false,
-  },
-  {
     text: 'TRBox',
     url: '/trbox',
     child: false,
