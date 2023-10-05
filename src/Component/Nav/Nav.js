@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './Nav.scss';
 import {
   MAIN_MENU,
@@ -8,9 +9,28 @@ import {
 } from '../../data/ComponentData';
 
 const Nav = () => {
+  const location = useLocation();
   const [style, setStyle] = useState(false);
+  const [cartCnt, setCartCnt] = useState(0);
   const isLoginStatus = localStorage.getItem('accessToken');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    isLoginStatus &&
+      fetch('http://51.20.57.76:8000/cart/cartTotal', {
+        method: 'Get',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('accessToken'),
+        },
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(result => {
+          setCartCnt(result.data);
+        });
+  }, [location.pathname]);
 
   const dimBgAppear = (state, key) => {
     if (key) {
@@ -98,7 +118,7 @@ const Nav = () => {
               <ul className="navUtil">
                 <li className="iconItem">
                   <button to="/" className="itemCart" onClick={goCart}>
-                    <span className="cartNum">0</span>
+                    <span className="cartNum">{cartCnt}</span>
                   </button>
                 </li>
                 {isLoginStatus ? (
