@@ -156,7 +156,10 @@ const Product = () => {
     delivery: totalAmount.totalPrice > 50000 ? 0 : 2500,
   };
   const handelInfoMove = () => {
-    navigate('/payment', { state: datas });
+    navigate(
+      `/payment?id=${productData.id}&cnt=${totalAmount.cnt}&isBagCheck=${totalAmount.isBagCheck}&isWrapCheck=${totalAmount.isWrapCheck}`,
+      { state: datas },
+    );
   };
 
   return (

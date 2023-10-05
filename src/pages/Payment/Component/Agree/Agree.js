@@ -3,6 +3,7 @@ import Input from '../../../../Component/Input/Input';
 import './Agree.scss';
 
 const Agree = props => {
+  const { onClick } = props;
   return (
     <div className="infoBottom">
       <div className="infoBottomWrap">
@@ -11,6 +12,7 @@ const Agree = props => {
           type="checkbox"
           id="allAgree"
           text="위 상품의 판매조건을 명확히 확인하였으며, 구매 진행에 동의 합니다."
+          onClick={onClick}
         />
       </div>
       <div className="infoBottomTextList">

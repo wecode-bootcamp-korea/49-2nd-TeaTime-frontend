@@ -7,6 +7,7 @@ import ItemList from './Component/ItemList/ItemList';
 import DisCountModal from './Component/DisCountModal/DisCountModal';
 import PaymentModal from './Component/PaymentModal/PaymentModal';
 import Agree from './Component/Agree/Agree';
+import Button from '../../Component/Button/Button';
 import './Payment.scss';
 
 const Payment = () => {
@@ -15,40 +16,45 @@ const Payment = () => {
   const [isItemListModal, setIsItemListModal] = useState(false);
   const [isDisCountModal, setIsDisCountModal] = useState(false);
   const [isPaymentModal, setIsPaymentModal] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [paymentSelect, setPaymentSelect] = useState([]);
+  const [searchParams, setSeachParams] = useSearchParams();
   const location = useLocation();
-  // const [seachParams, setSeachParams] = useSearchParams();
 
-  const [userInfo, setUserInfo] = useState([
-    {
-      name: '',
-      email: '',
-      phone: '',
-      senderName: '',
-    },
-  ]);
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    senderName: '',
+  });
+
   const [itemList, setItemList] = useState([]);
   const productData = location.state;
+  const id = searchParams.get('id');
+  const cnt = searchParams.get('cnt');
+  const isBagCheck = searchParams.get('isBagCheck');
+  const isWrapCheck = searchParams.get('isWrapCheck');
+
+  // var
+  const disCount = itemList.discount > 0 ? itemList.discount : 0 * cnt;
 
   useEffect(() => {
-    fetch('../data/ItemListData.json')
+    fetch(`http://51.20.57.76:8000/products/order/${id}`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
       .then(res => res.json())
-      .then(data => setItemList(data));
-  }, []);
-
-  console.log(itemList);
-
-  // useEffect(() => {
-  //   fetch(`http://51.20.57.76:8000/orders`, {
-  //     method: 'Get',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       Authorization: localStorage.getItem('accessToken'),
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setItemList(data));
-  // }, []);
+      .then(result => {
+        if (result.message === 'READ_SUCCESS') {
+          setItemList(result.data);
+        } else if (result.message === 'PRODUCT_NOT_FOUND') {
+          alert('상품이 존재하지 않습니다.');
+        }
+      });
+  }, [id]);
 
   // event
   const handleUserInfo = e => {
@@ -85,6 +91,10 @@ const Payment = () => {
     return setIsPaymentModal(true);
   };
 
+  const handleIsChecked = () => {
+    setIsChecked(!isChecked);
+  };
+
   const handleOnClick = e => {
     if (e.target.name === 'payment') {
       setPaymentSelect({ ...paymentSelect, payment: 'on', account: '' });
@@ -93,6 +103,31 @@ const Payment = () => {
     }
   };
 
+  // const handleOnSubmit = e => {
+  //   fetch(`http://51.20.57.76:8000/orders`, {
+  //     method: 'post',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       Authorization: localStorage.getItem('accessToken'),
+  //     },
+  //     body: JSON.stringify({
+  //       productId : productData.id,
+  //       count : productData.cnt,
+  //       isBag : productData.isBagCheck,
+  //       isPacking : productData.isWrapCheck,
+  //       name : userInfo.name,
+  //       phoneNumber : userInfo.phone,
+  //       totalPrice : productData.totalPrice,
+  //       isShippingFee: ,
+  //       isAgree : isChecked,
+  //       address : ,
+  //       detailAddress : ,
+  //       zipCode : ,
+  //     }),
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => setItemList(data));
+  // };
   return (
     <div className="payment">
       <div className="paymentInnerWrap">
@@ -123,7 +158,19 @@ const Payment = () => {
             {isUserInfoModal && <UserInfoModal onChange={handleUserInfo} />}
 
             <div className="paymentUserInfoDelivery">
-              <h2 className="paymentDeliveryInfo">배송지 정보</h2>
+              <div className="deliveryInfoWrap">
+                <h2 className="paymentDeliveryInfo">배송지 정보</h2>
+                <Button
+                  className="paymentDeliveryBtn"
+                  scale="xSmall"
+                  shape="outLine"
+                  color="white"
+
+                  // onClick={onClickDeliveryChange}
+                >
+                  주문 고객과 동일
+                </Button>
+              </div>
               <DeliveryInfo />
             </div>
 
@@ -138,44 +185,37 @@ const Payment = () => {
                 <span>총 {!productData ? itemList.length : '1'}건</span>
               </div>
 
-              {productData !== null && (
-                <div className="paymentItemInfoBox">
-                  <div className="paymentItemInfoBoxWrap">
-                    <div className="paymentItemInfoBoxWrapInnerImg">
-                      <img
-                        src={
-                          productData.img !== null
-                            ? productData.img
-                            : '../images/no-image.jpg'
-                        }
-                        alt="상품 이미지"
-                      />
-                    </div>
-                    <div className="paymentItemInfoBoxWrapInnerInfo">
-                      <div className="paymentItemInfoBoxWrapInnerInfoName">
-                        <span>{productData.name}</span>
-                        <div>
-                          <span className="packaging">
-                            {productData.isBagCheck ? '포장' : '비포장'}
-                          </span>
-                          <span className="packaging"> / </span>
-                          <span className="packaging">
-                            {productData.isWrapCheck
-                              ? '쇼핑백 사용'
-                              : '쇼핑백 미사용'}
-                          </span>
-                        </div>
+              <div className="paymentItemInfoBox">
+                <div className="paymentItemInfoBoxWrap">
+                  <div className="paymentItemInfoBoxWrapInnerImg">
+                    <img
+                      src={
+                        itemList.mainImageUrl !== null
+                          ? itemList.mainImageUrl
+                          : '../images/no-image.jpg'
+                      }
+                      alt="상품 이미지"
+                    />
+                  </div>
+                  <div className="paymentItemInfoBoxWrapInnerInfo">
+                    <div className="paymentItemInfoBoxWrapInnerInfoName">
+                      <span>{itemList.name}</span>
+                      <div>
+                        <span className="packaging">
+                          {isBagCheck ? '포장' : '비포장'}
+                        </span>
+                        <span className="packaging"> / </span>
+                        <span className="packaging">
+                          {isWrapCheck ? '쇼핑백 사용' : '쇼핑백 미사용'}
+                        </span>
                       </div>
-                      <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                        <p>{`${productData.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-                        /<span>{`${productData.cnt}개`}</span>
-                      </p>
                     </div>
+                    <p className="paymentItemInfoBoxWrapInnerInfoPrice">
+                      <p>{`${itemList?.price}원`}</p>/<span>{`${cnt}개`}</span>
+                    </p>
                   </div>
                 </div>
-              )}
+              </div>
 
               {productData === null &&
                 (isItemListModal ? (
@@ -194,10 +234,8 @@ const Payment = () => {
                           </span>
                         </div>
                         <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                          <p>{`${itemList[0]?.price
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-                          /<span>{`${itemList[0]?.quantity}개`}</span>
+                          <p>{`${itemList[0]?.price}원`}</p>/
+                          <span>{`${itemList[0]?.quantity}개`}</span>
                         </p>
                       </div>
                     </div>
@@ -214,12 +252,7 @@ const Payment = () => {
                   }}
                 >
                   <h2 className="disCountTitle">할인/포인트</h2>
-                  <span>
-                    {productData !== null &&
-                      `${productData.discountPrice
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
-                  </span>
+                  <span>{`${disCount}원`}</span>
                 </div>
                 {isDisCountModal && <DisCountModal productData={productData} />}
               </div>
@@ -247,11 +280,11 @@ const Payment = () => {
                 )}
               </div>
 
-              <Agree />
+              <Agree onClick={handleIsChecked} />
             </div>
           </section>
 
-          <Receipt productData={productData} />
+          <Receipt productData={productData} itemList={itemList} />
         </form>
       </div>
     </div>
