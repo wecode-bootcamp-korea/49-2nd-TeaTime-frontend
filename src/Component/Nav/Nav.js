@@ -16,19 +16,20 @@ const Nav = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://51.20.57.76:8000/cart/cartTotal', {
-      method: 'Get',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('accessToken'),
-      },
-    })
-      .then(res => {
-        return res.json();
+    isLoginStatus &&
+      fetch('http://51.20.57.76:8000/cart/cartTotal', {
+        method: 'Get',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('accessToken'),
+        },
       })
-      .then(result => {
-        setCartCnt(result.data);
-      });
+        .then(res => {
+          return res.json();
+        })
+        .then(result => {
+          setCartCnt(result.data);
+        });
   }, [location.pathname]);
 
   const dimBgAppear = (state, key) => {
