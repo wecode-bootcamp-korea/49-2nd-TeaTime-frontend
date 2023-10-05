@@ -73,11 +73,13 @@ const BestList = () => {
                     src={item.mainImageUrl}
                     onMouseOver={e => imageHover(e, item.subImageUrl)}
                     onMouseOut={e => imageHover(e, item.mainImageUrl)}
+                    alt="상품 이미지"
                   />
                 ) : (
                   <img
                     onClick={() => goDetail(item.id)}
                     src="/images/no-image.jpg"
+                    alt="상품 이미지"
                   />
                 )}
 
