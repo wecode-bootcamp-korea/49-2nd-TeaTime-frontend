@@ -9,8 +9,6 @@ export const Postcode = props => {
   );
 
   const handleComplete = data => {
-    console.log(data);
-
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -31,8 +29,6 @@ export const Postcode = props => {
   const handleClick = () => {
     open({ onComplete: handleComplete });
   };
-
-  // console.log(handleComplete());
 
   return (
     <Button

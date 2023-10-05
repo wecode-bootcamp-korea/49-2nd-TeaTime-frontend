@@ -11,6 +11,7 @@ const Input = props => {
     scale,
     text,
     onChange,
+    onClick,
     value,
     children,
   } = props;
@@ -27,6 +28,7 @@ const Input = props => {
         text={text}
         value={value}
         onChange={onChange}
+        onClick={onClick}
       >
         {children}
       </input>

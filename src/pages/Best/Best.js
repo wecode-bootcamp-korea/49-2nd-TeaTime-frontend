@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Chip from '../../Component/Chip/Chip';
 import ImgBanner from '../../Component/ImgBanner/ImgBanner';
 import BestList from './BestList/BestList';

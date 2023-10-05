@@ -5,11 +5,6 @@ export const MAIN_MENU = [
     child: true,
   },
   {
-    text: '선물추천',
-    url: '/',
-    child: false,
-  },
-  {
     text: 'TRBox',
     url: '/trbox',
     child: false,
@@ -134,5 +129,47 @@ export const PRODUCT_SORT = [
   {
     text: '낮은 가격순',
     value: 5,
+  },
+];
+
+export const TR_BOX_DATA = [
+  {
+    id: 114,
+    title: '매월 결제',
+    name: '다다일상 기획_ 5종 17입(23.10)',
+    img: '../../../images/trbox.png',
+    cnt: 1,
+    price: 24900,
+    discountPrice: 0,
+    totalPrice: 24900,
+    isBagCheck: false,
+    isWrapCheck: false,
+    delivery: 0,
+  },
+  {
+    id: 115,
+    title: '3개월 일괄 결제',
+    name: '다다일상 기획_ 5종 17입(23.10)',
+    price: 68700,
+    img: '../../../images/trbox.png',
+    cnt: 1,
+    discountPrice: 0,
+    totalPrice: 68700,
+    isBagCheck: false,
+    isWrapCheck: false,
+    delivery: 0,
+  },
+  {
+    id: 116,
+    title: '6개월 일월 결제',
+    name: '다다일상 기획_ 5종 17입(23.10)',
+    price: 119400,
+    img: '../../../images/trbox.png',
+    cnt: 1,
+    discountPrice: 0,
+    totalPrice: 119400,
+    isBagCheck: false,
+    isWrapCheck: false,
+    delivery: 0,
   },
 ];

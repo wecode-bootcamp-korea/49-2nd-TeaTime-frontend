@@ -87,5 +87,9 @@
     &[color='secondary'] {
       @include secondary($white, $gray, $darkWhite);
     }
+
+    &[color='white'] {
+      @include primary($white, $gray, $darkWhite);
+    }
   }
 }

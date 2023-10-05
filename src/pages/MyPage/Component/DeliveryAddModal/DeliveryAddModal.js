@@ -7,7 +7,7 @@ import './DeliveryAddModal.scss';
 
 const DeliveryAddModal = props => {
   // props
-  const { open, onClick } = props;
+  const { open, onClick, address } = props;
 
   // useState
   const [onAddressSelect, setOnAddressSelect] = useState('');
@@ -27,6 +27,8 @@ const DeliveryAddModal = props => {
     const body = document.querySelector('body');
     body.style.overflow = open ? 'hidden' : 'auto';
   }, [open]);
+
+  console.log(address);
 
   // handlers
   const handlerChange = e => {
@@ -48,6 +50,36 @@ const DeliveryAddModal = props => {
 
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleAddressInfoBtn = e => {
+    fetch('http://51.20.57.76:8000/user/delivery', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        address: deliveryAddUserInfo.deliveryAddress,
+        detailAddress: deliveryAddUserInfo.deliveryAddressDetail,
+        zipCode: deliveryAddUserInfo.deliveryZipCode,
+        name: deliveryAddUserInfo.deliveryName,
+        isMain: isChecked,
+        phoneNumber:
+          deliveryAddUserInfo.deliveryPrefix +
+          deliveryAddUserInfo.deliveryPhone,
+        subName: deliveryAddUserInfo.deliveryRecipient,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.message === 'DELIVERY ADDRESS SUCCESS') {
+          alert('배송지가 추가되었습니다.');
+          window.location.reload();
+        } else {
+          alert('배송지 추가에 실패했습니다.');
+        }
+      });
   };
 
   if (!open) return null;
@@ -123,7 +155,12 @@ const DeliveryAddModal = props => {
                 />
               </div>
               <div className="deliveryAddModalButton">
-                <Button scale="middle" shape="fill" color="tertiary">
+                <Button
+                  scale="middle"
+                  shape="fill"
+                  color="tertiary"
+                  onClick={() => handleAddressInfoBtn()}
+                >
                   저장
                 </Button>
               </div>

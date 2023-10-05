@@ -21,14 +21,8 @@ const BestList = props => {
             discountPrice,
           } = item;
 
-          const handelMouseOver = () => {
-            if (id === index) {
-              setIsHovering(true);
-            }
-          };
-
-          const handelMouseOut = () => {
-            setIsHovering(false);
+          const imageHover = (e, img) => {
+            e.target.src = img;
           };
 
           return (
@@ -41,8 +35,18 @@ const BestList = props => {
                     src: subImageUrl ? subImageUrl : '/images/no-image.jpg',
                   })}
                   alt="best 상품"
-                  onMouseOver={handelMouseOver}
-                  onMouseOut={handelMouseOut}
+                  onMouseOver={e =>
+                    imageHover(
+                      e,
+                      subImageUrl ? subImageUrl : '/images/no-image.jpg',
+                    )
+                  }
+                  onMouseOut={e =>
+                    imageHover(
+                      e,
+                      mainImageUrl ? mainImageUrl : '/images/no-image.jpg',
+                    )
+                  }
                   onClick={() => {
                     navigate(`/product/${id}`);
                   }}

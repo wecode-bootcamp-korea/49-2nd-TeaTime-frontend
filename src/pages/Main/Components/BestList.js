@@ -119,6 +119,7 @@ const BestList = () => {
                   <img
                     onClick={() => goDetail(item.id)}
                     src="/images/no-image.jpg"
+                    alt="상품 이미지"
                   />
                 )}
 

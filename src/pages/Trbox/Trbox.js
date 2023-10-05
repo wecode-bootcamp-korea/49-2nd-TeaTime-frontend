@@ -1,16 +1,37 @@
+
 import React, { useState, useEffect } from 'react';
-import './Trbox.scss';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button/Button';
+import { TR_BOX_DATA } from '../../data/ComponentData';
+import './Trbox.scss';
+
 const Trbox = () => {
   const [clickStatus, setClickStatus] = useState(1);
+  const navigate = useNavigate();
 
   const handleStatus = key => {
     setClickStatus(key);
   };
 
+  let dataToPass;
+
+  const handelTrBoxPayment = () => {
+    if (clickStatus === 1) {
+      dataToPass = TR_BOX_DATA[0];
+    } else if (clickStatus === 2) {
+      dataToPass = TR_BOX_DATA[1];
+    } else if (clickStatus === 3) {
+      dataToPass = TR_BOX_DATA[2];
+    }
+
+    // navigate('/payment', { state: { trBox: dataToPass } });/
+    navigate('/payment', { state: dataToPass });
+  };
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
 
   return (
     <div className="trbox">
@@ -27,7 +48,7 @@ const Trbox = () => {
             </colgroup>
             <thead>
               <tr>
-                <th></th>
+                <th />
                 <th>다다일상</th>
               </tr>
             </thead>
@@ -221,6 +242,7 @@ const Trbox = () => {
                 scale="middle"
                 shape="fill"
                 color="green"
+                onClick={handelTrBoxPayment}
               >
                 바로구매
               </Button>

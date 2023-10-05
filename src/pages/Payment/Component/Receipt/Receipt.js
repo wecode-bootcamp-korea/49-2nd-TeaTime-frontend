@@ -3,37 +3,28 @@ import Button from '../../../../Component/Button/Button';
 import './Receipt.scss';
 
 const Receipt = props => {
-  const { productData } = props;
+  const { itemList } = props;
 
-  console.log(productData);
+  const deliveryPrice = itemList.price >= 50000 ? 0 : 2500;
+  const discountPrice = itemList.discount !== null ? itemList.discount : 0;
+  const totalPrice = itemList.price + deliveryPrice - itemList.discount;
+
   return (
     <section className="paymentReceipt">
       <div className="paymentReceiptContainer">
         <ul className="paymentReceiptList">
           <li className="paymentReceiptTotalPrice">
             <h2>총 상품금액</h2>
-            <span>{`${productData.price
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</span>
+            <span>{`${itemList.price}원`}</span>
           </li>
           <li className="paymentReceiptDisCountWrap">
             <div className="disCountWrap">
               <h2>총 할인 혜택</h2>
-              <span className="disCount">
-                {productData !== null &&
-                  `-${productData.discountPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
-              </span>
+              <span className="disCount">{`${discountPrice}원`}</span>
             </div>
             <div className="disCountPrice">
               <h3>└ 상품할인</h3>
-              <span>
-                {productData !== null &&
-                  `-${productData.discountPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
-              </span>
+              <span>{`${discountPrice}원`}</span>
             </div>
           </li>
           <li className="paymentReceiptPoint">
@@ -42,18 +33,11 @@ const Receipt = props => {
           </li>
           <li className="paymentReceiptDelivery">
             <h2>배송비</h2>
-            <span>
-              {`${productData.delivery
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              원`}
-            </span>
+            <span>{`${deliveryPrice}원`}</span>
           </li>
           <li className="paymentReceiptTotal">
             <h2>총 결제금액</h2>
-            <span className="totalPrice">{`${productData.totalPrice
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</span>
+            <span className="totalPrice">{`${totalPrice}원`}</span>
           </li>
         </ul>
         <Button
@@ -62,9 +46,7 @@ const Receipt = props => {
           fullWidth="true"
           shape="fill"
         >
-          {`${productData.totalPrice
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 주문하기`}
+          {`${totalPrice}원 주문하기`}
         </Button>
       </div>
     </section>

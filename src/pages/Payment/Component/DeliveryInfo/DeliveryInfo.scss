@@ -1,42 +1,135 @@
 .deliveryInfoBox {
   width: 100%;
   line-height: 20px;
-  border: 1px solid #e6e6e6;
   border-radius: 8px;
 
   .NameBoxWrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px 0 20px;
 
-    .NameBox {
-      display: flex;
-      align-items: center;
+    .deliveryName {
+      font-size: 16px;
+      font-weight: 600;
+    }
 
-      .deliveryName {
-        font-size: 16px;
-        font-weight: 600;
+    .label {
+      flex: 1;
+      .deliveryInput {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .deliveryInfoTable {
+      width: 100%;
+      vertical-align: top;
+      padding: 0 20px;
+
+      & caption {
+        visibility: hidden;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
       }
 
-      .deliverySubName {
-        font-size: 14px;
+      .deliveryName {
+        display: flex;
+        align-items: center;
+
+        .infoText {
+          font-size: 14px;
+          color: #333;
+          font-weight: 400;
+          text-shadow: 1px 1px 1px #666666;
+          text-align: left;
+        }
+      }
+
+      .deliveryPhone {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .infoText {
+          font-size: 14px;
+          color: #333;
+          font-weight: 400;
+          text-shadow: 1px 1px 1px #666666;
+          text-align: left;
+        }
+      }
+
+      .deliveryPhoneWrap {
+        display: flex;
+        width: 100%;
+
+        & .phoneSelect {
+          width: 30%;
+          height: 40px;
+          padding: 0 24px 0 16px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        & p {
+          height: 40px;
+        }
+
+        & p::after {
+          content: '-';
+          padding: 0 10px;
+          vertical-align: middle;
+        }
+
+        .deliveryPhoneInput {
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+        }
+      }
+
+      .deliveryAddress {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .infoText {
+          font-size: 14px;
+          color: #333;
+          font-weight: 400;
+          text-shadow: 1px 1px 1px #666666;
+          text-align: left;
+        }
+      }
+
+      .addModalAddressWrap {
+        display: flex;
+        width: 100%;
+
+        .label {
+          flex: 0;
+        }
+        .addressInput {
+          width: 250px;
+        }
+
+        .addressSearch {
+          height: 40px;
+          line-height: 40px;
+          padding: 0 10px;
+          margin: 0 10px;
+          border-radius: 4px;
+        }
       }
     }
   }
-}
-
-.deliveryAddress {
-  font-size: 14px;
-  color: #666;
-  word-break: keep-all;
-  padding: 20px 20px 0 20px;
-}
-
-.deliveryPhone {
-  font-size: 13px;
-  color: #666;
-  padding: 20px 20px 20px 20px;
 }
 
 .deliveryBtn {
