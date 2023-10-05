@@ -1,29 +1,143 @@
-import React from 'react';
-import Chip from '../../../../Component/Chip/Chip';
+import React, { useEffect, useState } from 'react';
 import Button from '../../../../Component/Button/Button';
+import Input from '../../../../Component/Input/Input';
+import DeliverySelectModal from '../DeliverySelectModal/DeliverySelectModal';
+import { Postcode } from '../../../MyPage/Component/DeliveryAddModal/Component/DaumPostCode';
 import './DeliveryInfo.scss';
 
 const DeliveryInfo = () => {
+  // state
+  const [open, setOpen] = useState(false);
+  const [onAddressSelect, setOnAddressSelect] = useState('');
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    name: '',
+    subName: '',
+    address: '',
+    addressDetail: '',
+    zipCode: '',
+    phoneNumber: '',
+    isMyAddress: true,
+  });
+  // handlers
+  const onClickDeliveryChange = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const onClickDelivery = data => {
+    setDeliveryInfo(data);
+    onClose();
+  };
+
+  const handlerChange = e => {
+    const { name, value } = e.target;
+    setDeliveryInfo({
+      ...deliveryInfo,
+      [name]: value,
+    });
+  };
+
+  const handleAddressSelect = address => {
+    setOnAddressSelect(address);
+    setDeliveryInfo({
+      ...deliveryInfo,
+      zipCode: address.zonecode,
+      address: address.address,
+    });
+  };
+
   return (
     <section>
       <div className="deliveryInfoBox">
         <div className="NameBoxWrap">
-          <div className="NameBox">
-            <h2 className="deliveryName">홍길동</h2>
-            <h3 className="deliverySubName">(나)</h3>
-          </div>
-          <Chip scale="small" checked="true" text="기본 배송지" />
+          <table className="deliveryInfoTable">
+            <caption>배송지 정보</caption>
+            <colgroup>
+              <col style={{ width: '130px' }} />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th className="deliveryName" scope="row">
+                  <p className="infoText">받는 분</p>
+                </th>
+                <td>
+                  <Input
+                    className="deliveryNameInput"
+                    scale="middle"
+                    type="text"
+                    name="name"
+                    // onChange={onChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th className="deliveryPhone" scope="row">
+                  <p className="infoText">연락처</p>
+                </th>
+                <td>
+                  <div className="deliveryPhoneWrap">
+                    <select className="phoneSelect">
+                      <option value="010" selected>
+                        010
+                      </option>
+                      <option value="011">011</option>
+                      <option value="016">016</option>
+                      <option value="017">017</option>
+                    </select>
+                    <p />
+                    <Input
+                      className="deliveryPhoneInput"
+                      scale="middle"
+                      type="text"
+                      name="phone"
+                      // onChange={onChange}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th className="deliveryAddress" scope="row">
+                  <p className="infoText">주소</p>
+                </th>
+                <td>
+                  <div className="addModalAddressWrap">
+                    <Input
+                      className="addressInput"
+                      onChange={handlerChange}
+                      scale="middle"
+                      name="deliveryZipCode"
+                      defaultValue={onAddressSelect.zonecode}
+                    />
+                    <Postcode onAddressSelect={handleAddressSelect} />
+                  </div>
+                  <Input
+                    scale="middle"
+                    defaultValue={onAddressSelect.address}
+                  />
+                  <Input
+                    scale="middle"
+                    name="deliveryAddressDetail"
+                    placeholder="상세주소 입력"
+                    onChange={handlerChange}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <p className="deliveryAddress">
-          <span>서울특별시 강남구 삼성동</span>
-          <span>123-45</span>
-        </p>
-        <p className="deliveryPhone">연락처 : 010-1234-5678</p>
-        <Button className="deliveryBtn" shape="fill" fullWidth="true">
+
+        <Button
+          className="deliveryBtn"
+          shape="fill"
+          fullWidth="true"
+          onClick={onClickDeliveryChange}
+        >
           배송지 변경
         </Button>
       </div>
-
       <div className="requestedTerm">
         <p className="requestedTermTitle">배송 요청사항</p>
         <select className="deliverySelect">
@@ -39,6 +153,11 @@ const DeliveryInfo = () => {
           <option value="직접 입력">직접 입력</option>
         </select>
       </div>
+      <DeliverySelectModal
+        open={open}
+        onClose={onClose}
+        onClickDelivery={onClickDelivery}
+      />
     </section>
   );
 };

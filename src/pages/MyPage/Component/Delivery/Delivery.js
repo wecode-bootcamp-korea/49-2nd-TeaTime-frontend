@@ -6,7 +6,7 @@ import DeliveryAddModal from '../DeliveryAddModal/DeliveryAddModal';
 import './Delivery.scss';
 
 const Delivery = props => {
-  const { DILIVERY_DATA } = props;
+  const { address } = props;
   const [isMyAddress, setIsMyAddress] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,10 +22,10 @@ const Delivery = props => {
     <div className="deliveryLocation">
       <h3 className="deliveryInfo">배송지 정보</h3>
       <p className="deliveryLength">
-        <span>{`${DILIVERY_DATA.length}개`}</span>의 배송지가 등록되어 있습니다.
+        <span>{`${address?.length}개`}</span>의 배송지가 등록되어 있습니다.
       </p>
 
-      {DILIVERY_DATA.map(data => {
+      {address?.map(data => {
         return (
           <>
             <div className="deliveryRegister" key={data.id} />

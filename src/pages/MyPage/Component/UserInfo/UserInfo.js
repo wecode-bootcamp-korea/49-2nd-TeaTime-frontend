@@ -2,6 +2,7 @@ import React from 'react';
 import './UserInfo.scss';
 
 const UserInfo = props => {
+  const { userInfo } = props;
   return (
     <div className="memberData">
       <div className="memberDataHeader">
@@ -14,19 +15,19 @@ const UserInfo = props => {
               <th scope="row" className="trTitle">
                 이름
               </th>
-              <td>박요진</td>
+              <td>{userInfo?.name}</td>
             </tr>
             <tr>
               <th scope="row" className="trTitle">
                 휴대폰 번호
               </th>
-              <td>010-1242-1456</td>
+              <td>{userInfo?.phoneNumber}</td>
             </tr>
             <tr>
               <th scope="row" className="trTitle">
                 이메일
               </th>
-              <td>eokng@wgam.com</td>
+              <td>{userInfo?.email}</td>
             </tr>
             <tr>
               <th scope="row" className="trTitle">
