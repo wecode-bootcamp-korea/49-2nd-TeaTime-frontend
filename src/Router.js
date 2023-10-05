@@ -14,7 +14,6 @@ import Cart from './pages/Cart/Cart';
 import InitializeScroll from './Component/initializeScroll/initializeScroll';
 import Trbox from './pages/Trbox/Trbox';
 
-
 const Router = () => {
   return (
     <BrowserRouter>

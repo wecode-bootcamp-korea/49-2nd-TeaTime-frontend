@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Trbox.scss';
 import Button from '../../Component/Button/Button';
 const Trbox = () => {
@@ -7,6 +7,10 @@ const Trbox = () => {
   const handleStatus = key => {
     setClickStatus(key);
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <div className="trbox">

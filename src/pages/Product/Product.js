@@ -21,6 +21,7 @@ const Product = () => {
   const [productData, setProductData] = useState({});
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     fetch(`http://51.20.57.76:8000/products/${productId}`, {
       method: 'Get',
       headers: {
@@ -133,6 +134,40 @@ const Product = () => {
     }
   };
 
+  const putCart = () => {
+    fetch('http://51.20.57.76:8000/cart/add', {
+      method: 'Post',
+      body: JSON.stringify({
+        productId: productId,
+        count: totalAmount.cnt,
+        isBag: totalAmount.isBagCheck ? 1 : 0,
+        isPackage: totalAmount.isPackage ? 1 : 0,
+      }),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result.message === 'add') {
+          if (
+            window.confirm(
+              '장바구니에 추가되었습니다. \n 장바구니로 이동하시겠습니까?',
+            )
+          ) {
+            navigate('/cart');
+          } else {
+            window.location.reload();
+          }
+        } else {
+          alert('에러입니다. 관리자에게 문의하세요.');
+        }
+      });
+  };
+
   // useLocation 으로 받아온 데이터 모음 state를 이용해 데이터를 넘겨줌
   const datas = {
     id: productData.id,
@@ -158,6 +193,10 @@ const Product = () => {
   const handelInfoMove = () => {
     navigate('/payment', { state: datas });
   };
+
+  if (Object.keys(productData).length === 0) {
+    return null;
+  }
 
   return (
     <div className="product">
@@ -302,6 +341,7 @@ const Product = () => {
                   shape="fill"
                   fullWidth="true"
                   color="secondary"
+                  onClick={putCart}
                 >
                   장바구니
                 </Button>
@@ -325,15 +365,15 @@ const Product = () => {
             <div className="starPoint">
               <div
                 className={`star p${
-                  productData.reviewGradeAvg ? productData.reviewGradeAvg : 0
+                  productData.reviewGradeAvg
+                    ? Math.round(productData.reviewGradeAvg)
+                    : 0
                 }`}
               >
                 <div className="bar" />
               </div>
               <span className="pointNum">
-                {productData.reviewGradeAvg
-                  ? productData.reviewGradeAvg + '.0'
-                  : 0}
+                {productData.reviewGradeAvg ? productData.reviewGradeAvg : 0}
               </span>
             </div>
           </div>
