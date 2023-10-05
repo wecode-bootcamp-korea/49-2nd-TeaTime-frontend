@@ -182,7 +182,7 @@ const Payment = () => {
                 }}
               >
                 <h2 className="paymentItemInfo">주문상품</h2>
-                <span>총 {!productData ? itemList.length : '1'}건</span>
+                <span>총 {`${1}건`}</span>
               </div>
 
               <div className="paymentItemInfoBox">
