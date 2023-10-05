@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button/Button';
 import './Cart.scss';
 import Count from '../../Component/Count/Count';
@@ -13,6 +14,7 @@ const Cart = () => {
     totalPacking: 0,
     totalRealPrice: 0,
   });
+  const navigate = useNavigate();
 
   const handleData = () => {
     fetch(`http://51.20.57.76:8000/cart/show`, {
@@ -285,6 +287,7 @@ const Cart = () => {
                     scale="middle"
                     shape="fill"
                     color="bording"
+                    onClick={handelInfoMove}
                   >
                     선택주문
                   </Button>
@@ -293,6 +296,7 @@ const Cart = () => {
                     scale="middle"
                     shape="fill"
                     color="green"
+                    onClick={handelInfoMove}
                   >
                     전체주문
                   </Button>
