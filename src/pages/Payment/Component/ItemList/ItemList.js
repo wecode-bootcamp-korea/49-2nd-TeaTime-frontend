@@ -4,7 +4,7 @@ import './ItemList.scss';
 const ItemList = props => {
   const { itemList } = props;
 
-  return itemList.map(item => {
+  return itemList?.map(item => {
     return (
       <div className="paymentItemInfoBox" key={item}>
         <div className="paymentItemInfoBoxWrap">

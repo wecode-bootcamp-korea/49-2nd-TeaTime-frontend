@@ -24,12 +24,15 @@ const Payment = () => {
   const [userInfo, setUserInfo] = useState({
     name: '',
     email: '',
-    phone: '',
+    domain: '',
+    phoneFix: '',
+    phoneNumber: '',
     senderName: '',
   });
 
+  const [userInfoList, setUserInfoList] = useState({});
+
   const [itemList, setItemList] = useState([]);
-  const productData = location.state;
   const id = searchParams.get('id');
   const cnt = searchParams.get('cnt');
   const isBagCheck = searchParams.get('isBagCheck');
@@ -37,6 +40,8 @@ const Payment = () => {
 
   // var
   const disCount = itemList.discount > 0 ? itemList.discount : 0 * cnt;
+  const userInfoData = userInfoList.userRegistrationData;
+  const addressData = userInfoList.userDatadeliveryAddressData;
 
   useEffect(() => {
     fetch(`http://51.20.57.76:8000/products/order/${id}`, {
@@ -56,6 +61,19 @@ const Payment = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    fetch(`http://51.20.57.76:8000/user/userInfo`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => res.json())
+      .then(result => {
+        setUserInfoList(result.user);
+      });
+  }, []);
   // event
   const handleUserInfo = e => {
     const { name, value } = e.target;
@@ -102,6 +120,15 @@ const Payment = () => {
       setPaymentSelect({ ...paymentSelect, payment: '', account: 'on' });
     }
   };
+
+  // useEffect(() => {
+  //   {...userInfo,
+  //   name: userInfoData.name,
+  //   email: userInfoData.email,
+  //   domain: userInfoData.domain,}
+  // })
+
+  console.log(userInfo);
 
   // const handleOnSubmit = e => {
   //   fetch(`http://51.20.57.76:8000/orders`, {
@@ -155,7 +182,12 @@ const Payment = () => {
               </p>
             </div>
 
-            {isUserInfoModal && <UserInfoModal onChange={handleUserInfo} />}
+            {isUserInfoModal && (
+              <UserInfoModal
+                onChange={handleUserInfo}
+                userInfoData={userInfoData}
+              />
+            )}
 
             <div className="paymentUserInfoDelivery">
               <div className="deliveryInfoWrap">
@@ -171,7 +203,7 @@ const Payment = () => {
                   주문 고객과 동일
                 </Button>
               </div>
-              <DeliveryInfo />
+              <DeliveryInfo onChange={onChange} />
             </div>
 
             <div className="paymentUserInfoItem">
@@ -217,30 +249,7 @@ const Payment = () => {
                 </div>
               </div>
 
-              {productData === null &&
-                (isItemListModal ? (
-                  <ItemList itemList={itemList} />
-                ) : (
-                  <div className="paymentItemInfoBox">
-                    <div className="paymentItemInfoBoxWrap">
-                      <div className="paymentItemInfoBoxWrapInnerImg">
-                        <img src={itemList[0]?.image} alt="상품 이미지" />
-                      </div>
-                      <div className="paymentItemInfoBoxWrapInnerInfo">
-                        <div className="paymentItemInfoBoxWrapInnerInfoName">
-                          <span>{itemList[0]?.name}</span>
-                          <span className="packaging">
-                            {itemList[0]?.packaging}
-                          </span>
-                        </div>
-                        <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                          <p>{`${itemList[0]?.price}원`}</p>/
-                          <span>{`${itemList[0]?.quantity}개`}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              {itemList.length > 0 && <ItemList itemList={itemList} />}
 
               <div className="paymentDisCount">
                 <div
@@ -254,7 +263,7 @@ const Payment = () => {
                   <h2 className="disCountTitle">할인/포인트</h2>
                   <span>{`${disCount}원`}</span>
                 </div>
-                {isDisCountModal && <DisCountModal productData={productData} />}
+                {isDisCountModal && <DisCountModal />}
               </div>
 
               <div className="paymentSelect">
@@ -284,7 +293,7 @@ const Payment = () => {
             </div>
           </section>
 
-          <Receipt productData={productData} itemList={itemList} />
+          <Receipt itemList={itemList} />
         </form>
       </div>
     </div>

@@ -9,11 +9,7 @@ import './MyPage.scss';
 
 const MyPage = () => {
   // State
-  const [userInfo, setUserInfo] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  });
+  const [userInfo, setUserInfo] = useState({});
 
   const { tabId } = useParams();
 
