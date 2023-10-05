@@ -182,6 +182,10 @@ const Cart = () => {
       });
   };
 
+  const handelInfoMove = () => {
+    navigate('/payment', { state: checkItems });
+  };
+
   return (
     <div className="cart">
       <div className="cartTit">
@@ -355,6 +359,7 @@ const Cart = () => {
                       scale="middle"
                       shape="fill"
                       color="green"
+                      onClick={handelInfoMove}
                     >
                       {total.totalRealPrice &&
                         total.totalRealPrice.toLocaleString()}
