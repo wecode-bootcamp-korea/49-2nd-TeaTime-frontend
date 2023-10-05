@@ -152,9 +152,19 @@ const Product = () => {
         return res.json();
       })
       .then(result => {
-        result.message === 'add'
-          ? window.location.reload()
-          : alert('에러입니다. 관리자에게 문의하세요.');
+        if (result.message === 'add') {
+          if (
+            window.confirm(
+              '장바구니에 추가되었습니다. \n 장바구니로 이동하시겠습니까?',
+            )
+          ) {
+            navigate('/cart');
+          } else {
+            window.location.reload();
+          }
+        } else {
+          alert('에러입니다. 관리자에게 문의하세요.');
+        }
       });
   };
 
