@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="logo">
-          <Link>
+          <Link to="/">
             <img
               onClick={MoveToTop}
               src="/images/logo_transparent.png"

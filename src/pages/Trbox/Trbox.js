@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button/Button';
-import './Trbox.scss';
 import { TR_BOX_DATA } from '../../data/ComponentData';
+import './Trbox.scss';
 
 const Trbox = () => {
   const [clickStatus, setClickStatus] = useState(1);
@@ -26,6 +27,12 @@ const Trbox = () => {
     // navigate('/payment', { state: { trBox: dataToPass } });/
     navigate('/payment', { state: dataToPass });
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+
   return (
     <div className="trbox">
       <div className="trboxImg">
