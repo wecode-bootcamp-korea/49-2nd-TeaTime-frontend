@@ -1,0 +1,29 @@
+.imgHeader {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  padding: 30px 0 30px 0;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  overflow: hidden;
+
+  & .imgBanner {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    opacity: 0.8;
+  }
+
+  & .imgBannerText {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    font-size: 54px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow: 2px 2px 6px #888;
+    user-select: none;
+  }
+}

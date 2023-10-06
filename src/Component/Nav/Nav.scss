@@ -1,0 +1,200 @@
+.nav {
+  color: #333;
+  font-weight: 400;
+  font-size: 13px;
+
+  a {
+    color: black;
+
+    &:hover {
+      color: green;
+    }
+  }
+  .dimBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+  }
+
+  .menuBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: white;
+  }
+
+  .wrapper {
+    padding: 0 10px;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .innerBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .leftBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .logo {
+    width: 110px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .navBox {
+    display: block;
+    padding-left: 40px;
+  }
+
+  .navListDept1 {
+    display: flex;
+
+    .itemDept1 {
+      padding-right: 80px;
+
+      > a {
+        display: block;
+        height: 80px;
+        line-height: 80px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    .navListDept2Box {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      background-color: #fff;
+      visibility: hidden;
+      overflow: hidden;
+      max-height: 0;
+      border-top: 1px solid #e6e6e6;
+
+      .wrapper {
+        padding-left: 120px;
+        padding-right: 170px;
+      }
+    }
+
+    .flexBox {
+      display: flex;
+      align-items: flex-start;
+      padding: 40px;
+    }
+
+    .navListDept2 {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 1 1 auto;
+      width: 1%;
+    }
+
+    .itemDept2 {
+      flex: 0 0 20%;
+      width: 20%;
+      a {
+        font-size: 20px;
+      }
+    }
+
+    .navListDept3 {
+      margin-top: 15px;
+    }
+
+    .itemDept3 {
+      margin-bottom: 12px;
+      a {
+        font-size: 15px;
+        color: #666;
+        &:hover {
+          color: green;
+        }
+      }
+    }
+
+    .itemDept1:not(.no-child):hover {
+      .navListDept2Box {
+        max-height: 100vh;
+        visibility: visible;
+        transition: all 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+    }
+  }
+
+  .rightBox {
+    display: flex;
+    align-items: center;
+  }
+
+  .itemCart {
+    background: url(../../../public/images/cart.png);
+    width: 28px;
+    height: 28px;
+    display: block;
+    background-size: cover;
+    border: none;
+    &:hover {
+      background: url(../../../public/images/greenCart.png);
+      width: 28px;
+      height: 28px;
+      display: block;
+      background-size: cover;
+      border: none;
+    }
+  }
+
+  .cartNum {
+    height: 18px;
+    line-height: 18px;
+    padding: 0 5px;
+    position: absolute;
+    right: -8px;
+    top: -4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cee88e;
+    color: #333;
+    font-weight: 500;
+    border-radius: 9px;
+    text-align: center;
+  }
+
+  .iconItem {
+    position: relative;
+    margin-right: 25px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+    margin-right: 24px;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    height: 80px;
+  }
+
+  .navUtil {
+    display: flex;
+    align-items: center;
+  }
+}

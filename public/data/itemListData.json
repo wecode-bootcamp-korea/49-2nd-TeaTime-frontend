@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "그린티 랑드샤",
+    "packaging": "포장불가",
+    "price": 29900,
+    "quantity": "1",
+    "image": "../../../images/tea-test_1.png"
+  },
+  {
+    "id": 2,
+    "name": "고양이 라떼",
+    "packaging": "포장불가",
+    "price": 9900,
+    "quantity": "4",
+    "image": "../../../images/tea-test_2.png"
+  },
+  {
+    "id": 3,
+    "name": "말떼 차",
+    "packaging": "포장가능",
+    "price": 4900,
+    "quantity": "2",
+    "image": "../../../images/tea-test_3.png"
+  }
+]

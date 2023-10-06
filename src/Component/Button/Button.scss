@@ -1,0 +1,95 @@
+// $colorA: #5c95f0, $colorB: #313131,
+// $colorC: #ffffff, $colorD: #000000,
+// $colorE: #6c801a, $colorF: #666,
+// $colorG: #ddd,
+
+@import '/src/styles/mixin.scss';
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+
+  &[scale='large'] {
+    min-width: 300px;
+    font-size: 16px;
+  }
+
+  &[scale='middle'] {
+    min-width: 250px;
+    font-size: 15px;
+  }
+
+  &[scale='small'] {
+    min-width: 150px;
+    font-size: 15px;
+  }
+
+  &[scale='xSmall'] {
+    min-width: 100px;
+    font-size: 14px;
+  }
+
+  &[data-fullWidth='true'] {
+    width: 100%;
+  }
+
+  &[shape='fill'] {
+    height: 50px;
+    line-height: 50px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+
+    &[color='primary'] {
+      @include primary($skyblue, $white, $skyblue);
+      border-radius: 4px;
+    }
+
+    &[color='secondary'] {
+      @include secondary($black, $white, $black);
+    }
+
+    &[color='tertiary'] {
+      @include tertiary($lightGray, $gray, $darkWhite);
+    }
+
+    &[color='bording'] {
+      @include bording($white, $darkGreen, $black);
+    }
+
+    &[color='green'] {
+      @include primary($darkGreen, $white, $darkGreen);
+    }
+
+    &[color='darkGray'] {
+      @include primary($lightGray, $gray, $darkGray);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #f0f0f0;
+      border-color: #f0f0f0;
+      color: #c6c6c6;
+    }
+  }
+
+  &[shape='outLine'] {
+    height: 45px;
+    line-height: 50px;
+    font-weight: 600;
+    text-align: center;
+
+    &[color='primary'] {
+      @include primary($white, $black, $black);
+    }
+
+    &[color='secondary'] {
+      @include secondary($white, $gray, $darkWhite);
+    }
+
+    &[color='white'] {
+      @include primary($white, $gray, $darkWhite);
+    }
+  }
+}

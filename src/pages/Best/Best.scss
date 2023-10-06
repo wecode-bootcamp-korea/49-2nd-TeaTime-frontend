@@ -1,0 +1,77 @@
+.nav + .best {
+  margin-top: 80px;
+}
+
+.best {
+  width: 100%;
+  min-width: 1240px;
+
+  .bestContainer {
+    width: 100%;
+    min-width: 1240px;
+    padding-bottom: 30px;
+
+    .bestChipBtnWrap {
+      max-width: 1240px;
+      margin: 0 auto;
+
+      .chip {
+        margin-left: 10px;
+      }
+
+      .ChipBtn {
+        display: flex;
+      }
+    }
+
+    .bestListTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1240px;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 40px auto;
+      padding: 0 15px;
+
+      .sortWrap {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 0 10px;
+      }
+
+      .sortBtn {
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        color: #999999;
+        padding-right: 13px;
+        border: none;
+        background-color: #fff;
+
+        &::after {
+          content: url('../../../public/images/down-arrow.png');
+        }
+
+        &.on::after {
+          content: url('../../../public/images/up-arrow.png');
+        }
+      }
+
+      .optionBox {
+        background: #fff;
+        border-top: 1px solid #ddd;
+
+        & li > a {
+          font-size: 14px;
+          height: 32px;
+          line-height: 32px;
+          text-decoration: none;
+          color: #727272;
+          padding: 5px 0;
+        }
+      }
+    }
+  }
+}

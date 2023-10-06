@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Header from './Component/Header/Header';
+import MainForm from './Component/MainForm/MainForm';
+import './Login.scss';
 
 const Login = () => {
   return (
-    <>
-      <p>로그인 페이지 입니다.</p>
-    </>
+    <div className="login">
+      <Header text="로그인" />
+      <MainForm />
+    </div>
   );
 };
 

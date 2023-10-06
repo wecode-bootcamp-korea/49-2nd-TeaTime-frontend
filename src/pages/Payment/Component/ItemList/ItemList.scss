@@ -1,0 +1,59 @@
+.paymentItemInfoBox {
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+
+  .paymentItemInfoBoxWrap {
+    display: flex;
+    align-items: center;
+
+    .paymentItemInfoBoxWrapInnerImg {
+      width: 70px;
+      height: 100px;
+      margin-right: 20px;
+      padding-bottom: 10px;
+
+      & img {
+        max-width: 100%;
+        height: 100%;
+        object-fit: contain;
+        vertical-align: middle;
+      }
+    }
+
+    .paymentItemInfoBoxWrapInnerInfo {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .paymentItemInfoBoxWrapInnerInfoName {
+        display: flex;
+        flex-direction: column;
+        line-height: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.05em;
+
+        .packaging {
+          font-size: 14px;
+          font-weight: 400;
+          color: #666666;
+        }
+      }
+
+      .paymentItemInfoBoxWrapInnerInfoPrice {
+        display: flex;
+        align-items: center;
+
+        & p {
+          font-size: 16px;
+          font-weight: 600;
+          letter-spacing: -0.05em;
+        }
+
+        & span {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
