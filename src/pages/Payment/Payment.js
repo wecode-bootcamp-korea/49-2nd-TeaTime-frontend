@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import UserInfoModal from './Component/UserInfoModal/UserInfoModal';
 import Receipt from './Component/Receipt/Receipt';
 import DeliveryInfo from './Component/DeliveryInfo/DeliveryInfo';
@@ -20,6 +20,7 @@ const Payment = () => {
   const [paymentSelect, setPaymentSelect] = useState([]);
   const [searchParams, setSeachParams] = useSearchParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
     name: '',
@@ -30,18 +31,36 @@ const Payment = () => {
     senderName: '',
   });
 
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    name: '',
+    address: '',
+    addressDetail: '',
+    zipCode: '',
+    phoneFix: '',
+    phoneNumber: '',
+  });
+
   const [userInfoList, setUserInfoList] = useState({});
 
   const [itemList, setItemList] = useState([]);
+
   const id = searchParams.get('id');
   const cnt = searchParams.get('cnt');
   const isBagCheck = searchParams.get('isBagCheck');
   const isWrapCheck = searchParams.get('isWrapCheck');
+  const cartId = location.state;
 
   // var
-  const disCount = itemList.discount > 0 ? itemList.discount : 0 * cnt;
-  const userInfoData = userInfoList.userRegistrationData;
-  const addressData = userInfoList.userDatadeliveryAddressData;
+  const disCount =
+    itemList?.discount > 0 || itemList?.discount !== null
+      ? itemList?.discount * cnt
+      : 0 * cnt;
+  const totalItemPrice = itemList?.price * cnt;
+  const totalPrice = itemList?.price * cnt - disCount;
+  const deliveryPrice = totalPrice >= 50000 ? 0 : 2500;
+  const userInfoData = userInfoList?.userRegistrationData;
+  const emailParts =
+    userInfoData !== undefined && userInfoData?.email.split('@');
 
   useEffect(() => {
     fetch(`http://51.20.57.76:8000/products/order/${id}`, {
@@ -74,10 +93,19 @@ const Payment = () => {
         setUserInfoList(result.user);
       });
   }, []);
+
   // event
   const handleUserInfo = e => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const handlerChange = e => {
+    const { name, value } = e.target;
+    setDeliveryInfo({
+      ...deliveryInfo,
+      [name]: value,
+    });
   };
 
   // function
@@ -121,40 +149,60 @@ const Payment = () => {
     }
   };
 
-  // useEffect(() => {
-  //   {...userInfo,
-  //   name: userInfoData.name,
-  //   email: userInfoData.email,
-  //   domain: userInfoData.domain,}
-  // })
+  const copyCustomerInfo = () => {
+    const orderCustomerInfo = {
+      name: userInfoData.name,
+      phoneFix: userInfoData.phoneNumber.slice(0, 3),
+      phoneNumber: userInfoData.phoneNumber.slice(4, 13),
+    };
+    setDeliveryInfo(orderCustomerInfo);
+  };
 
-  console.log(userInfo);
+  useEffect(() => {
+    const userInfoUpdate = {
+      name: userInfoData?.name,
+      email: emailParts[0],
+      domain: emailParts[1],
+      phoneFix: userInfoData?.phoneNumber.slice(0, 3),
+      phoneNumber: userInfoData?.phoneNumber.slice(4, 13),
+    };
+    setUserInfo(userInfoUpdate);
+  }, [isUserInfoModal, userInfoData]);
 
-  // const handleOnSubmit = e => {
-  //   fetch(`http://51.20.57.76:8000/orders`, {
-  //     method: 'post',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       Authorization: localStorage.getItem('accessToken'),
-  //     },
-  //     body: JSON.stringify({
-  //       productId : productData.id,
-  //       count : productData.cnt,
-  //       isBag : productData.isBagCheck,
-  //       isPacking : productData.isWrapCheck,
-  //       name : userInfo.name,
-  //       phoneNumber : userInfo.phone,
-  //       totalPrice : productData.totalPrice,
-  //       isShippingFee: ,
-  //       isAgree : isChecked,
-  //       address : ,
-  //       detailAddress : ,
-  //       zipCode : ,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setItemList(data));
-  // };
+  const handleOnSubmit = e => {
+    fetch(`http://51.20.57.76:8000/orders`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        productId: id,
+        count: cnt,
+        isBag: isBagCheck,
+        isPacking: isWrapCheck,
+        totalPrice: totalPrice,
+        payments: '',
+        name: userInfo.name,
+        phoneNumber: userInfo.phoneFix + userInfo.phoneNumber,
+        email: userInfo.email + '@' + userInfo.domain,
+        isShippingFee: deliveryPrice,
+        status: '',
+        isAgree: isChecked,
+        address: deliveryInfo.address,
+        detailAddress: deliveryInfo.deliveryAddressDetail,
+        zipCode: deliveryInfo.zipCode,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        navigate('/');
+      });
+  };
+
+  console.log(cartId);
+
   return (
     <div className="payment">
       <div className="paymentInnerWrap">
@@ -164,7 +212,12 @@ const Payment = () => {
           </div>
         </section>
 
-        <form className="paymentFormOrder">
+        <form
+          className="paymentFormOrder"
+          onSubmit={() => {
+            handleOnSubmit();
+          }}
+        >
           <section className="paymentInfo">
             <div
               className="paymentUserInfoTitle"
@@ -178,7 +231,10 @@ const Payment = () => {
                   isUserInfoModal ? 'modalOn' : ''
                 }`}
               >
-                <span>홍길동/010-1215-8452</span>
+                <span>
+                  {userInfo?.name}/
+                  {`${userInfo?.phoneFix}-` + userInfo?.phoneNumber}
+                </span>
               </p>
             </div>
 
@@ -197,13 +253,17 @@ const Payment = () => {
                   scale="xSmall"
                   shape="outLine"
                   color="white"
-
-                  // onClick={onClickDeliveryChange}
+                  onClick={copyCustomerInfo}
                 >
                   주문 고객과 동일
                 </Button>
               </div>
-              <DeliveryInfo onChange={onChange} />
+              <DeliveryInfo
+                onChange={handlerChange}
+                userInfoData={userInfoData}
+                deliveryInfo={deliveryInfo}
+                setDeliveryInfo={setDeliveryInfo}
+              />
             </div>
 
             <div className="paymentUserInfoItem">
@@ -234,16 +294,18 @@ const Payment = () => {
                       <span>{itemList.name}</span>
                       <div>
                         <span className="packaging">
-                          {isBagCheck ? '포장' : '비포장'}
+                          {isBagCheck === 'true' ? '포장' : '비포장'}
                         </span>
                         <span className="packaging"> / </span>
                         <span className="packaging">
-                          {isWrapCheck ? '쇼핑백 사용' : '쇼핑백 미사용'}
+                          {isWrapCheck === 'true'
+                            ? '쇼핑백 사용'
+                            : '쇼핑백 미사용'}
                         </span>
                       </div>
                     </div>
                     <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                      <p>{`${itemList?.price}원`}</p>/<span>{`${cnt}개`}</span>
+                      <p>{`${totalItemPrice}원`}</p>/<span>{`${cnt}개`}</span>
                     </p>
                   </div>
                 </div>
@@ -293,7 +355,14 @@ const Payment = () => {
             </div>
           </section>
 
-          <Receipt itemList={itemList} />
+          <Receipt
+            itemList={itemList}
+            isChecked={isChecked}
+            disCount={disCount}
+            totalItemPrice={totalItemPrice}
+            totalPrice={totalPrice}
+            deliveryPrice={deliveryPrice}
+          />
         </form>
       </div>
     </div>
