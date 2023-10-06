@@ -86,6 +86,8 @@ const MainForm = props => {
     }
   };
 
+  console.log(isChecked);
+
   return (
     <div className="loginContainer">
       <div className="loginSubTitle">
@@ -103,7 +105,7 @@ const MainForm = props => {
             type="text"
             scale="large"
             name="userId"
-            value={isChecked ? localStorage.getItem('userId') : null}
+            defaultValue={isChecked ? localStorage.getItem('userId') : ''}
           />
           <Input
             placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
