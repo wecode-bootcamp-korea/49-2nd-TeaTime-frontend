@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button/Button';
-import './Cart.scss';
 import Count from '../../Component/Count/Count';
+import './Cart.scss';
 const Cart = () => {
   const [checkItems, setCheckItems] = useState([]);
   const [data, setData] = useState([]);
@@ -239,7 +239,7 @@ const Cart = () => {
                             checkItems.includes(item.cart_id) ? true : false
                           }
                         />
-                        <label htmlFor={`prdId${item.cart_id}`}></label>
+                        <label htmlFor={`prdId${item.cart_id}`} />
                       </div>
                     </div>
                     <div className="prdInfo">

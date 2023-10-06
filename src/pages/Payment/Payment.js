@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import UserInfoModal from './Component/UserInfoModal/UserInfoModal';
 import Receipt from './Component/Receipt/Receipt';
 import DeliveryInfo from './Component/DeliveryInfo/DeliveryInfo';
@@ -20,23 +20,47 @@ const Payment = () => {
   const [paymentSelect, setPaymentSelect] = useState([]);
   const [searchParams, setSeachParams] = useSearchParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
     name: '',
     email: '',
-    phone: '',
+    domain: '',
+    phoneFix: '',
+    phoneNumber: '',
     senderName: '',
   });
 
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    name: '',
+    address: '',
+    addressDetail: '',
+    zipCode: '',
+    phoneFix: '',
+    phoneNumber: '',
+  });
+
+  const [userInfoList, setUserInfoList] = useState({});
+
   const [itemList, setItemList] = useState([]);
-  const productData = location.state;
+
   const id = searchParams.get('id');
   const cnt = searchParams.get('cnt');
   const isBagCheck = searchParams.get('isBagCheck');
   const isWrapCheck = searchParams.get('isWrapCheck');
+  const cartId = location.state;
 
   // var
-  const disCount = itemList.discount > 0 ? itemList.discount : 0 * cnt;
+  const disCount =
+    itemList?.discount > 0 || itemList?.discount !== null
+      ? itemList?.discount * cnt
+      : 0 * cnt;
+  const totalItemPrice = itemList?.price * cnt;
+  const totalPrice = itemList?.price * cnt - disCount;
+  const deliveryPrice = totalPrice >= 50000 ? 0 : 2500;
+  const userInfoData = userInfoList?.userRegistrationData;
+  const emailParts =
+    userInfoData !== undefined && userInfoData?.email.split('@');
 
   useEffect(() => {
     fetch(`http://51.20.57.76:8000/products/order/${id}`, {
@@ -56,10 +80,32 @@ const Payment = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    fetch(`http://51.20.57.76:8000/user/userInfo`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(res => res.json())
+      .then(result => {
+        setUserInfoList(result.user);
+      });
+  }, []);
+
   // event
   const handleUserInfo = e => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const handlerChange = e => {
+    const { name, value } = e.target;
+    setDeliveryInfo({
+      ...deliveryInfo,
+      [name]: value,
+    });
   };
 
   // function
@@ -103,31 +149,60 @@ const Payment = () => {
     }
   };
 
-  // const handleOnSubmit = e => {
-  //   fetch(`http://51.20.57.76:8000/orders`, {
-  //     method: 'post',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       Authorization: localStorage.getItem('accessToken'),
-  //     },
-  //     body: JSON.stringify({
-  //       productId : productData.id,
-  //       count : productData.cnt,
-  //       isBag : productData.isBagCheck,
-  //       isPacking : productData.isWrapCheck,
-  //       name : userInfo.name,
-  //       phoneNumber : userInfo.phone,
-  //       totalPrice : productData.totalPrice,
-  //       isShippingFee: ,
-  //       isAgree : isChecked,
-  //       address : ,
-  //       detailAddress : ,
-  //       zipCode : ,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setItemList(data));
-  // };
+  const copyCustomerInfo = () => {
+    const orderCustomerInfo = {
+      name: userInfoData.name,
+      phoneFix: userInfoData.phoneNumber.slice(0, 3),
+      phoneNumber: userInfoData.phoneNumber.slice(4, 13),
+    };
+    setDeliveryInfo(orderCustomerInfo);
+  };
+
+  useEffect(() => {
+    const userInfoUpdate = {
+      name: userInfoData?.name,
+      email: emailParts[0],
+      domain: emailParts[1],
+      phoneFix: userInfoData?.phoneNumber.slice(0, 3),
+      phoneNumber: userInfoData?.phoneNumber.slice(4, 13),
+    };
+    setUserInfo(userInfoUpdate);
+  }, [isUserInfoModal, userInfoData]);
+
+  const handleOnSubmit = e => {
+    fetch(`http://51.20.57.76:8000/orders`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        productId: id,
+        count: cnt,
+        isBag: isBagCheck,
+        isPacking: isWrapCheck,
+        totalPrice: totalPrice,
+        payments: '',
+        name: userInfo.name,
+        phoneNumber: userInfo.phoneFix + userInfo.phoneNumber,
+        email: userInfo.email + '@' + userInfo.domain,
+        isShippingFee: deliveryPrice,
+        status: '',
+        isAgree: isChecked,
+        address: deliveryInfo.address,
+        detailAddress: deliveryInfo.deliveryAddressDetail,
+        zipCode: deliveryInfo.zipCode,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        navigate('/');
+      });
+  };
+
+  console.log(cartId);
+
   return (
     <div className="payment">
       <div className="paymentInnerWrap">
@@ -137,7 +212,12 @@ const Payment = () => {
           </div>
         </section>
 
-        <form className="paymentFormOrder">
+        <form
+          className="paymentFormOrder"
+          onSubmit={() => {
+            handleOnSubmit();
+          }}
+        >
           <section className="paymentInfo">
             <div
               className="paymentUserInfoTitle"
@@ -151,11 +231,19 @@ const Payment = () => {
                   isUserInfoModal ? 'modalOn' : ''
                 }`}
               >
-                <span>홍길동/010-1215-8452</span>
+                <span>
+                  {userInfo?.name}/
+                  {`${userInfo?.phoneFix}-` + userInfo?.phoneNumber}
+                </span>
               </p>
             </div>
 
-            {isUserInfoModal && <UserInfoModal onChange={handleUserInfo} />}
+            {isUserInfoModal && (
+              <UserInfoModal
+                onChange={handleUserInfo}
+                userInfoData={userInfoData}
+              />
+            )}
 
             <div className="paymentUserInfoDelivery">
               <div className="deliveryInfoWrap">
@@ -165,13 +253,17 @@ const Payment = () => {
                   scale="xSmall"
                   shape="outLine"
                   color="white"
-
-                  // onClick={onClickDeliveryChange}
+                  onClick={copyCustomerInfo}
                 >
                   주문 고객과 동일
                 </Button>
               </div>
-              <DeliveryInfo />
+              <DeliveryInfo
+                onChange={handlerChange}
+                userInfoData={userInfoData}
+                deliveryInfo={deliveryInfo}
+                setDeliveryInfo={setDeliveryInfo}
+              />
             </div>
 
             <div className="paymentUserInfoItem">
@@ -202,45 +294,24 @@ const Payment = () => {
                       <span>{itemList.name}</span>
                       <div>
                         <span className="packaging">
-                          {isBagCheck ? '포장' : '비포장'}
+                          {isBagCheck === 'true' ? '포장' : '비포장'}
                         </span>
                         <span className="packaging"> / </span>
                         <span className="packaging">
-                          {isWrapCheck ? '쇼핑백 사용' : '쇼핑백 미사용'}
+                          {isWrapCheck === 'true'
+                            ? '쇼핑백 사용'
+                            : '쇼핑백 미사용'}
                         </span>
                       </div>
                     </div>
                     <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                      <p>{`${itemList?.price}원`}</p>/<span>{`${cnt}개`}</span>
+                      <p>{`${totalItemPrice}원`}</p>/<span>{`${cnt}개`}</span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              {productData === null &&
-                (isItemListModal ? (
-                  <ItemList itemList={itemList} />
-                ) : (
-                  <div className="paymentItemInfoBox">
-                    <div className="paymentItemInfoBoxWrap">
-                      <div className="paymentItemInfoBoxWrapInnerImg">
-                        <img src={itemList[0]?.image} alt="상품 이미지" />
-                      </div>
-                      <div className="paymentItemInfoBoxWrapInnerInfo">
-                        <div className="paymentItemInfoBoxWrapInnerInfoName">
-                          <span>{itemList[0]?.name}</span>
-                          <span className="packaging">
-                            {itemList[0]?.packaging}
-                          </span>
-                        </div>
-                        <p className="paymentItemInfoBoxWrapInnerInfoPrice">
-                          <p>{`${itemList[0]?.price}원`}</p>/
-                          <span>{`${itemList[0]?.quantity}개`}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              {itemList.length > 0 && <ItemList itemList={itemList} />}
 
               <div className="paymentDisCount">
                 <div
@@ -254,7 +325,7 @@ const Payment = () => {
                   <h2 className="disCountTitle">할인/포인트</h2>
                   <span>{`${disCount}원`}</span>
                 </div>
-                {isDisCountModal && <DisCountModal productData={productData} />}
+                {isDisCountModal && <DisCountModal />}
               </div>
 
               <div className="paymentSelect">
@@ -284,7 +355,14 @@ const Payment = () => {
             </div>
           </section>
 
-          <Receipt productData={productData} itemList={itemList} />
+          <Receipt
+            itemList={itemList}
+            isChecked={isChecked}
+            disCount={disCount}
+            totalItemPrice={totalItemPrice}
+            totalPrice={totalPrice}
+            deliveryPrice={deliveryPrice}
+          />
         </form>
       </div>
     </div>

@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../../../../Component/Button/Button';
 import Input from '../../../../Component/Input/Input';
 import DeliverySelectModal from '../DeliverySelectModal/DeliverySelectModal';
 import { Postcode } from '../../../MyPage/Component/DeliveryAddModal/Component/DaumPostCode';
 import './DeliveryInfo.scss';
 
-const DeliveryInfo = () => {
+const DeliveryInfo = props => {
+  const { deliveryInfo, setDeliveryInfo, onChange } = props;
   // state
   const [open, setOpen] = useState(false);
   const [onAddressSelect, setOnAddressSelect] = useState('');
-  const [deliveryInfo, setDeliveryInfo] = useState({
-    name: '',
-    subName: '',
-    address: '',
-    addressDetail: '',
-    zipCode: '',
-    phoneNumber: '',
-    isMyAddress: true,
-  });
+
   // handlers
   const onClickDeliveryChange = () => {
     setOpen(true);
@@ -32,14 +25,6 @@ const DeliveryInfo = () => {
     onClose();
   };
 
-  const handlerChange = e => {
-    const { name, value } = e.target;
-    setDeliveryInfo({
-      ...deliveryInfo,
-      [name]: value,
-    });
-  };
-
   const handleAddressSelect = address => {
     setOnAddressSelect(address);
     setDeliveryInfo({
@@ -48,7 +33,6 @@ const DeliveryInfo = () => {
       address: address.address,
     });
   };
-
   return (
     <section>
       <div className="deliveryInfoBox">
@@ -69,7 +53,8 @@ const DeliveryInfo = () => {
                     scale="middle"
                     type="text"
                     name="name"
-                    // onChange={onChange}
+                    onChange={onChange}
+                    value={deliveryInfo.name}
                   />
                 </td>
               </tr>
@@ -79,10 +64,15 @@ const DeliveryInfo = () => {
                 </th>
                 <td>
                   <div className="deliveryPhoneWrap">
-                    <select className="phoneSelect">
-                      <option value="010" selected>
-                        010
+                    <select
+                      className="phoneSelect"
+                      onChange={onChange}
+                      name="phoneFix"
+                    >
+                      <option value={deliveryInfo.phoneFix} selected>
+                        {deliveryInfo.phoneFix}
                       </option>
+                      <option value="010">010</option>
                       <option value="011">011</option>
                       <option value="016">016</option>
                       <option value="017">017</option>
@@ -92,8 +82,9 @@ const DeliveryInfo = () => {
                       className="deliveryPhoneInput"
                       scale="middle"
                       type="text"
-                      name="phone"
-                      // onChange={onChange}
+                      name="phoneNumber"
+                      onChange={onChange}
+                      value={deliveryInfo.phoneNumber}
                     />
                   </div>
                 </td>
@@ -106,22 +97,19 @@ const DeliveryInfo = () => {
                   <div className="addModalAddressWrap">
                     <Input
                       className="addressInput"
-                      onChange={handlerChange}
+                      onChange={onChange}
                       scale="middle"
                       name="deliveryZipCode"
-                      defaultValue={onAddressSelect.zonecode}
+                      value={onAddressSelect.zonecode}
                     />
                     <Postcode onAddressSelect={handleAddressSelect} />
                   </div>
-                  <Input
-                    scale="middle"
-                    defaultValue={onAddressSelect.address}
-                  />
+                  <Input scale="middle" value={onAddressSelect.address} />
                   <Input
                     scale="middle"
                     name="deliveryAddressDetail"
                     placeholder="상세주소 입력"
-                    onChange={handlerChange}
+                    onChange={onChange}
                   />
                 </td>
               </tr>
@@ -129,14 +117,14 @@ const DeliveryInfo = () => {
           </table>
         </div>
 
-        <Button
+        {/* <Button
           className="deliveryBtn"
           shape="fill"
           fullWidth="true"
           onClick={onClickDeliveryChange}
         >
           배송지 변경
-        </Button>
+        </Button> */}
       </div>
       <div className="requestedTerm">
         <p className="requestedTermTitle">배송 요청사항</p>

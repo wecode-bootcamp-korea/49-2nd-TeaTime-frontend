@@ -14,6 +14,7 @@ const Input = props => {
     onClick,
     value,
     children,
+    defaultValue,
   } = props;
 
   return (
@@ -29,6 +30,7 @@ const Input = props => {
         value={value}
         onChange={onChange}
         onClick={onClick}
+        defaultValue={defaultValue}
       >
         {children}
       </input>

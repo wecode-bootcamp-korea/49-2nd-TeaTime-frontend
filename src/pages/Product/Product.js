@@ -33,6 +33,7 @@ const Product = () => {
         return res.json();
       })
       .then(result => {
+        console.log(result);
         if (result.message === 'READ_DETAIL_SUCCESS') {
           setProductData(result.data);
           setTotalAmount(pre => {
@@ -168,32 +169,9 @@ const Product = () => {
       });
   };
 
-  // useLocation 으로 받아온 데이터 모음 state를 이용해 데이터를 넘겨줌
-  const datas = {
-    id: productData.id,
-    name: productData.name,
-    img: productData.mainImageUrl,
-    cnt: totalAmount.cnt,
-    price: productData.price * totalAmount.cnt,
-    discountPrice:
-      (productData.price / 100) *
-      (productData.discountRate || 0) *
-      totalAmount.cnt,
-
-    // 할인된 금액이 있을 경우에는 할인된 금액으로 갯수 곱해서 계산
-    // 할인된 금액이 없을 경우에는 전체 금액
-    totalPrice: productData.discountPrice
-      ? productData.discountPrice * totalAmount.cnt +
-        (totalAmount.totalPrice > 50000 ? 0 : 2500)
-      : totalAmount.totalPrice + (totalAmount.totalPrice > 50000 ? 0 : 2500),
-    isBagCheck: totalAmount.isBagCheck,
-    isWrapCheck: totalAmount.isWrapCheck,
-    delivery: totalAmount.totalPrice > 50000 ? 0 : 2500,
-  };
   const handelInfoMove = () => {
     navigate(
       `/payment?id=${productData.id}&cnt=${totalAmount.cnt}&isBagCheck=${totalAmount.isBagCheck}&isWrapCheck=${totalAmount.isWrapCheck}`,
-      { state: datas },
     );
   };
 

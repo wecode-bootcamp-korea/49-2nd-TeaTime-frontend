@@ -3,7 +3,17 @@ import Input from '../../../../Component/Input/Input';
 import './UserInfoModal.scss';
 
 const UserInfoModal = props => {
-  const { onChange } = props;
+  const { onChange, userInfoData } = props;
+
+  const parts = userInfoData.email.split('@');
+  const email = parts[0];
+  const domain = parts[1];
+
+  const phoneParts = userInfoData.phoneNumber.split('-');
+  const phone = phoneParts[0];
+  const phone2 = phoneParts[1];
+  const phone3 = phoneParts[2];
+
   return (
     <section>
       <div className="paymentUserInfoInputWrap">
@@ -24,6 +34,7 @@ const UserInfoModal = props => {
                   type="text"
                   name="name"
                   onChange={onChange}
+                  defaultValue={userInfoData.name}
                 />
               </td>
             </tr>
@@ -39,9 +50,15 @@ const UserInfoModal = props => {
                     type="text"
                     name="email"
                     onChange={onChange}
+                    defaultValue={email}
                   />
                   <span className="text"> @ </span>
-                  <select className="emailSelect">
+                  <select
+                    className="emailSelect"
+                    name="domain"
+                    onChange={onChange}
+                  >
+                    <option value={domain}>{domain}</option>
                     <option value="naver.com">naver.com</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="hanmail.net">hanmail.net</option>
@@ -57,7 +74,12 @@ const UserInfoModal = props => {
               </th>
               <td>
                 <div className="userPhoneWrap">
-                  <select className="phoneSelect">
+                  <select
+                    className="phoneSelect"
+                    name="phoneFix"
+                    onChange={onChange}
+                  >
+                    <option value={phone}>{phone}</option>
                     <option value="010">010</option>
                     <option value="011">011</option>
                     <option value="016">016</option>
@@ -70,9 +92,10 @@ const UserInfoModal = props => {
                     className="paymentUserInfoInput"
                     scale="middle"
                     type="text"
-                    name="phone"
+                    name="phoneNumber"
                     placeholder="휴대폰"
                     onChange={onChange}
+                    defaultValue={phone2 + phone3}
                   />
                 </div>
               </td>
