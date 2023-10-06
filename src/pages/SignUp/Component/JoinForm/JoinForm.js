@@ -113,9 +113,6 @@ const JoinForm = props => {
     isPhoneValidation &&
     !isEmailValidation &&
     isChecked;
-
-  console.log(isChecked);
-
   return (
     <form className="signUpForm" onChange={onChangeHandler}>
       <fieldset>
