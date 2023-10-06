@@ -105,6 +105,11 @@
       color: #fff;
       background-color: #6c801a;
       border-radius: 0 0 8px 8px;
+
+      &:disabled {
+        background-color: #e6e6e6;
+        color: #333;
+      }
     }
   }
 }
