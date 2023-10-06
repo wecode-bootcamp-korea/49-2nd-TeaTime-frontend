@@ -29,8 +29,6 @@ const MyPage = () => {
       });
   }, []);
 
-  console.log(userInfo);
-
   return (
     <main className="myPage">
       <div className="myPageHeader">
