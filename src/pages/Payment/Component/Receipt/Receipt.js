@@ -3,8 +3,14 @@ import Button from '../../../../Component/Button/Button';
 import './Receipt.scss';
 
 const Receipt = props => {
-  const { isChecked, disCount, totalItemPrice, totalPrice, deliveryPrice } =
-    props;
+  const {
+    isChecked,
+    disCount,
+    totalItemPrice,
+    totalPrice,
+    deliveryPrice,
+    onClick,
+  } = props;
   return (
     <section className="paymentReceipt">
       <div className="paymentReceiptContainer">
@@ -42,8 +48,9 @@ const Receipt = props => {
           fullWidth="true"
           shape="fill"
           disabled={!isChecked}
+          onClick={onClick}
         >
-          {`${totalPrice}원 주문하기`}
+          {totalPrice + deliveryPrice}원 주문하기
         </Button>
       </div>
     </section>

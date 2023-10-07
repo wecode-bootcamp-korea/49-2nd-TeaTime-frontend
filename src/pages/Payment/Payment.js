@@ -57,7 +57,7 @@ const Payment = () => {
       : 0 * cnt;
   const totalItemPrice = itemList?.price * cnt;
   const totalPrice = itemList?.price * cnt - disCount;
-  const deliveryPrice = totalPrice >= 50000 ? 0 : 2500;
+  const deliveryPrice = itemList?.price * cnt - disCount >= 50000 ? 0 : 2500;
   const userInfoData = userInfoList?.userRegistrationData;
   const emailParts =
     userInfoData !== undefined && userInfoData?.email.split('@');
@@ -170,8 +170,9 @@ const Payment = () => {
   }, [isUserInfoModal, userInfoData]);
 
   const handleOnSubmit = e => {
-    fetch(`http://51.20.57.76:8000/orders`, {
-      method: 'post',
+    e.preventDefault();
+    fetch('http://51.20.57.76:8000/orders', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('accessToken'),
@@ -182,12 +183,10 @@ const Payment = () => {
         isBag: isBagCheck,
         isPacking: isWrapCheck,
         totalPrice: totalPrice,
-        payments: '',
         name: userInfo.name,
         phoneNumber: userInfo.phoneFix + userInfo.phoneNumber,
         email: userInfo.email + '@' + userInfo.domain,
-        isShippingFee: deliveryPrice,
-        status: '',
+        isShippingFee: totalPrice >= 50000 ? 0 : 1,
         isAgree: isChecked,
         address: deliveryInfo.address,
         detailAddress: deliveryInfo.deliveryAddressDetail,
@@ -197,11 +196,8 @@ const Payment = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        navigate('/');
       });
   };
-
-  console.log(cartId);
 
   return (
     <div className="payment">
@@ -212,12 +208,7 @@ const Payment = () => {
           </div>
         </section>
 
-        <form
-          className="paymentFormOrder"
-          onSubmit={() => {
-            handleOnSubmit();
-          }}
-        >
+        <form className="paymentFormOrder">
           <section className="paymentInfo">
             <div
               className="paymentUserInfoTitle"
@@ -362,6 +353,7 @@ const Payment = () => {
             totalItemPrice={totalItemPrice}
             totalPrice={totalPrice}
             deliveryPrice={deliveryPrice}
+            onClick={handleOnSubmit}
           />
         </form>
       </div>
